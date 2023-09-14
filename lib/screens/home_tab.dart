@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../screens/favorite_tab.dart';
 import '../helper/helper.dart' show screenWidth, ColorPallet;
 import '../widgets/widgets.dart' show Carousel, MezmurTile;
-import 'catagory_tab.dart';
+import './catagory_tab.dart';
+import '../models/mezmurs.dart';
+import '../controllers/mezmur_controller.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -25,13 +29,14 @@ class _HomeState extends State<Home>
     [Icons.church_outlined, Icons.church],
     [Icons.settings_outlined, Icons.settings],
   ];
+  MezmurController mezmurController = Get.find();
 
   @override
   void initState() {
     tabController = TabController(length: 5, vsync: this);
 
     scrollController.addListener(() {
-      if (scrollController.offset == 0.0) {
+      if (scrollController.offset == scrollController.initialScrollOffset) {
         setState(() {
           showCarousel = true;
         });
@@ -44,10 +49,16 @@ class _HomeState extends State<Home>
     super.initState();
   }
 
+  Future refreshHandler() async {
+    //for test purpose only
+    return Future.delayed(const Duration(seconds: 4));
+  }
+
   @override
   void dispose() {
     searchController.dispose();
     scrollController.dispose();
+
     super.dispose();
   }
 
@@ -68,12 +79,14 @@ class _HomeState extends State<Home>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
         controller: tabController,
         children: [
           _buildHomeTab(),
           const CatagoryTab(),
-          Container(),
+          const FavoriteTab(),
           Container(),
           Container(),
         ],
@@ -87,7 +100,7 @@ class _HomeState extends State<Home>
       child: Container(
         margin: const EdgeInsets.only(top: 20),
         width: screenWidth(context) * 0.9,
-        height: 40,
+        height: 50,
         child: TextField(
           controller: searchController,
           onChanged: searchOnChangeHandler,
@@ -123,36 +136,39 @@ class _HomeState extends State<Home>
         AnimatedSwitcher(
           switchInCurve: Curves.bounceOut,
           switchOutCurve: Curves.fastOutSlowIn,
-          duration: const Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: 1500),
           transitionBuilder: (child, animation) {
             return SizeTransition(
               sizeFactor: animation,
               child: child,
             );
           },
-          child:
-              showCarousel == true ? const Carousel() : const SizedBox.shrink(),
+          child: showCarousel == true
+              ? Carousel(
+                  mezmurs: mezmurController.getRandomMezmurs(),
+                )
+              : const SizedBox.shrink(),
         ),
         showCarousel ? const SizedBox.shrink() : const SizedBox(height: 20),
         Expanded(
           child: RefreshIndicator(
-            onRefresh: () async {
-              print("Refreshing....");
-            },
-            color: Colors.red,
-            backgroundColor: Colors.white,
+            onRefresh: refreshHandler,
+            backgroundColor: blurWhite,
+            color: foregroundColor,
+            strokeWidth: 2,
             child: AnimatedList(
-              shrinkWrap: true,
               controller: scrollController,
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              initialItemCount: 20,
+              initialItemCount: mezmurs.length,
               itemBuilder: (context, index, animation) {
-                return MezmurTile(
-                  image: 'assets/icons/dingle_maryam_1.jpg',
-                  index: index,
-                  isFavorite: false,
-                  title: 'እኔስ በምግባሬ',
-                  subtitle: 'እኔስ በምግባሬ ደካማ ሆኛለሁ',
+                return Obx(
+                  () => MezmurTile(
+                    image: mezmurs[index]['image'],
+                    index: index,
+                    isFavorite: mezmurs[index]['isFavorite'],
+                    title: mezmurs[index]['title'],
+                    subtitle: mezmurs[index]['title'],
+                  ),
                 );
               },
             ),
@@ -178,13 +194,22 @@ class _HomeState extends State<Home>
 
   _buildNavigationBar() {
     return Container(
-      decoration: BoxDecoration(color: foregroundColor, boxShadow: [
-        BoxShadow(
-          blurRadius: 3,
-          spreadRadius: 2,
-          color: Colors.black.withOpacity(0.2),
-        )
-      ]),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              mezmurScreenColor.withOpacity(0.8),
+              navigationBarColor.withOpacity(0.3),
+            ],
+          ),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 3,
+              spreadRadius: 2,
+              color: Colors.black.withOpacity(0.2),
+            )
+          ]),
       child: TabBar(
         onTap: (index) {
           isTabClicked = isTabClicked.map((value) => false).toList();

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get/get.dart';
 import '../../helper/helper.dart' show ColorPallet;
+import '../../controllers/mezmur_controller.dart';
+import '../../screens/mezmur_screen.dart';
 
 class Carousel extends StatefulWidget {
-  const Carousel({super.key});
+  final Set mezmurs;
+  const Carousel({super.key, required this.mezmurs});
 
   @override
   State<Carousel> createState() => _CarouselState();
@@ -11,15 +15,31 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel> with ColorPallet {
   final carouselController = CarouselController();
-
+  MezmurController mezmurController = Get.find();
   int currentIndex = 0;
-  List mezmurTitles = [
-    'Simshin Terche',
-    'Tekle Haymaot Tsehay',
-    'Arsema Ney',
-    'Aba Giorgis',
-    'Emebetachin Kedej komalech'
-  ];
+  String image1 = '';
+  String image2 = '';
+  String image3 = '';
+  String image4 = '';
+  String image5 = '';
+
+  List mezmurTitles = [];
+  @override
+  void initState() {
+    image1 = mezmurController.mezmurList[widget.mezmurs.elementAt(0)]['image'];
+    image2 = mezmurController.mezmurList[widget.mezmurs.elementAt(1)]['image'];
+    image3 = mezmurController.mezmurList[widget.mezmurs.elementAt(2)]['image'];
+    image4 = mezmurController.mezmurList[widget.mezmurs.elementAt(3)]['image'];
+    image5 = mezmurController.mezmurList[widget.mezmurs.elementAt(4)]['image'];
+    mezmurTitles = [
+      mezmurController.mezmurList[widget.mezmurs.elementAt(0)]['title'],
+      mezmurController.mezmurList[widget.mezmurs.elementAt(1)]['title'],
+      mezmurController.mezmurList[widget.mezmurs.elementAt(2)]['title'],
+      mezmurController.mezmurList[widget.mezmurs.elementAt(3)]['title'],
+      mezmurController.mezmurList[widget.mezmurs.elementAt(4)]['title'],
+    ];
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -32,16 +52,22 @@ class _CarouselState extends State<Carousel> with ColorPallet {
       children: [
         GestureDetector(
           onTap: () {
-            //Navigate To Mezmur Screen
+            Get.to(
+              () => const MezmurScreen(),
+              arguments: [widget.mezmurs.elementAt(currentIndex)],
+              transition: Transition.topLevel,
+              duration: const Duration(milliseconds: 500),
+              opaque: true,
+            );
           },
           child: CarouselSlider(
             carouselController: carouselController,
             items: [
-              _buildSlider('assets/icons/dingle_maryam_1.jpg'),
-              _buildSlider('assets/icons/abune_teklehaymanot.jpg'),
-              _buildSlider('assets/icons/kidist_arsema.jpg'),
-              _buildSlider('assets/icons/abune_giorgis.jpg'),
-              _buildSlider('assets/icons/dingle_maryam_2.jpg'),
+              _buildSlider(image1),
+              _buildSlider(image2),
+              _buildSlider(image3),
+              _buildSlider(image4),
+              _buildSlider(image5),
             ],
             options: CarouselOptions(
                 viewportFraction: 0.7,

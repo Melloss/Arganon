@@ -20,7 +20,10 @@ class _CatagoryExpandableState extends State<CatagoryExpandable>
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       decoration: BoxDecoration(
-        color: foregroundColor,
+        gradient: LinearGradient(colors: [
+          foregroundColor.withOpacity(0.8),
+          foregroundColor.withOpacity(0.6),
+        ]),
         borderRadius: BorderRadius.circular(5),
       ),
       child: ExpansionTile(
@@ -32,6 +35,7 @@ class _CatagoryExpandableState extends State<CatagoryExpandable>
               )),
           children: [
             GridView(
+              physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.zero,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
