@@ -6,6 +6,8 @@ import '../helper/helper.dart' show Constants;
 class MezmurController extends GetxController with Constants {
   RxList<RxMap<String, dynamic>> mezmurList = mezmurs;
   List favoriteMezmurIndexs = [];
+  Set randomMezmurs = {};
+  List searchedMezmurs = [];
 
   List<int> kidistSilasseMezmurs = [];
   List<int> medhanealemMezmurs = [];
@@ -39,12 +41,39 @@ class MezmurController extends GetxController with Constants {
   List<int> kidusYaredMezmurs = [];
   List<int> abuneAregawiMezmurs = [];
 
-  Set<int> getRandomMezmurs() {
+  void generateRandomMezmurs() {
     Set<int> randomNumbers = {};
     for (int i = 0; randomNumbers.length < 5; i++) {
       randomNumbers.add(Random().nextInt(mezmurList.length));
     }
-    return randomNumbers;
+    randomMezmurs = randomNumbers;
+  }
+
+  search(String text) {
+    searchedMezmurs.clear();
+    for (int i = 0; i < mezmurList.length; i++) {
+      if (mezmurList[i]['title'].contains(text)) {
+        searchedMezmurs.add(i);
+      }
+    }
+    for (int i = 0; i < mezmurList.length; i++) {
+      if (mezmurList[i]['lyrics'].contains(text)) {
+        if (searchedMezmurs.contains(i) == false) {
+          searchedMezmurs.add(i);
+        }
+      }
+    }
+
+    print(searchedMezmurs);
+  }
+
+  String getSubtitle(int index) {
+    String lyrics = mezmurList[index]['lyrics'];
+    String subtitle = lyrics.split('\n')[0];
+    if (subtitle.length > 23) {
+      return '${subtitle.substring(0, 23)}...';
+    }
+    return subtitle;
   }
 
   createCatagories() {

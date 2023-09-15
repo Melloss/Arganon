@@ -18,170 +18,177 @@ class _CatagoryTabState extends State<CatagoryTab> with Constants {
       children: [
         const SizedBox(height: 30),
         CatagoryExpandable(
-          title: 'Ye zewtir Mezmur',
+          title: 'የዘውትር መዝሙር',
           children: <CatagoryTile>[
             CatagoryTile(
               path: kidistSilasseImage,
-              name: 'Ye Kidist Silasse',
+              name: 'የቅድስት ሥላሴ',
               catagoryName: kidistSilasseCatagory,
             ),
             CatagoryTile(
               path: medhanealemImage,
-              name: 'Ye Medhane Alem',
+              name: 'የመድሀኔአለም',
               catagoryName: medhanealemCatagory,
             ),
             CatagoryTile(
               path: nisehaImage2,
-              name: 'Ye Niseha',
+              name: 'የንሰሀ',
               alignment: Alignment.center,
               catagoryName: nisehaCatagory,
             ),
             CatagoryTile(
               path: peraklitosImage,
-              name: 'Ye pseraklitos',
+              name: 'የጰራቅሊጦስ',
               catagoryName: pseraklitosCatagory,
+            ),
+            CatagoryTile(
+              path: betekristianImage1,
+              name: 'Others',
+              catagoryName: othersCatagory,
             )
           ],
         ),
-        CatagoryExpandable(title: 'Yekidusan Mezmur', children: [
+        CatagoryExpandable(title: 'የቅዱሳን መዝሙር', children: [
           CatagoryTile(
             path: emebetachinImage1,
-            name: 'Ye Emebetachin',
+            name: 'የእመቤታችን',
             catagoryName: emebetachinCatagory,
           ),
           CatagoryTile(
             path: abuneTeklehaymanotImage,
-            name: 'Ye Abune Teklehaymanot ',
+            name: 'የአቡነ ተክለሀይማኖት',
             catagoryName: abuneTeklehaymanotCatagory,
           ),
           CatagoryTile(
             path: kidusMikaelImage1,
-            name: 'Ye Kidus Mikael',
+            name: 'የቅዱስ ሚካኤል',
             catagoryName: kidusMikaelCatagory,
           ),
           CatagoryTile(
             path: kidusGebrielImage,
-            name: 'Ye Kidus Gebriel',
+            name: 'የቅዱስ ገብርኤል',
             catagoryName: kidusGebrielCatagory,
           ),
           CatagoryTile(
             path: kidistArsemaImage,
-            name: 'Ye Kidist Arsema',
+            name: 'የቅድስት አርሴማ',
             catagoryName: kidistArsemaCatagory,
           ),
           CatagoryTile(
             path: kidusRufaelImage,
-            name: 'Ye Kidus Rufael',
+            name: 'የቅዱስ ሩፋኤል',
             catagoryName: kidusRufaelCatagory,
           ),
           CatagoryTile(
             path: abuneGebremenfeskidusImage,
-            name: 'Ye Abune Gebremenfeskidus',
+            name: 'የአቡነ ገብረመንፈስቅዱስ',
             catagoryName: abuneGebremenfeskidusCatagory,
           ),
           CatagoryTile(
             path: abuneGiorgisImage,
-            name: 'Ye Abune Giorgis',
+            name: 'የአባ ጊዮርጊስ ዘጋስጫ',
             catagoryName: abuneGiorgisCatagory,
           ),
           CatagoryTile(
             path: kidusUraelImage,
-            name: 'Ye Kidus Urael',
+            name: 'የቅዱስ ዑራኤል',
             catagoryName: kidusUraelCatagory,
+            alignment: const Alignment(0, -0.7),
           ),
           CatagoryTile(
             path: kidusGiorgisImage,
-            name: 'Ye Kidus Giorgis',
+            name: 'የቅዱስ ጊዮርጊስ',
             catagoryName: kidusGiorgisCatagory,
+            alignment: const Alignment(0, -0.5),
           ),
           CatagoryTile(
             path: kidusYohanisMetmikImage,
-            name: 'Ye Kidus Yohannes Metmik',
+            name: 'የቅዱስ ዮሀንስ መጥምቅ',
             catagoryName: kidusYohanisMetimkCatagory,
           ),
           CatagoryTile(
             path: kidusEstifanosImage,
-            name: 'Ye Kidus Estifanos',
+            name: 'የቅዱስ እስጢፋኖስ',
             catagoryName: kidusEstifanosCatagory,
           ),
           CatagoryTile(
             path: kidusPawlosImage,
-            name: 'Ye Kidus Pawlos',
+            name: 'የቅዱስ ጳውሎስ',
             catagoryName: kidusPawlosCatagory,
           ),
           CatagoryTile(
             path: kidusMerkoryosImage,
-            name: 'Ye Kidus Merkoryos',
+            name: 'የቅዱስ መርቆርዮስ',
             catagoryName: kidusMerkoryosCatagory,
           ),
           CatagoryTile(
             path: kidusYaredImage,
-            name: 'Ye Kidus Yared',
+            name: 'የቅዱስ ያሬድ',
             catagoryName: kidusYaredCatagory,
           ),
           CatagoryTile(
             path: abuneAregawiImage,
-            name: 'Ye Abune Aregawi',
+            name: 'የአቡነ አረጋዊ',
             catagoryName: abuneAregawiCatagory,
             alignment: Alignment.center,
           ),
         ]),
-        CatagoryExpandable(title: 'Ye Beal Mezmur', children: [
+        CatagoryExpandable(title: 'የበዓል መዝሙር', children: [
           CatagoryTile(
             path: sergImage,
-            name: 'Ye Serg',
+            name: 'የሰርግ',
             catagoryName: sergCatagory,
             alignment: Alignment.center,
           ),
           CatagoryTile(
             path: lidetImage,
-            name: 'Ye Lidet',
+            name: 'የልደት',
             catagoryName: lidetCatagory,
           ),
           CatagoryTile(
             path: meskelBealImage,
-            name: 'Ye Meskel',
+            name: 'የመስቀል',
             alignment: Alignment.center,
             catagoryName: meskelCatagory,
           ),
           CatagoryTile(
             path: enkutatashImage,
-            name: 'Ye Enkutatash',
+            name: 'የአዲስ አመት',
             catagoryName: enkutatashCatagory,
           ),
           CatagoryTile(
             path: timketImage,
-            name: 'Ye Timket',
+            name: 'የጥምቀት',
             catagoryName: timketCatagory,
           ),
           CatagoryTile(
             path: hosaenaImage,
-            name: 'Ye hosaena',
+            name: 'የሆሳዕና',
             catagoryName: hosaenaCatagory,
           ),
           CatagoryTile(
             path: sikletImage,
-            name: 'Ye siklet',
+            name: 'የስቅለት',
             catagoryName: sikletCatagory,
           ),
           CatagoryTile(
             path: tinsaeImage,
-            name: 'Ye Tinsae',
+            name: 'የትንሳኤ',
             catagoryName: tinsaeCatagory,
           ),
           CatagoryTile(
             path: ergetImage,
-            name: 'Ye erget',
+            name: 'የዕርገት',
             catagoryName: ergetCatagory,
           ),
           CatagoryTile(
             path: mitseatImage,
-            name: 'Ye Mitsat',
+            name: 'የምጻት',
             catagoryName: mitseatCatagory,
           ),
           CatagoryTile(
             path: debretaborImage,
-            name: 'Ye Debretabor',
+            name: 'የደብረ ታቦር',
             catagoryName: debretaborCatagory,
           ),
         ])

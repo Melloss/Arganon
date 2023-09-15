@@ -21,6 +21,7 @@ class _HomeState extends State<Home>
   late TabController tabController;
   bool showCloseButton = false;
   bool showCarousel = true;
+  bool isSearching = false;
   List<bool> isTabClicked = [true, false, false, false, false];
   List icons = [
     [Icons.home_outlined, Icons.home],
@@ -62,16 +63,19 @@ class _HomeState extends State<Home>
     super.dispose();
   }
 
-  searchOnChangeHandler(value) {
+  searchOnChangeHandler(String value) {
+    mezmurController.search(value);
     if (value.isEmpty) {
       setState(() {
         showCloseButton = false;
         showCarousel = true;
+        isSearching = false;
       });
     } else {
       setState(() {
         showCloseButton = true;
         showCarousel = false;
+        isSearching = true;
       });
     }
   }
@@ -116,6 +120,7 @@ class _HomeState extends State<Home>
                     searchController.text = '';
                     setState(() {
                       showCloseButton = false;
+                      isSearching = false;
                     });
                   },
                   icon: Visibility(
@@ -145,34 +150,54 @@ class _HomeState extends State<Home>
           },
           child: showCarousel == true
               ? Carousel(
-                  mezmurs: mezmurController.getRandomMezmurs(),
+                  mezmurs: mezmurController.randomMezmurs,
                 )
               : const SizedBox.shrink(),
         ),
         showCarousel ? const SizedBox.shrink() : const SizedBox(height: 20),
         Expanded(
-          child: RefreshIndicator(
-            onRefresh: refreshHandler,
-            backgroundColor: blurWhite,
-            color: foregroundColor,
-            strokeWidth: 2,
-            child: AnimatedList(
-              controller: scrollController,
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              initialItemCount: mezmurs.length,
-              itemBuilder: (context, index, animation) {
-                return Obx(
-                  () => MezmurTile(
-                    image: mezmurs[index]['image'],
-                    index: index,
-                    isFavorite: mezmurs[index]['isFavorite'],
-                    title: mezmurs[index]['title'],
-                    subtitle: mezmurs[index]['title'],
+          child: isSearching
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: ListView.builder(
+                    itemCount: mezmurController.searchedMezmurs.length,
+                    itemBuilder: (context, index) {
+                      return MezmurTile(
+                        image: mezmurController.mezmurList[
+                            mezmurController.searchedMezmurs[index]]['image'],
+                        isFavorite: mezmurController.mezmurList[mezmurController
+                            .searchedMezmurs[index]]['isFavorite'],
+                        title: mezmurController.mezmurList[
+                            mezmurController.searchedMezmurs[index]]['title'],
+                        subtitle: mezmurController.getSubtitle(
+                            mezmurController.searchedMezmurs[index]),
+                        index: mezmurController.searchedMezmurs[index],
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          ),
+                )
+              : RefreshIndicator(
+                  onRefresh: refreshHandler,
+                  backgroundColor: blurWhite,
+                  color: foregroundColor,
+                  strokeWidth: 2,
+                  child: AnimatedList(
+                    controller: scrollController,
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    initialItemCount: mezmurs.length,
+                    itemBuilder: (context, index, animation) {
+                      return Obx(
+                        () => MezmurTile(
+                          image: mezmurs[index]['image'],
+                          index: index,
+                          isFavorite: mezmurs[index]['isFavorite'],
+                          title: mezmurs[index]['title'],
+                          subtitle: mezmurController.getSubtitle(index),
+                        ),
+                      );
+                    },
+                  ),
+                ),
         ),
       ],
     );
@@ -222,15 +247,15 @@ class _HomeState extends State<Home>
         labelColor: blurWhite,
         labelPadding: EdgeInsets.zero,
         labelStyle: const TextStyle(
-          fontSize: 10,
+          fontSize: 11,
         ),
         controller: tabController,
         tabs: [
-          _buildTab(0, 'Home'),
-          _buildTab(1, 'Catagories'),
-          _buildTab(2, 'Favorite'),
-          _buildTab(3, 'Kidase'),
-          _buildTab(4, 'Settings'),
+          _buildTab(0, 'ቤት'),
+          _buildTab(1, 'ምድቦች'),
+          _buildTab(2, 'የተወደዱ'),
+          _buildTab(3, 'ቅዳሴ'),
+          _buildTab(4, 'ማስተካከያ'),
         ],
       ),
     );

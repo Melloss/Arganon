@@ -1,8 +1,14 @@
 mixin Constants {
   //Screens
-  final mezmurScreen = 'mezmur_screen';
-  final catagoryListDisplayScreen = 'catagory_list_display';
   final homeScreen = '/';
+
+  final catagoryListDisplayScreen = 'catagory_list_display';
+  final mezmurScreenScroller = 'mezmurScreenScroller';
+
+  //from screen
+  final fromHome = 'fromHome';
+  final fromFavorite = 'fromFavorite';
+  final fromCatagory = 'fromCatagory';
 
   //Images
   final kidistArsemaImage = 'assets/icons/kidist_arsema.jpg';
@@ -14,7 +20,7 @@ mixin Constants {
   final medhanealemImage = 'assets/icons/Medhane-Alem_1.jpg';
   final abuneGebremenfeskidusImage = 'assets/icons/abune_gebremenfeskidus.jpg';
   final kidusGebrielImage = 'assets/icons/kidus_gebreil_1.jpg';
-  final kidusMikaelImage1 = 'assets/icons/kidus_mikael_1.jpg';
+  final kidusMikaelImage1 = 'assets/icons/kidus_mikael.jpeg';
   final kidusRufaelImage = 'assets/icons/kidus_rufael.jpg';
   final lidetImage = 'assets/icons/lidet_1.jpg';
   final tseloteHamusImage = 'assets/icons/tselote_hamus.jpg';
@@ -73,4 +79,5 @@ mixin Constants {
   final kidusYaredCatagory = 'kidus_yared';
   final sergCatagory = 'serg';
   final debretaborCatagory = 'debretabor';
+  final othersCatagory = 'others';
 }

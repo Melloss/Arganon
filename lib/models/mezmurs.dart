@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+//Images
 const kidistArsemaImage = 'assets/icons/kidist_arsema.jpg';
 const emebetachinImage1 = 'assets/icons/dingle_maryam_1.jpg';
 const emebetachinImage2 = 'assets/icons/dingle_maryam_2.jpg';
@@ -18,13 +19,37 @@ const nisehaImage1 = 'assets/niseha_1.jpg';
 const nisehaImage2 = 'assets/niseha_2.jpg';
 const enkutatashImage = 'assets/enkutatash.jpg';
 const betekristianImage1 = 'assets/betekristian_1.jpg';
-const kidusYohanisMetmikImage = 'assets/betekristian_1.jpg';
+const abuneAregawiImage = 'assets/icons/abune_aregawi.jpg';
+const peraklitosImage = 'assets/icons/pseraklitos.jpg';
+const kidusUraelImage = 'assets/icons/kidus_urael.jpeg';
+const kidusGiorgisImage = 'assets/icons/kidus_giyorgis.jpeg';
+const kidusYohanisMetmikImage = 'assets/icons/kidus_yohanis_metimk.jpeg';
+const kidusEstifanosImage = 'assets/icons/kidus_estifanos.jpeg';
+const kidusPawlosImage = 'assets/icons/kidus_pawlos.jpeg';
+const kidusMerkoryosImage = 'assets/icons/kidus_merkoryos.jpg';
+const kidusYaredImage = 'assets/icons/kidus_yared.jpeg';
+const timketImage = 'assets/icons/timket.jpeg';
+const hosaenaImage = 'assets/icons/hosaena.jpeg';
+const sikletImage = 'assets/icons/meskel.jpeg';
+const tinsaeImage = 'assets/icons/tinsae.jpg';
+const ergetImage = 'assets/icons/erget.jpg';
+const mitseatImage = 'assets/icons/mitseat.jpg';
+const debretaborImage = 'assets/icons/debre_tabor.jpeg';
+const sergImage = 'assets/icons/serg.jpeg';
 
 //catagories
 const medhanealemCatagory = 'medhanealem';
 const emebetachinCatagory = 'emebetachin';
 const enkutatashCatagory = 'enkutatash';
-const nesehaCatagory = 'niseha';
+const nisehaCatagory = 'niseha';
+const lidetCatagory = 'lidet';
+const meskelCatagory = 'meskel';
+const timketCatagory = 'timket';
+const hosaenaCatagory = 'hosaena';
+const sikletCatagory = 'siklet';
+const tinsaeCatagory = 'tinsae';
+const ergetCatagory = 'erget';
+const mitseatCatagory = 'mitseat';
 const kidusYohanisMetimkCatagory = 'kidus_yohnis_metmik';
 const kidistSilasseCatagory = 'kidist_silasse';
 const pseraklitosCatagory = 'pseraklitos';
@@ -35,6 +60,16 @@ const kidistArsemaCatagory = 'kidist_arsema';
 const kidusRufaelCatagory = 'kidus_rufael';
 const abuneGebremenfeskidusCatagory = 'abune_gebremenfeskidus';
 const abuneGiorgisCatagory = 'abune_giorgis';
+const abuneAregawiCatagory = 'abune_aregawi';
+const kidusUraelCatagory = 'kidus_urael';
+const kidusGiorgisCatagory = 'kidus_giorgis';
+const kidusEstifanosCatagory = 'kidus_estifanos';
+const kidusPawlosCatagory = 'kidus_pawlos';
+const kidusMerkoryosCatagory = 'kidus_merkoryos';
+const kidusYaredCatagory = 'kidus_yared';
+const sergCatagory = 'serg';
+const debretaborCatagory = 'debretabor';
+const othersCatagory = 'others';
 
 class Mezmurs extends GetxController {}
 
@@ -60,7 +95,7 @@ RxList<RxMap<String, dynamic>> mezmurs = [
     'isFavorite': false,
     'catagory': [
       emebetachinCatagory,
-      nesehaCatagory,
+      nisehaCatagory,
     ]
   }.obs,
   {

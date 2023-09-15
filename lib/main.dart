@@ -1,3 +1,4 @@
+import 'package:arganon/models/mezmurs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,6 @@ class Arganon extends StatelessWidget with ColorPallet, Constants {
       initialRoute: homeScreen,
       routes: {
         homeScreen: (context) => const Home(),
-        mezmurScreen: (context) => const MezmurScreen(),
         catagoryListDisplayScreen: (context) => const CatagoryListDisplay(),
       },
     );
@@ -56,7 +56,6 @@ class Arganon extends StatelessWidget with ColorPallet, Constants {
           titleLarge: TextStyle(
             color: blurWhite,
             fontSize: 16.5,
-            fontWeight: FontWeight.bold,
           ),
           displayLarge: const TextStyle(
             color: Colors.white,
@@ -91,6 +90,7 @@ void main() {
   initControllers();
   MezmurController mezmurController = Get.find();
   mezmurController.createCatagories();
+  mezmurController.generateRandomMezmurs();
   mezmurController.dispose();
   runApp(Arganon());
 }

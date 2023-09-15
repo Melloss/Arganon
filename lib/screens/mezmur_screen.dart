@@ -6,7 +6,8 @@ import '../models/mezmurs.dart';
 import '../controllers/mezmur_controller.dart';
 
 class MezmurScreen extends StatefulWidget {
-  const MezmurScreen({super.key});
+  final int index;
+  const MezmurScreen({super.key, required this.index});
 
   @override
   State<MezmurScreen> createState() => _MezmurScreenState();
@@ -17,12 +18,9 @@ class _MezmurScreenState extends State<MezmurScreen>
   MezmurController mezmurController = Get.find();
   bool showAudioController = true;
   bool isPlaying = false;
-  late int index;
 
   @override
   void initState() {
-    index = Get.arguments[0];
-
     super.initState();
   }
 
@@ -31,18 +29,31 @@ class _MezmurScreenState extends State<MezmurScreen>
     return Scaffold(
         body: Stack(alignment: Alignment.bottomCenter, children: [
       Hero(
-        tag: 'mezmur$index',
+        tag: 'mezmur${widget.index}',
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
             alignment: Alignment.topCenter,
-            image: AssetImage(mezmurs[index]['image']),
+            image: AssetImage(mezmurs[widget.index]['image']),
             fit: BoxFit.cover,
           )),
         ),
       ),
       _buildBackgroundOverlay(),
       _buildMezmurLyrics(),
+      Positioned(
+        top: 30,
+        left: 0,
+        child: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.keyboard_arrow_left,
+            color: Colors.white,
+          ),
+        ),
+      ),
     ]));
   }
 
@@ -62,54 +73,55 @@ class _MezmurScreenState extends State<MezmurScreen>
 
   _buildBackgroundOverlay() {
     return Container(
-        height: screenHeight(context),
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              mezmurScreenColor.withOpacity(0),
-              mezmurScreenColor.withOpacity(0.1),
-              mezmurScreenColor.withOpacity(0.2),
-              mezmurScreenColor.withOpacity(0.3),
-              mezmurScreenColor.withOpacity(0.6),
-              mezmurScreenColor.withOpacity(0.7),
-              mezmurScreenColor.withOpacity(0.8),
-              mezmurScreenColor.withOpacity(0.85),
-              mezmurScreenColor.withOpacity(0.93),
-              mezmurScreenColor.withOpacity(0.95),
-              mezmurScreenColor.withOpacity(0.95),
-              mezmurScreenColor.withOpacity(0.95),
-              mezmurScreenColor.withOpacity(0.98),
-              mezmurScreenColor.withOpacity(1),
-              mezmurScreenColor.withOpacity(1),
-              mezmurScreenColor.withOpacity(1),
-            ])));
+      height: screenHeight(context),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+            mezmurScreenColor.withOpacity(0),
+            mezmurScreenColor.withOpacity(0.1),
+            mezmurScreenColor.withOpacity(0.2),
+            mezmurScreenColor.withOpacity(0.3),
+            mezmurScreenColor.withOpacity(0.6),
+            mezmurScreenColor.withOpacity(0.7),
+            mezmurScreenColor.withOpacity(0.8),
+            mezmurScreenColor.withOpacity(0.85),
+            mezmurScreenColor.withOpacity(0.93),
+            mezmurScreenColor.withOpacity(0.95),
+            mezmurScreenColor.withOpacity(0.95),
+            mezmurScreenColor.withOpacity(0.95),
+            mezmurScreenColor.withOpacity(0.98),
+            mezmurScreenColor.withOpacity(1),
+            mezmurScreenColor.withOpacity(1),
+            mezmurScreenColor.withOpacity(1),
+          ])),
+    );
   }
 
   _buildMezmurLyrics() {
     return Positioned(
         bottom: 0,
         child: SizedBox(
-          width: screenWidth(context),
+          width: screenWidth(context) * 0.9,
           height: screenHeight(context) * 0.7,
           child: Column(
             children: [
               Expanded(
-                flex: 6,
+                flex: 8,
                 child:
                     ListView(physics: const BouncingScrollPhysics(), children: [
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      mezmurs[index]['lyrics'],
+                      mezmurs[widget.index]['lyrics'],
                       style: Theme.of(context).textTheme.displayLarge,
                     ),
                   ),
                 ]),
               ),
               Expanded(
-                  flex: showAudioController ? 2 : 0,
+                  flex: showAudioController ? 3 : 0,
                   child: _buildMuzmurAudioController())
             ],
           ),
@@ -119,14 +131,19 @@ class _MezmurScreenState extends State<MezmurScreen>
   _buildAllControllers() {
     return Align(
       alignment: Alignment.center,
-      child: InkWell(
+      child: GestureDetector(
+        onVerticalDragStart: (detail) {
+          setState(() {
+            showAudioController = false;
+          });
+        },
         onDoubleTap: () {
           setState(() {
             showAudioController = false;
           });
         },
         child: Container(
-          margin: const EdgeInsets.only(bottom: 10),
+          margin: const EdgeInsets.only(bottom: 20),
           width: screenWidth(context) * 0.9,
           decoration: BoxDecoration(
             boxShadow: [
@@ -143,61 +160,59 @@ class _MezmurScreenState extends State<MezmurScreen>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Slider(
-                value: 0.5,
+                value: 0.1,
                 onChanged: (value) {},
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('00:00', style: Theme.of(context).textTheme.titleSmall),
-                  Text('05:00', style: Theme.of(context).textTheme.titleSmall),
+                  Text('00:00',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            fontSize: 11,
+                          )),
+                  Text('05:00',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            fontSize: 11,
+                          )),
                 ],
               ),
               Stack(
                 children: [
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.skip_previous)),
-                        IconButton(
-                            onPressed: () {
-                              setState(() {
-                                isPlaying = !isPlaying;
-                              });
-                            },
-                            icon: Icon(
-                              isPlaying ? Icons.pause : Icons.play_arrow,
-                              size: 35,
-                            )),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.skip_next)),
-                      ],
-                    ),
-                  ),
                   Positioned(
-                    top: 10,
+                    top: 0,
                     left: 30,
                     child: IconButton(
                         onPressed: () {}, icon: const Icon(Icons.download)),
                   ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isPlaying = !isPlaying;
+                          });
+                        },
+                        icon: Icon(
+                          isPlaying
+                              ? Icons.pause_circle
+                              : Icons.play_circle_fill,
+                          size: 45,
+                        )),
+                  ),
                   Positioned(
-                    top: 10,
+                    top: 0,
                     right: 30,
                     child: Obx(
                       () => IconButton(
                           onPressed: () {
-                            mezmurController.toggleFavorite(index);
+                            mezmurController.toggleFavorite(widget.index);
                             setState(() {
                               mezmurController.favoriteMezmurIndexs =
                                   mezmurController.favoriteMezmurIndexs;
                             });
                           },
                           icon: Icon(
-                            mezmurs[index]['isFavorite']
+                            mezmurs[widget.index]['isFavorite']
                                 ? Icons.favorite
                                 : Icons.favorite_outline,
                           )),

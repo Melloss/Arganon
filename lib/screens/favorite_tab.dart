@@ -38,10 +38,9 @@ class _FavoriteTabState extends State<FavoriteTab> with Constants {
                           ['isFavorite'],
                   title: mezmurs[mezmurController.favoriteMezmurIndexs[index]]
                       ['title'],
-                  subtitle:
-                      mezmurs[mezmurController.favoriteMezmurIndexs[index]]
-                          ['title'],
-                  fromFavoriteTab: true,
+                  subtitle: mezmurController.getSubtitle(
+                      mezmurController.favoriteMezmurIndexs[index]),
+                  from: fromFavorite,
                 );
               }),
             ),

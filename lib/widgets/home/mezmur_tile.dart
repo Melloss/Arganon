@@ -3,15 +3,17 @@ import 'package:get/get.dart';
 import '../../helper/helper.dart' show ColorPallet, screenWidth, Constants;
 import '../../models/mezmurs.dart';
 import '../../controllers/mezmur_controller.dart';
-import '../../screens/mezmur_screen.dart';
+import '../../screens/mezmur_screen_scroller.dart';
 
 class MezmurTile extends StatefulWidget {
   String image;
   String title;
   String subtitle;
   bool isFavorite;
-  bool fromFavoriteTab;
+  String from;
   int index;
+  String catagory;
+
   MezmurTile({
     super.key,
     required this.image,
@@ -19,7 +21,8 @@ class MezmurTile extends StatefulWidget {
     required this.subtitle,
     required this.isFavorite,
     required this.index,
-    this.fromFavoriteTab = false,
+    this.from = 'fromHome',
+    this.catagory = '',
   });
 
   @override
@@ -31,7 +34,7 @@ class _MezmurTileState extends State<MezmurTile> with ColorPallet, Constants {
 
   @override
   Widget build(BuildContext context) {
-    return widget.fromFavoriteTab
+    return widget.from == fromFavorite
         ? AnimatedSwitcher(
             transitionBuilder: (child, animation) {
               return FadeTransition(opacity: animation, child: child);
@@ -48,20 +51,20 @@ class _MezmurTileState extends State<MezmurTile> with ColorPallet, Constants {
     return InkWell(
       onTap: () {
         Get.to(
-          () => const MezmurScreen(),
-          arguments: [widget.index],
+          () => MezmurScreenScroller(
+              from: widget.from, currentIndex: widget.index),
+          arguments: widget.catagory,
           transition: Transition.topLevel,
           duration: const Duration(milliseconds: 500),
-          opaque: true,
         );
 
         //Get.toNamed(mezmurScreen, arguments: [widget.index]);
       },
       child: Container(
         alignment: Alignment.center,
-        margin: const EdgeInsets.symmetric(vertical: 5),
+        margin: const EdgeInsets.symmetric(vertical: 7),
         width: screenWidth(context),
-        height: 70,
+        height: 65,
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
               foregroundColor,
@@ -83,7 +86,7 @@ class _MezmurTileState extends State<MezmurTile> with ColorPallet, Constants {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: BorderRadius.circular(30),
                 image: DecorationImage(
                     alignment: Alignment.topCenter,
                     image: AssetImage(widget.image),
@@ -92,7 +95,7 @@ class _MezmurTileState extends State<MezmurTile> with ColorPallet, Constants {
             ),
           ),
           contentPadding:
-              const EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 5),
+              const EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
           title:
               Text(widget.title, style: Theme.of(context).textTheme.titleLarge),
           subtitle: Text(
@@ -105,7 +108,7 @@ class _MezmurTileState extends State<MezmurTile> with ColorPallet, Constants {
           trailing: Obx(
             () => IconButton(
               onPressed: () {
-                if (widget.fromFavoriteTab == false) {
+                if (widget.from != fromFavorite) {
                   mezmurController.toggleFavorite(widget.index);
                 } else {
                   mezmurController.toggleFavorite(widget.index);

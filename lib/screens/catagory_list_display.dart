@@ -15,9 +15,10 @@ class _CatagoryListDisplayState extends State<CatagoryListDisplay>
     with ColorPallet, Constants {
   MezmurController mezmurControllers = Get.find();
   late List mezmurs;
+  late String catagory;
   @override
   void initState() {
-    String catagory = Get.arguments;
+    catagory = Get.arguments;
     mezmurs = mezmurControllers.getMezmur(catagory);
 
     super.initState();
@@ -59,10 +60,12 @@ class _CatagoryListDisplayState extends State<CatagoryListDisplay>
             return MezmurTile(
               image: mezmurControllers.mezmurList[mezmurs[index]]['image'],
               title: mezmurControllers.mezmurList[mezmurs[index]]['title'],
-              subtitle: mezmurControllers.mezmurList[mezmurs[index]]['title'],
+              subtitle: mezmurControllers.getSubtitle(mezmurs[index]),
               isFavorite: mezmurControllers.mezmurList[mezmurs[index]]
                   ['isFavorite'],
               index: mezmurs[index],
+              from: fromCatagory,
+              catagory: catagory,
             );
           }),
         ),

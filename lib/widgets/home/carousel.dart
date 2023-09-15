@@ -52,9 +52,9 @@ class _CarouselState extends State<Carousel> with ColorPallet {
       children: [
         GestureDetector(
           onTap: () {
+            print(widget.mezmurs.elementAt(currentIndex));
             Get.to(
-              () => const MezmurScreen(),
-              arguments: [widget.mezmurs.elementAt(currentIndex)],
+              () => MezmurScreen(index: widget.mezmurs.elementAt(currentIndex)),
               transition: Transition.topLevel,
               duration: const Duration(milliseconds: 500),
               opaque: true,
