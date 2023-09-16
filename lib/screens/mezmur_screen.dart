@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../helper/helper.dart'
     show Constants, ColorPallet, screenHeight, screenWidth;
-import '../models/mezmurs.dart';
 import '../controllers/mezmur_controller.dart';
+import '../controllers/database_controller.dart';
 
 class MezmurScreen extends StatefulWidget {
   final int index;
@@ -16,6 +16,7 @@ class MezmurScreen extends StatefulWidget {
 class _MezmurScreenState extends State<MezmurScreen>
     with Constants, ColorPallet {
   MezmurController mezmurController = Get.find();
+  DatabaseController databaseController = Get.find();
   bool showAudioController = true;
   bool isPlaying = false;
 
@@ -34,7 +35,7 @@ class _MezmurScreenState extends State<MezmurScreen>
           decoration: BoxDecoration(
               image: DecorationImage(
             alignment: Alignment.topCenter,
-            image: AssetImage(mezmurs[widget.index]['image']),
+            image: AssetImage(mezmurController.mezmurList[widget.index].image),
             fit: BoxFit.cover,
           )),
         ),
@@ -114,7 +115,7 @@ class _MezmurScreenState extends State<MezmurScreen>
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      mezmurs[widget.index]['lyrics'],
+                      mezmurController.mezmurList[widget.index].lyrics,
                       style: Theme.of(context).textTheme.displayLarge,
                     ),
                   ),
@@ -200,24 +201,24 @@ class _MezmurScreenState extends State<MezmurScreen>
                         )),
                   ),
                   Positioned(
-                    top: 0,
-                    right: 30,
-                    child: Obx(
-                      () => IconButton(
-                          onPressed: () {
-                            mezmurController.toggleFavorite(widget.index);
-                            setState(() {
-                              mezmurController.favoriteMezmurIndexs =
-                                  mezmurController.favoriteMezmurIndexs;
-                            });
-                          },
-                          icon: Icon(
-                            mezmurs[widget.index]['isFavorite']
-                                ? Icons.favorite
-                                : Icons.favorite_outline,
-                          )),
-                    ),
-                  ),
+                      top: 0,
+                      right: 30,
+                      child: IconButton(
+                        onPressed: () async {
+                          mezmurController.toggleFavorite(widget.index);
+                          await databaseController.updateMezmur(widget.index);
+                          setState(() {
+                            mezmurController.favoriteMezmurIndexs =
+                                mezmurController.favoriteMezmurIndexs;
+                          });
+                        },
+                        icon: Icon(
+                          mezmurController
+                                  .mezmurList[widget.index].isFavorite.value
+                              ? Icons.favorite
+                              : Icons.favorite_outline,
+                        ),
+                      )),
                 ],
               )
             ],

@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import '../models/mezmurs.dart' show mezmurs;
 import 'dart:math' show Random;
-import '../helper/helper.dart' show Constants;
+import '../models/mezmurs.dart';
 
-class MezmurController extends GetxController with Constants {
-  RxList<RxMap<String, dynamic>> mezmurList = mezmurs;
+class MezmurController extends GetxController {
+  List<Mezmur> mezmurList = [];
+
   List favoriteMezmurIndexs = [];
   Set randomMezmurs = {};
   List searchedMezmurs = [];
@@ -41,7 +41,7 @@ class MezmurController extends GetxController with Constants {
   List<int> kidusYaredMezmurs = [];
   List<int> abuneAregawiMezmurs = [];
 
-  void generateRandomMezmurs() {
+  generateRandomMezmurs() {
     Set<int> randomNumbers = {};
     for (int i = 0; randomNumbers.length < 5; i++) {
       randomNumbers.add(Random().nextInt(mezmurList.length));
@@ -52,23 +52,21 @@ class MezmurController extends GetxController with Constants {
   search(String text) {
     searchedMezmurs.clear();
     for (int i = 0; i < mezmurList.length; i++) {
-      if (mezmurList[i]['title'].contains(text)) {
+      if (mezmurList[i].title.contains(text)) {
         searchedMezmurs.add(i);
       }
     }
     for (int i = 0; i < mezmurList.length; i++) {
-      if (mezmurList[i]['lyrics'].contains(text)) {
+      if (mezmurList[i].lyrics.contains(text)) {
         if (searchedMezmurs.contains(i) == false) {
           searchedMezmurs.add(i);
         }
       }
     }
-
-    print(searchedMezmurs);
   }
 
   String getSubtitle(int index) {
-    String lyrics = mezmurList[index]['lyrics'];
+    String lyrics = mezmurList[index].lyrics;
     String subtitle = lyrics.split('\n')[0];
     if (subtitle.length > 23) {
       return '${subtitle.substring(0, 23)}...';
@@ -78,7 +76,8 @@ class MezmurController extends GetxController with Constants {
 
   createCatagories() {
     for (int i = 0; i < mezmurList.length; i++) {
-      List catagories = mezmurList[i]['catagory'];
+      List catagories = [...mezmurList[i].catagory];
+
       if (catagories.contains(kidistSilasseCatagory)) {
         kidistSilasseMezmurs.add(i);
       }
@@ -182,11 +181,11 @@ class MezmurController extends GetxController with Constants {
   }
 
   void toggleFavorite(int index) {
-    if (mezmurList[index]['isFavorite'] == true) {
-      mezmurList[index]['isFavorite'] = false;
+    if (mezmurList[index].isFavorite.value == true) {
+      mezmurList[index].isFavorite.value = false;
       favoriteMezmurIndexs.remove(index);
     } else {
-      mezmurList[index]['isFavorite'] = true;
+      mezmurList[index].isFavorite.value = true;
       if (favoriteMezmurIndexs.contains(index) == false) {
         favoriteMezmurIndexs.add(index);
       }

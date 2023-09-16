@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../helper/helper.dart' show ColorPallet, screenWidth, Constants;
-import '../../models/mezmurs.dart';
 import '../../controllers/mezmur_controller.dart';
 import '../../screens/mezmur_screen_scroller.dart';
+import '../../controllers/database_controller.dart';
 
 class MezmurTile extends StatefulWidget {
   String image;
@@ -31,6 +31,7 @@ class MezmurTile extends StatefulWidget {
 
 class _MezmurTileState extends State<MezmurTile> with ColorPallet, Constants {
   MezmurController mezmurController = Get.find();
+  DatabaseController databaseController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class _MezmurTileState extends State<MezmurTile> with ColorPallet, Constants {
               return FadeTransition(opacity: animation, child: child);
             },
             duration: const Duration(milliseconds: 500),
-            child: mezmurs[widget.index]['isFavorite']
+            child: mezmurController.mezmurList[widget.index].isFavorite.value
                 ? _buildTile()
                 : const SizedBox.shrink(),
           )
@@ -105,22 +106,24 @@ class _MezmurTileState extends State<MezmurTile> with ColorPallet, Constants {
           dense: true,
           selected: true,
           splashColor: blurWhite,
-          trailing: Obx(
-            () => IconButton(
-              onPressed: () {
-                if (widget.from != fromFavorite) {
-                  mezmurController.toggleFavorite(widget.index);
-                } else {
-                  mezmurController.toggleFavorite(widget.index);
-                  setState(() {
-                    mezmurController.favoriteMezmurIndexs =
-                        mezmurController.favoriteMezmurIndexs;
-                  });
-                  //mezmurController.favoriteMezmurIndexs.remove(widget.index);
-                }
-              },
-              icon: Icon(
-                mezmurController.mezmurList[widget.index]['isFavorite']
+          trailing: IconButton(
+            onPressed: () async {
+              if (widget.from != fromFavorite) {
+                mezmurController.toggleFavorite(widget.index);
+                await databaseController.updateMezmur(widget.index);
+              } else {
+                mezmurController.toggleFavorite(widget.index);
+                await databaseController.updateMezmur(widget.index);
+                setState(() {
+                  mezmurController.favoriteMezmurIndexs =
+                      mezmurController.favoriteMezmurIndexs;
+                });
+                //mezmurController.favoriteMezmurIndexs.remove(widget.index);
+              }
+            },
+            icon: Obx(
+              () => Icon(
+                mezmurController.mezmurList[widget.index].isFavorite.value
                     ? Icons.favorite
                     : Icons.favorite_outline,
                 color: blurWhite.withOpacity(0.8),

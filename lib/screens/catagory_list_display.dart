@@ -57,15 +57,17 @@ class _CatagoryListDisplayState extends State<CatagoryListDisplay>
           physics: const BouncingScrollPhysics(),
           itemCount: mezmurs.length,
           itemBuilder: ((context, index) {
-            return MezmurTile(
-              image: mezmurControllers.mezmurList[mezmurs[index]]['image'],
-              title: mezmurControllers.mezmurList[mezmurs[index]]['title'],
-              subtitle: mezmurControllers.getSubtitle(mezmurs[index]),
-              isFavorite: mezmurControllers.mezmurList[mezmurs[index]]
-                  ['isFavorite'],
-              index: mezmurs[index],
-              from: fromCatagory,
-              catagory: catagory,
+            return Obx(
+              () => MezmurTile(
+                image: mezmurControllers.mezmurList[mezmurs[index]].image,
+                title: mezmurControllers.mezmurList[mezmurs[index]].title,
+                subtitle: mezmurControllers.getSubtitle(mezmurs[index]),
+                isFavorite: mezmurControllers
+                    .mezmurList[mezmurs[index]].isFavorite.value,
+                index: mezmurs[index],
+                from: fromCatagory,
+                catagory: catagory,
+              ),
             );
           }),
         ),

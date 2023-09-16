@@ -1,7 +1,6 @@
 import 'package:arganon/helper/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../models/mezmurs.dart';
 import '../widgets/widgets.dart' show MezmurTile;
 import '../controllers/mezmur_controller.dart';
 
@@ -29,15 +28,17 @@ class _FavoriteTabState extends State<FavoriteTab> with Constants {
               itemCount: mezmurController.favoriteMezmurIndexs.length,
               itemBuilder: ((context, index) {
                 return MezmurTile(
-                  key: Key(index.toString()),
-                  image: mezmurs[mezmurController.favoriteMezmurIndexs[index]]
-                      ['image'],
+                  image: mezmurController
+                      .mezmurList[mezmurController.favoriteMezmurIndexs[index]]
+                      .image,
                   index: mezmurController.favoriteMezmurIndexs[index],
-                  isFavorite:
-                      mezmurs[mezmurController.favoriteMezmurIndexs[index]]
-                          ['isFavorite'],
-                  title: mezmurs[mezmurController.favoriteMezmurIndexs[index]]
-                      ['title'],
+                  isFavorite: mezmurController
+                      .mezmurList[mezmurController.favoriteMezmurIndexs[index]]
+                      .isFavorite
+                      .value,
+                  title: mezmurController
+                      .mezmurList[mezmurController.favoriteMezmurIndexs[index]]
+                      .title,
                   subtitle: mezmurController.getSubtitle(
                       mezmurController.favoriteMezmurIndexs[index]),
                   from: fromFavorite,

@@ -26,17 +26,17 @@ class _CarouselState extends State<Carousel> with ColorPallet {
   List mezmurTitles = [];
   @override
   void initState() {
-    image1 = mezmurController.mezmurList[widget.mezmurs.elementAt(0)]['image'];
-    image2 = mezmurController.mezmurList[widget.mezmurs.elementAt(1)]['image'];
-    image3 = mezmurController.mezmurList[widget.mezmurs.elementAt(2)]['image'];
-    image4 = mezmurController.mezmurList[widget.mezmurs.elementAt(3)]['image'];
-    image5 = mezmurController.mezmurList[widget.mezmurs.elementAt(4)]['image'];
+    image1 = mezmurController.mezmurList[widget.mezmurs.elementAt(0)].image;
+    image2 = mezmurController.mezmurList[widget.mezmurs.elementAt(1)].image;
+    image3 = mezmurController.mezmurList[widget.mezmurs.elementAt(2)].image;
+    image4 = mezmurController.mezmurList[widget.mezmurs.elementAt(3)].image;
+    image5 = mezmurController.mezmurList[widget.mezmurs.elementAt(4)].image;
     mezmurTitles = [
-      mezmurController.mezmurList[widget.mezmurs.elementAt(0)]['title'],
-      mezmurController.mezmurList[widget.mezmurs.elementAt(1)]['title'],
-      mezmurController.mezmurList[widget.mezmurs.elementAt(2)]['title'],
-      mezmurController.mezmurList[widget.mezmurs.elementAt(3)]['title'],
-      mezmurController.mezmurList[widget.mezmurs.elementAt(4)]['title'],
+      mezmurController.mezmurList[widget.mezmurs.elementAt(0)].title,
+      mezmurController.mezmurList[widget.mezmurs.elementAt(1)].title,
+      mezmurController.mezmurList[widget.mezmurs.elementAt(2)].title,
+      mezmurController.mezmurList[widget.mezmurs.elementAt(3)].title,
+      mezmurController.mezmurList[widget.mezmurs.elementAt(4)].title,
     ];
     super.initState();
   }

@@ -1,11 +1,10 @@
-import 'package:arganon/models/mezmurs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import './screens/home_tab.dart';
 import './helper/helper.dart' show ColorPallet, Constants, initControllers;
-import './screens/mezmur_screen.dart';
-import 'screens/catagory_list_display.dart';
+import './controllers/database_controller.dart';
+import './screens/catagory_list_display.dart';
 import './controllers/mezmur_controller.dart';
 
 class Arganon extends StatelessWidget with ColorPallet, Constants {
@@ -84,13 +83,17 @@ class Arganon extends StatelessWidget with ColorPallet, Constants {
   }
 }
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //initialize all controllers
   initControllers();
+
+  DatabaseController dbController = Get.find();
   MezmurController mezmurController = Get.find();
-  mezmurController.createCatagories();
+  await dbController.init();
   mezmurController.generateRandomMezmurs();
+  mezmurController.createCatagories();
+  dbController.dispose();
   mezmurController.dispose();
   runApp(Arganon());
 }

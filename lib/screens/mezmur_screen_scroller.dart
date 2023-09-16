@@ -1,4 +1,3 @@
-import 'package:arganon/models/mezmurs.dart';
 import 'package:flutter/material.dart';
 import '../screens/mezmur_screen.dart';
 import 'package:get/get.dart';

@@ -4,7 +4,6 @@ import '../screens/favorite_tab.dart';
 import '../helper/helper.dart' show screenWidth, ColorPallet;
 import '../widgets/widgets.dart' show Carousel, MezmurTile;
 import './catagory_tab.dart';
-import '../models/mezmurs.dart';
 import '../controllers/mezmur_controller.dart';
 
 class Home extends StatefulWidget {
@@ -162,16 +161,25 @@ class _HomeState extends State<Home>
                   child: ListView.builder(
                     itemCount: mezmurController.searchedMezmurs.length,
                     itemBuilder: (context, index) {
-                      return MezmurTile(
-                        image: mezmurController.mezmurList[
-                            mezmurController.searchedMezmurs[index]]['image'],
-                        isFavorite: mezmurController.mezmurList[mezmurController
-                            .searchedMezmurs[index]]['isFavorite'],
-                        title: mezmurController.mezmurList[
-                            mezmurController.searchedMezmurs[index]]['title'],
-                        subtitle: mezmurController.getSubtitle(
-                            mezmurController.searchedMezmurs[index]),
-                        index: mezmurController.searchedMezmurs[index],
+                      return Obx(
+                        () => MezmurTile(
+                          image: mezmurController
+                              .mezmurList[
+                                  mezmurController.searchedMezmurs[index]]
+                              .image,
+                          isFavorite: mezmurController
+                              .mezmurList[
+                                  mezmurController.searchedMezmurs[index]]
+                              .isFavorite
+                              .value,
+                          title: mezmurController
+                              .mezmurList[
+                                  mezmurController.searchedMezmurs[index]]
+                              .title,
+                          subtitle: mezmurController.getSubtitle(
+                              mezmurController.searchedMezmurs[index]),
+                          index: mezmurController.searchedMezmurs[index],
+                        ),
                       );
                     },
                   ),
@@ -184,14 +192,15 @@ class _HomeState extends State<Home>
                   child: AnimatedList(
                     controller: scrollController,
                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                    initialItemCount: mezmurs.length,
+                    initialItemCount: mezmurController.mezmurList.length,
                     itemBuilder: (context, index, animation) {
                       return Obx(
                         () => MezmurTile(
-                          image: mezmurs[index]['image'],
+                          image: mezmurController.mezmurList[index].image,
                           index: index,
-                          isFavorite: mezmurs[index]['isFavorite'],
-                          title: mezmurs[index]['title'],
+                          isFavorite: mezmurController
+                              .mezmurList[index].isFavorite.value,
+                          title: mezmurController.mezmurList[index].title,
                           subtitle: mezmurController.getSubtitle(index),
                         ),
                       );
