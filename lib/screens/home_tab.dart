@@ -5,6 +5,7 @@ import '../helper/helper.dart' show screenWidth, ColorPallet;
 import '../widgets/widgets.dart' show Carousel, MezmurTile;
 import './catagory_tab.dart';
 import '../controllers/mezmur_controller.dart';
+import '../controllers/database_controller.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -30,6 +31,7 @@ class _HomeState extends State<Home>
     [Icons.settings_outlined, Icons.settings],
   ];
   MezmurController mezmurController = Get.find();
+  DatabaseController databaseController = Get.find();
 
   @override
   void initState() {
@@ -50,8 +52,7 @@ class _HomeState extends State<Home>
   }
 
   Future refreshHandler() async {
-    //for test purpose only
-    return Future.delayed(const Duration(seconds: 4));
+    await databaseController.fetchMezmurs();
   }
 
   @override
@@ -120,6 +121,7 @@ class _HomeState extends State<Home>
                     setState(() {
                       showCloseButton = false;
                       isSearching = false;
+                      showCarousel = true;
                     });
                   },
                   icon: Visibility(
@@ -189,20 +191,19 @@ class _HomeState extends State<Home>
                   backgroundColor: blurWhite,
                   color: foregroundColor,
                   strokeWidth: 2,
-                  child: AnimatedList(
+                  child: ListView.builder(
                     controller: scrollController,
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    initialItemCount: mezmurController.mezmurList.length,
-                    itemBuilder: (context, index, animation) {
-                      return Obx(
-                        () => MezmurTile(
-                          image: mezmurController.mezmurList[index].image,
-                          index: index,
-                          isFavorite: mezmurController
-                              .mezmurList[index].isFavorite.value,
-                          title: mezmurController.mezmurList[index].title,
-                          subtitle: mezmurController.getSubtitle(index),
-                        ),
+                    padding:
+                        const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                    itemCount: mezmurController.mezmurList.length,
+                    itemBuilder: (context, index) {
+                      return MezmurTile(
+                        image: mezmurController.mezmurList[index].image,
+                        index: mezmurController.mezmurList[index].id,
+                        isFavorite:
+                            mezmurController.mezmurList[index].isFavorite.value,
+                        title: mezmurController.mezmurList[index].title,
+                        subtitle: mezmurController.getSubtitle(index),
                       );
                     },
                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/mezmur_screen.dart';
 import 'package:get/get.dart';
 import '../controllers/mezmur_controller.dart';
+import '../controllers/ui_controller.dart';
 import '../helper/helper.dart' show Constants;
 
 class MezmurScreenScroller extends StatefulWidget {
@@ -17,37 +18,42 @@ class MezmurScreenScroller extends StatefulWidget {
 class _MezmurScreenScrollerState extends State<MezmurScreenScroller>
     with Constants {
   MezmurController mezmurController = Get.find();
+  UIController uiController = Get.find();
   late List mezmurs;
-  late PageController pageController;
 
   @override
   void initState() {
-    print(widget.currentIndex);
     if (widget.from == fromHome) {
       mezmurs = mezmurController.mezmurList;
     } else if (widget.from == fromFavorite) {
       mezmurs = mezmurController.favoriteMezmurIndexs;
     } else if (widget.from == fromCatagory) {
       String catagory = Get.arguments;
-      print(catagory);
+
       mezmurs = mezmurController.getMezmur(catagory);
     }
-    pageController = PageController(
+    uiController.pageController = PageController(
         initialPage: widget.from == fromHome
             ? widget.currentIndex
             : mezmurs.indexOf(widget.currentIndex));
-
+    uiController.currentPage.value = widget.from == fromHome
+        ? widget.currentIndex
+        : mezmurs.indexOf(widget.currentIndex);
+    print(uiController.currentPage);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
+        onPageChanged: (i) {
+          uiController.currentPage.value = i;
+        },
         allowImplicitScrolling: true,
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         itemCount: mezmurs.length,
-        controller: pageController,
+        controller: uiController.pageController,
         itemBuilder: (context, index) {
           return MezmurScreen(
             index: widget.from == fromHome ? index : mezmurs[index],

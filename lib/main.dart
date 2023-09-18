@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 import './screens/home_tab.dart';
 import './helper/helper.dart' show ColorPallet, Constants, initControllers;
 import './controllers/database_controller.dart';
 import './screens/catagory_list_display.dart';
 import './controllers/mezmur_controller.dart';
+import './controllers/ui_controller.dart';
+import './firebase_options.dart';
 
 class Arganon extends StatelessWidget with ColorPallet, Constants {
   Arganon({super.key});
@@ -85,15 +88,19 @@ class Arganon extends StatelessWidget with ColorPallet, Constants {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //initialize all controllers
   initControllers();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  //initialize all controllers
+  UIController uiController = Get.find();
   DatabaseController dbController = Get.find();
   MezmurController mezmurController = Get.find();
   await dbController.init();
   mezmurController.generateRandomMezmurs();
   mezmurController.createCatagories();
   dbController.dispose();
-  mezmurController.dispose();
+
+  uiController.dispose();
   runApp(Arganon());
 }

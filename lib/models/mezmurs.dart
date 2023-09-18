@@ -78,7 +78,7 @@ class Mezmur {
   String lyrics;
   String image;
   RxBool isFavorite;
-  List<String> catagory;
+  List catagory;
   String fileId;
   Mezmur(
       {required this.id,
@@ -90,11 +90,12 @@ class Mezmur {
       required this.fileId});
   toMap() {
     return {
+      'id': id,
       'title': title,
       'lyrics': lyrics,
       'image': image,
-      'isFavorite': isFavorite,
       'catagory': catagory,
+      'fileId': fileId,
     };
   }
 }

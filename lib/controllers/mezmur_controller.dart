@@ -1,13 +1,19 @@
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'dart:math' show Random;
+import 'dart:convert' show json;
+import '../helper/helper.dart' show ColorPallet;
 import '../models/mezmurs.dart';
+import '../models/mezmurs_file_id.dart';
 
-class MezmurController extends GetxController {
+class MezmurController extends GetxController with ColorPallet {
   List<Mezmur> mezmurList = [];
 
   List favoriteMezmurIndexs = [];
   Set randomMezmurs = {};
   List searchedMezmurs = [];
+  String mezmursUrl =
+      'https://arganon-53673-default-rtdb.firebaseio.com/mezmurs.json';
 
   List<int> kidistSilasseMezmurs = [];
   List<int> medhanealemMezmurs = [];
@@ -49,17 +55,54 @@ class MezmurController extends GetxController {
     randomMezmurs = randomNumbers;
   }
 
+//https://arganon-53673-default-rtdb.firebaseio.com/
+  postAllMezmursToFirebase() async {
+    try {
+      await http.post(Uri.parse(mezmursUrl),
+          body: json.encode({
+            'id': mezmurList.length,
+            'fileId': fileUniqueAddress[mezmurList.length],
+            'title': 'አማኑኤል ተመስገን',
+            'lyrics': '''አማን በአማን /2/
+አማኑኤል ተመስገን /2/
+ለዚህ ፍቅርህ ምን ልክፈል /2/
+    ድብቁን ሃጢያት አንተ ብትገልጠው
+    ይቅር ብለኸኝ ባትሸፋፍነው
+    እንደሰው በቀል ቢኖርህ ጌታ
+    ለእኔ ሃጢያትስ የለውም ቦታ
+በየደቂቃው ሃጢያት ስሰራ
+ስሰርቅ ስበድል አንተን ሳልፈራ
+አንተ ግን ፊትህ ምንም ቢቀየም
+በቁጣህ በትር አልገረፍከኝም
+    ምህረትህን ልከህ አድነኝ ዛሬ
+    ታክቶኛልና በሃጢያት መኖሬ
+    ዓለም በሃጢያት እየሳበችኝ
+    በፍቅርህ በደስታ መኖር አቃተኝ
+የሃጢያት ጉዞ ጣፋጭ ቢመስልም
+ውጤቱ መሮ ፍጹም አይጥምም
+እንደ በደሌ ስላልከፈልከኝ
+ተመስገን እንጂ ሌላ ምን አለኝ''',
+            'image': medhanealemImage,
+            'catagory': [
+              medhanealemCatagory,
+            ]
+          }));
+    } catch (error) {
+      print(error);
+    }
+  }
+
   search(String text) {
     searchedMezmurs.clear();
     for (int i = 0; i < mezmurList.length; i++) {
       if (mezmurList[i].title.contains(text)) {
-        searchedMezmurs.add(i);
+        searchedMezmurs.add(mezmurList[i].id);
       }
     }
     for (int i = 0; i < mezmurList.length; i++) {
       if (mezmurList[i].lyrics.contains(text)) {
         if (searchedMezmurs.contains(i) == false) {
-          searchedMezmurs.add(i);
+          searchedMezmurs.add(mezmurList[i].id);
         }
       }
     }
@@ -75,6 +118,38 @@ class MezmurController extends GetxController {
   }
 
   createCatagories() {
+    kidistSilasseMezmurs = [];
+    medhanealemMezmurs = [];
+    nisehaMezmurs = [];
+    pseraklitosMezmur = [];
+    emebetachinMezmur = [];
+    abuneTeklehaymanotMezmurs = [];
+    kidusMikaelMezmurs = [];
+    kidusGebrielMezmurs = [];
+    kidistArsemaMezmurs = [];
+    kidusRufaelMezmurs = [];
+    abuneGebremenfeskidusMezmurs = [];
+    abuneGiorgisMezmurs = [];
+    sergMezmurs = [];
+    lidetMezmurs = [];
+    meskelMezmurs = [];
+    enkuatatashMezmurs = [];
+    timketMezmurs = [];
+    hosaenaMezmurs = [];
+    sikletMezmurs = [];
+    tinsaeMezmurs = [];
+    ergetMezmurs = [];
+    mitsatMezmurs = [];
+    debretaborMezmurs = [];
+    kidusUraelMezmurs = [];
+    kidusGiorgisMezmurs = [];
+    kidusYohanisMetmikMezmurs = [];
+    kidusEstifanosMezmurs = [];
+    kidusPawlosMezmurs = [];
+    kidusMerkoryosMezmurs = [];
+    kidusYaredMezmurs = [];
+    abuneAregawiMezmurs = [];
+
     for (int i = 0; i < mezmurList.length; i++) {
       List catagories = [...mezmurList[i].catagory];
 
@@ -180,7 +255,7 @@ class MezmurController extends GetxController {
     return 'https://www.googleapis.com/drive/v3/files/$fileID?alt=media&key=AIzaSyCAtbRmPnOklzrDRYZe4LBemLzNTjx80pI&v=.mp3';
   }
 
-  void toggleFavorite(int index) {
+  void toggleFavorite(int index) async {
     if (mezmurList[index].isFavorite.value == true) {
       mezmurList[index].isFavorite.value = false;
       favoriteMezmurIndexs.remove(index);
@@ -190,6 +265,8 @@ class MezmurController extends GetxController {
         favoriteMezmurIndexs.add(index);
       }
     }
+
+    //postAllMezmursToFirebase();
   }
 
   List getMezmur(String catagory) {

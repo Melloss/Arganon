@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCuOjhA1FNzEBzRlGMvpjbpGBScXw0h6qg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1033299591762</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.arganon</string>
+	<key>PROJECT_ID</key>
+	<string>arganon-53673</string>
+	<key>STORAGE_BUCKET</key>
+	<string>arganon-53673.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1033299591762:ios:5ae43f83ced3792968958b</string>
+	<key>DATABASE_URL</key>
+	<string>https://arganon-53673-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

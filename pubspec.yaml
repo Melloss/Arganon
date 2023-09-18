@@ -38,6 +38,9 @@ dependencies:
   sqflite: ^2.2.8+4
   carousel_slider: ^4.2.1
   path: ^1.8.2
+  http: ^0.13.6
+  firebase_core: ^2.15.1
+  firebase_database: ^10.2.5
 
 dev_dependencies:
   flutter_test:

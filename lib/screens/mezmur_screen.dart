@@ -4,6 +4,7 @@ import '../helper/helper.dart'
     show Constants, ColorPallet, screenHeight, screenWidth;
 import '../controllers/mezmur_controller.dart';
 import '../controllers/database_controller.dart';
+import '../controllers/ui_controller.dart';
 
 class MezmurScreen extends StatefulWidget {
   final int index;
@@ -16,6 +17,7 @@ class MezmurScreen extends StatefulWidget {
 class _MezmurScreenState extends State<MezmurScreen>
     with Constants, ColorPallet {
   MezmurController mezmurController = Get.find();
+  UIController uiController = Get.find();
   DatabaseController databaseController = Get.find();
   bool showAudioController = true;
   bool isPlaying = false;
@@ -29,15 +31,20 @@ class _MezmurScreenState extends State<MezmurScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(alignment: Alignment.bottomCenter, children: [
-      Hero(
-        tag: 'mezmur${widget.index}',
-        child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            alignment: Alignment.topCenter,
-            image: AssetImage(mezmurController.mezmurList[widget.index].image),
-            fit: BoxFit.cover,
-          )),
+      Obx(
+        () => Hero(
+          tag: uiController.currentPage.value == widget.index
+              ? 'mezmur${widget.index}'
+              : '${widget.index}',
+          child: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              alignment: Alignment.topCenter,
+              image:
+                  AssetImage(mezmurController.mezmurList[widget.index].image),
+              fit: BoxFit.cover,
+            )),
+          ),
         ),
       ),
       _buildBackgroundOverlay(),
