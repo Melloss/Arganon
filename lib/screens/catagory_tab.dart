@@ -43,7 +43,7 @@ class _CatagoryTabState extends State<CatagoryTab> with Constants {
             ),
             CatagoryTile(
               path: betekristianImage1,
-              name: 'Others',
+              name: 'ሌላ ተጨማሪ',
               catagoryName: othersCatagory,
             )
           ],

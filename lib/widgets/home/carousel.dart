@@ -42,11 +42,6 @@ class _CarouselState extends State<Carousel> with ColorPallet {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [

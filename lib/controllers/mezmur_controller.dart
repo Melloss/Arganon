@@ -5,6 +5,7 @@ import 'dart:convert' show json;
 import '../helper/helper.dart' show ColorPallet;
 import '../models/mezmurs.dart';
 import '../models/mezmurs_file_id.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class MezmurController extends GetxController with ColorPallet {
   List<Mezmur> mezmurList = [];
@@ -14,6 +15,12 @@ class MezmurController extends GetxController with ColorPallet {
   List searchedMezmurs = [];
   String mezmursUrl =
       'https://arganon-53673-default-rtdb.firebaseio.com/mezmurs.json';
+
+  AudioPlayer player = AudioPlayer();
+  int currentPlayingMezmurIndex = -1;
+  Duration mezmurDuration = const Duration(seconds: 0);
+  Duration mezmurPosition = const Duration(seconds: 0);
+  RxBool isPlaying = false.obs;
 
   List<int> kidistSilasseMezmurs = [];
   List<int> medhanealemMezmurs = [];

@@ -18,7 +18,7 @@ class _FavoriteTabState extends State<FavoriteTab> with Constants {
     return mezmurController.favoriteMezmurIndexs.isEmpty
         ? Center(
             child: Text(
-              'Favorite is Empty',
+              'የተመረጠ መዝሙር የለም',
               style: Theme.of(context).textTheme.titleSmall,
             ),
           )

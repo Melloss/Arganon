@@ -41,6 +41,8 @@ dependencies:
   http: ^0.13.6
   firebase_core: ^2.15.1
   firebase_database: ^10.2.5
+  audioplayers: ^4.1.0
+  animated_radial_menu: ^0.0.1
 
 dev_dependencies:
   flutter_test:

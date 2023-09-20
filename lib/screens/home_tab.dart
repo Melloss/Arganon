@@ -1,3 +1,4 @@
+import 'package:arganon/screens/mezmur_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../screens/favorite_tab.dart';
@@ -6,6 +7,7 @@ import '../widgets/widgets.dart' show Carousel, MezmurTile;
 import './catagory_tab.dart';
 import '../controllers/mezmur_controller.dart';
 import '../controllers/database_controller.dart';
+import 'package:animated_radial_menu/animated_radial_menu.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -96,6 +98,7 @@ class _HomeState extends State<Home>
         ],
       ),
       bottomNavigationBar: _buildNavigationBar(),
+      floatingActionButton: _buildRadialMenu(),
     );
   }
 
@@ -248,7 +251,6 @@ class _HomeState extends State<Home>
       child: TabBar(
         onTap: (index) {
           isTabClicked = isTabClicked.map((value) => false).toList();
-
           setState(() {
             isTabClicked[index] = true;
           });
@@ -269,5 +271,32 @@ class _HomeState extends State<Home>
         ],
       ),
     );
+  }
+
+  _buildRadialMenu() {
+    return Obx(() => Visibility(
+          visible: mezmurController.isPlaying.value,
+          child: RadialMenu(children: [
+            RadialButton(
+                icon: const Icon(Icons.pause_circle),
+                onPress: () async {
+                  await mezmurController.player.pause();
+                },
+                buttonColor: blurWhite),
+            RadialButton(
+                icon: const Icon(Icons.stop_circle),
+                onPress: () async {
+                  await mezmurController.player.stop();
+                },
+                buttonColor: blurWhite),
+            RadialButton(
+                icon: const Icon(Icons.info),
+                onPress: () async {
+                  Get.to(() => MezmurScreen(
+                      index: mezmurController.currentPlayingMezmurIndex));
+                },
+                buttonColor: blurWhite)
+          ]),
+        ));
   }
 }

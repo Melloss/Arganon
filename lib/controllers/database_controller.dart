@@ -148,7 +148,7 @@ class DatabaseController extends GetxController with ColorPallet {
       if (newMezmurs > 0) {
         Get.snackbar(
           'Success',
-          '$newMezmurs Mezmur Added Successfully',
+          '$newMezmurs መዝሙር በስኬት ተጨምሯል',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: blurWhite,
           colorText: backgroudColor,
@@ -157,7 +157,7 @@ class DatabaseController extends GetxController with ColorPallet {
       } else {
         Get.snackbar(
           'No New',
-          'There is no new Mezmur added',
+          'አዲስ መዝሙር የለም',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: blurWhite,
           colorText: backgroudColor,

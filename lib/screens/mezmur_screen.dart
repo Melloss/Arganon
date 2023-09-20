@@ -5,6 +5,7 @@ import '../helper/helper.dart'
 import '../controllers/mezmur_controller.dart';
 import '../controllers/database_controller.dart';
 import '../controllers/ui_controller.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class MezmurScreen extends StatefulWidget {
   final int index;
@@ -20,11 +21,75 @@ class _MezmurScreenState extends State<MezmurScreen>
   UIController uiController = Get.find();
   DatabaseController databaseController = Get.find();
   bool showAudioController = true;
-  bool isPlaying = false;
+  bool showSliderThumb = false;
+  late String urlPath;
 
   @override
   void initState() {
+    urlPath = mezmurController
+        .getUrlAddress(mezmurController.mezmurList[widget.index].fileId);
+
+    mezmurController.player.onPositionChanged.listen((Duration position) {
+      if (mounted) {
+        setState(() {
+          mezmurController.mezmurPosition = position;
+        });
+      }
+    });
+
+    mezmurController.player.onDurationChanged.listen((Duration? duration) {
+      if (mounted) {
+        setState(() {
+          mezmurController.mezmurDuration = duration!;
+        });
+      }
+    });
+    mezmurController.player.onPlayerComplete.listen((event) async {
+      await mezmurController.player.stop();
+      if (mounted) {
+        setState(() {
+          mezmurController.isPlaying.value = false;
+          mezmurController.mezmurDuration = const Duration(seconds: 0);
+          mezmurController.mezmurPosition = const Duration(seconds: 0);
+        });
+      }
+    });
+
+    print(mezmurController.currentPlayingMezmurIndex);
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // mezmurController.dispose();
+    super.dispose();
+  }
+
+  void playButtonHandler() async {
+    if (widget.index != mezmurController.currentPlayingMezmurIndex) {
+      //await mezmurController.player.stop();
+      await mezmurController.player.release();
+
+      print('another mezmur is playing ');
+    }
+    try {
+      mezmurController.currentPlayingMezmurIndex = widget.index;
+      if (mezmurController.isPlaying.value) {
+        if (mounted) {
+          mezmurController.isPlaying.value = false;
+        }
+        await mezmurController.player.pause();
+      } else {
+        if (mounted) {
+          mezmurController.isPlaying.value = true;
+        }
+        await mezmurController.player.setSourceUrl(urlPath);
+        await mezmurController.player.play(UrlSource(urlPath));
+      }
+    } catch (error) {
+      print(error);
+    }
   }
 
   @override
@@ -141,14 +206,18 @@ class _MezmurScreenState extends State<MezmurScreen>
       alignment: Alignment.center,
       child: GestureDetector(
         onVerticalDragStart: (detail) {
-          setState(() {
-            showAudioController = false;
-          });
+          if (mounted) {
+            setState(() {
+              showAudioController = false;
+            });
+          }
         },
         onDoubleTap: () {
-          setState(() {
-            showAudioController = false;
-          });
+          if (mounted) {
+            setState(() {
+              showAudioController = false;
+            });
+          }
         },
         child: Container(
           margin: const EdgeInsets.only(bottom: 20),
@@ -167,18 +236,63 @@ class _MezmurScreenState extends State<MezmurScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Slider(
-                value: 0.1,
-                onChanged: (value) {},
+              SliderTheme(
+                data: Theme.of(context).sliderTheme.copyWith(
+                    thumbShape: showSliderThumb == true
+                        ? null
+                        : SliderComponentShape.noThumb),
+                child: Slider(
+                  onChangeStart: (positon) {
+                    if (mounted) {
+                      setState(() {
+                        showSliderThumb = true;
+                      });
+                    }
+                  },
+                  onChangeEnd: (p) {
+                    if (mounted) {
+                      setState(() {
+                        showSliderThumb = false;
+                      });
+                    }
+                  },
+                  value:
+                      mezmurController.currentPlayingMezmurIndex == widget.index
+                          ? mezmurController.mezmurPosition.inSeconds.toDouble()
+                          : 0.0,
+                  onChanged: (value) {
+                    if (mounted) {
+                      setState(() {
+                        Duration newDuration = Duration(seconds: value.toInt());
+                        mezmurController.player.seek(newDuration);
+                      });
+                    }
+                  },
+                  min: 0.0,
+                  max:
+                      mezmurController.currentPlayingMezmurIndex == widget.index
+                          ? mezmurController.mezmurDuration.inSeconds.toDouble()
+                          : 0.0,
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('00:00',
+                  Text(
+                      mezmurController.currentPlayingMezmurIndex == widget.index
+                          ? mezmurController.mezmurPosition
+                              .toString()
+                              .split(".")[0]
+                          : '0:00:00',
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
                             fontSize: 11,
                           )),
-                  Text('05:00',
+                  Text(
+                      mezmurController.currentPlayingMezmurIndex == widget.index
+                          ? mezmurController.mezmurDuration
+                              .toString()
+                              .split(".")[0]
+                          : '0:00:00',
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
                             fontSize: 11,
                           )),
@@ -195,16 +309,17 @@ class _MezmurScreenState extends State<MezmurScreen>
                   Align(
                     alignment: Alignment.center,
                     child: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            isPlaying = !isPlaying;
-                          });
-                        },
-                        icon: Icon(
-                          isPlaying
-                              ? Icons.pause_circle
-                              : Icons.play_circle_fill,
-                          size: 45,
+                        onPressed: playButtonHandler,
+                        icon: Obx(
+                          () => Icon(
+                            mezmurController.isPlaying.value &&
+                                    widget.index ==
+                                        mezmurController
+                                            .currentPlayingMezmurIndex
+                                ? Icons.pause_circle
+                                : Icons.play_circle_fill,
+                            size: 45,
+                          ),
                         )),
                   ),
                   Positioned(
@@ -214,10 +329,12 @@ class _MezmurScreenState extends State<MezmurScreen>
                         onPressed: () async {
                           mezmurController.toggleFavorite(widget.index);
                           await databaseController.updateMezmur(widget.index);
-                          setState(() {
-                            mezmurController.favoriteMezmurIndexs =
-                                mezmurController.favoriteMezmurIndexs;
-                          });
+                          if (mounted) {
+                            setState(() {
+                              mezmurController.favoriteMezmurIndexs =
+                                  mezmurController.favoriteMezmurIndexs;
+                            });
+                          }
                         },
                         icon: Icon(
                           mezmurController
@@ -239,9 +356,11 @@ class _MezmurScreenState extends State<MezmurScreen>
     return Center(
       child: InkWell(
         onTap: () {
-          setState(() {
-            showAudioController = true;
-          });
+          if (mounted) {
+            setState(() {
+              showAudioController = true;
+            });
+          }
         },
         child: Container(
           width: 70,

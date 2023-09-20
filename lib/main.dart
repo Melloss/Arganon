@@ -75,7 +75,7 @@ class Arganon extends StatelessWidget with ColorPallet, Constants {
       sliderTheme: SliderThemeData(
         activeTrackColor: Colors.white.withOpacity(0.5),
         inactiveTrackColor: blurWhite.withOpacity(0.2),
-        thumbShape: SliderComponentShape.noThumb,
+        thumbColor: Colors.white.withOpacity(0.5),
         trackHeight: 4,
         trackShape: const RectangularSliderTrackShape(),
       ),
