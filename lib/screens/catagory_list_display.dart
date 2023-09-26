@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_is_empty
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../helper/helper.dart' show ColorPallet, Constants;
@@ -30,31 +28,31 @@ class _CatagoryListDisplayState extends State<CatagoryListDisplay>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: mezmurs.isEmpty
-          ? Center(
-              child: Text(
-                '$catagory mezmur is empty!',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            )
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 10),
-                IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(
-                    Icons.keyboard_arrow_left,
-                    color: blurWhite,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                _buildCatagoryList(),
-                const SizedBox(height: 10),
-              ],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 10),
+          IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.keyboard_arrow_left,
+              color: blurWhite,
             ),
+          ),
+          const SizedBox(height: 20),
+          mezmurs.isEmpty
+              ? Center(
+                  child: Text(
+                    'ለጊዜው በዚህ ምድብ ውስጥ መዝሙር የለም',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                )
+              : _buildCatagoryList(),
+          const SizedBox(height: 10),
+        ],
+      ),
     );
   }
 

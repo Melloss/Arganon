@@ -1,13 +1,16 @@
-import 'package:arganon/screens/mezmur_screen.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import '../screens/favorite_tab.dart';
 import '../helper/helper.dart' show screenWidth, ColorPallet;
 import '../widgets/widgets.dart' show Carousel, MezmurTile;
 import './catagory_tab.dart';
 import '../controllers/mezmur_controller.dart';
 import '../controllers/database_controller.dart';
-import 'package:animated_radial_menu/animated_radial_menu.dart';
+import '../screens/mezmur_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -98,7 +101,6 @@ class _HomeState extends State<Home>
         ],
       ),
       bottomNavigationBar: _buildNavigationBar(),
-      floatingActionButton: _buildRadialMenu(),
     );
   }
 
@@ -248,55 +250,147 @@ class _HomeState extends State<Home>
               color: Colors.black.withOpacity(0.2),
             )
           ]),
-      child: TabBar(
-        onTap: (index) {
-          isTabClicked = isTabClicked.map((value) => false).toList();
-          setState(() {
-            isTabClicked[index] = true;
-          });
-        },
-        indicator: const BoxDecoration(),
-        labelColor: blurWhite,
-        labelPadding: EdgeInsets.zero,
-        labelStyle: const TextStyle(
-          fontSize: 11,
+      child: Column(mainAxisSize: MainAxisSize.min, children: [
+        Obx(() => Visibility(
+              visible: mezmurController.showPlayerController.value,
+              child: Container(
+                width: screenWidth(context),
+                height: 40,
+                decoration: BoxDecoration(
+                  color: blurWhite,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Visibility(
+                      visible: mezmurController.currentPlayingMezmurIndex != -1,
+                      child: Container(
+                          width: 45,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              image: DecorationImage(
+                                alignment: Alignment.topCenter,
+                                image: AssetImage(mezmurController
+                                            .currentPlayingMezmurIndex ==
+                                        -1
+                                    ? ''
+                                    : mezmurController
+                                        .mezmurList[mezmurController
+                                            .currentPlayingMezmurIndex]
+                                        .image),
+                                fit: BoxFit.cover,
+                              ))),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Get.to(() => MezmurScreen(
+                            index: mezmurController.currentPlayingMezmurIndex));
+                      },
+                      child: Text(
+                        mezmurController.currentPlayingMezmurIndex == -1
+                            ? ''
+                            : mezmurController
+                                .mezmurList[
+                                    mezmurController.currentPlayingMezmurIndex]
+                                .title,
+                        style: TextStyle(
+                          color: backgroudColor,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: playPauseHandler,
+                      icon: mezmurController.isPlaying.value
+                          ? Icon(
+                              Icons.pause_circle,
+                              color: foregroundColor,
+                              size: 25,
+                            )
+                          : Icon(
+                              Icons.play_circle,
+                              color: foregroundColor,
+                              size: 25,
+                            ),
+                    ),
+                    IconButton(
+                        onPressed: () async {
+                          await mezmurController.player.stop();
+                          mezmurController.currentPlayingMezmurIndex = -1;
+                          mezmurController.isPlaying.value = false;
+                          mezmurController.showPlayerController.value = false;
+                        },
+                        icon: Icon(
+                          Icons.close,
+                          color: foregroundColor,
+                        )),
+                  ],
+                ),
+              ),
+            )),
+        TabBar(
+          onTap: (index) {
+            isTabClicked = isTabClicked.map((value) => false).toList();
+            setState(() {
+              isTabClicked[index] = true;
+            });
+          },
+          indicator: const BoxDecoration(),
+          labelColor: blurWhite,
+          labelPadding: EdgeInsets.zero,
+          labelStyle: const TextStyle(
+            fontSize: 11,
+          ),
+          controller: tabController,
+          tabs: [
+            _buildTab(0, 'ቤት'),
+            _buildTab(1, 'ምድቦች'),
+            _buildTab(2, 'የተወደዱ'),
+            _buildTab(3, 'ቅዳሴ'),
+            _buildTab(4, 'ማስተካከያ'),
+          ],
         ),
-        controller: tabController,
-        tabs: [
-          _buildTab(0, 'ቤት'),
-          _buildTab(1, 'ምድቦች'),
-          _buildTab(2, 'የተወደዱ'),
-          _buildTab(3, 'ቅዳሴ'),
-          _buildTab(4, 'ማስተካከያ'),
-        ],
-      ),
+      ]),
     );
   }
 
-  _buildRadialMenu() {
-    return Obx(() => Visibility(
-          visible: mezmurController.isPlaying.value,
-          child: RadialMenu(children: [
-            RadialButton(
-                icon: const Icon(Icons.pause_circle),
-                onPress: () async {
-                  await mezmurController.player.pause();
-                },
-                buttonColor: blurWhite),
-            RadialButton(
-                icon: const Icon(Icons.stop_circle),
-                onPress: () async {
-                  await mezmurController.player.stop();
-                },
-                buttonColor: blurWhite),
-            RadialButton(
-                icon: const Icon(Icons.info),
-                onPress: () async {
-                  Get.to(() => MezmurScreen(
-                      index: mezmurController.currentPlayingMezmurIndex));
-                },
-                buttonColor: blurWhite)
-          ]),
-        ));
+  void playPauseHandler() async {
+    String urlPath = mezmurController.getUrlAddress(mezmurController
+        .mezmurList[mezmurController.currentPlayingMezmurIndex].fileId);
+    if (mezmurController.isPlaying.value) {
+      await mezmurController.player.pause();
+      mezmurController.isPlaying.value = false;
+    } else {
+      final Directory appDocumentsDir =
+          await getApplicationDocumentsDirectory();
+
+      String path =
+          '${appDocumentsDir.path}/${mezmurController.currentPlayingMezmurIndex}.mp3';
+      if (await File(path).exists()) {
+        await mezmurController.player.play(DeviceFileSource(path));
+      } else {
+        final connectivityResult = await (Connectivity().checkConnectivity());
+        if (connectivityResult == ConnectivityResult.mobile ||
+            connectivityResult == ConnectivityResult.wifi ||
+            connectivityResult == ConnectivityResult.ethernet) {
+          await mezmurController.player.play(UrlSource(urlPath));
+        } else {
+          Get.snackbar(
+            'No Internet',
+            'በመጀመሪያ ኢንተርኔት ያብሩ',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: blurWhite,
+            colorText: backgroudColor,
+            margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          );
+        }
+      }
+      mezmurController.isPlaying.value = true;
+    }
   }
 }

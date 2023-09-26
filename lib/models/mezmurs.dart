@@ -70,7 +70,7 @@ const kidusMerkoryosCatagory = 'kidus_merkoryos';
 const kidusYaredCatagory = 'kidus_yared';
 const sergCatagory = 'serg';
 const debretaborCatagory = 'debretabor';
-const othersCatagory = 'others';
+const adadisMezmursCatagory = 'adadisMezmurCatagory';
 
 class Mezmur {
   int id;
@@ -80,14 +80,17 @@ class Mezmur {
   RxBool isFavorite;
   List catagory;
   String fileId;
-  Mezmur(
-      {required this.id,
-      required this.title,
-      required this.catagory,
-      required this.image,
-      required this.isFavorite,
-      required this.lyrics,
-      required this.fileId});
+  RxBool isSeen;
+  Mezmur({
+    required this.id,
+    required this.title,
+    required this.catagory,
+    required this.image,
+    required this.isFavorite,
+    required this.lyrics,
+    required this.fileId,
+    required this.isSeen,
+  });
   toMap() {
     return {
       'id': id,
@@ -96,6 +99,7 @@ class Mezmur {
       'image': image,
       'catagory': catagory,
       'fileId': fileId,
+      'isSeen': isSeen,
     };
   }
 }
@@ -112,6 +116,7 @@ List<Mezmur> initMezmurs() {
       isFavorite: isFavorite.obs,
       fileId: fileUniqueAddress[i],
       catagory: mezmurs[i]['catagory'],
+      isSeen: false.obs,
     );
     mezmursList.add(m);
   }
@@ -165,6 +170,29 @@ List<Map<String, dynamic>> mezmurs = [
     'isFavorite': false,
     'catagory': [
       emebetachinCatagory,
+    ]
+  },
+  {
+    'title': 'ስለማይነገር ስጦታው',
+    'lyrics': '''ስለማይነገር ስጦታው እግዚአብሔር ይመስገን
+ቸል ያላለን አምላክ ስንጓዝ ማዕበሉን አቋርጠን
+ስለማይነገር ስጦታው እግዚአብሔር ይመስገን
+    የሕይወት እስትንፋስ ዘራብን ህያው እንድንሆን
+    ይህን ያደረገ አምላካችን እግዚአብሔር ይመስገን
+    ስለማይነገር ስጦታው እግዚአብሔር ይመስገን
+ንፋስን ገልጾ ማዕበል አቁሞ የሚያሻግር
+የዓለም ፈተና ቢበዛ እርሱ መጠጊያችን
+ስለማይነገር ስጦታው እግዚአብሔር ይመስገን
+    ዳግም እንዳንሞት በሞቱ ሞትን የረታልን
+    የምንመካበት ትንሳኤን ሰላምን የሰጠን
+    ስለማይነገር ስጦታው እግዚአብሔር ይመስገን
+ከሲኦል እስራት ተፈተን ነፃ የወጣንበት
+መስቀሉን ለሰጠን ለአምላካችን እንዘምር በእውነት
+ስለማይነገር ስጦታው እግዚአብሔር ይመስገን''',
+    'image': medhanealemImage,
+    'isFavorite': false,
+    'catagory': [
+      medhanealemCatagory,
     ]
   },
   {

@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' show join;
+import 'package:connectivity_plus/connectivity_plus.dart';
 import './mezmur_controller.dart';
 import '../helper/helper.dart' show ColorPallet;
 import '../models/mezmurs.dart' show Mezmur, initMezmurs;
@@ -12,7 +13,7 @@ class DatabaseController extends GetxController with ColorPallet {
   MezmurController mezmurController = Get.find();
   late Database db;
   init() async {
-    final path = join(await getDatabasesPath(), 'ArganonMezmurs.db');
+    final path = join(await getDatabasesPath(), '5.db');
     try {
       db = await openDatabase(
         path,
@@ -25,7 +26,8 @@ class DatabaseController extends GetxController with ColorPallet {
             lyrics TEXT NOT NULL,
             image TEXT NOT NULL,
             isFavorite BOOL NOT NULL,
-            catagory TEXT NOT NULL
+            catagory TEXT NOT NULL,
+            isSeen BOOL NOT NULL
           )
         ''');
           List<Mezmur> mezmurList = initMezmurs();
@@ -37,6 +39,7 @@ class DatabaseController extends GetxController with ColorPallet {
               'image': mezmurList[i].image,
               'isFavorite': mezmurList[i].isFavorite.value == true ? 1 : 0,
               'catagory': mezmurList[i].catagory.join(','),
+              'isSeen': mezmurList[i].isSeen.value == true ? 1 : 0,
             });
           }
         },
@@ -62,6 +65,7 @@ class DatabaseController extends GetxController with ColorPallet {
                 isFavorite:
                     rowData[i]['isFavorite'] == 1 ? true.obs : false.obs,
                 fileId: fileUniqueAddress[i],
+                isSeen: rowData[i]['isSeen'] == 1 ? true.obs : false.obs,
               ),
             );
           }
@@ -88,6 +92,8 @@ class DatabaseController extends GetxController with ColorPallet {
                     ? 1
                     : 0,
             'catagory': mezmurController.mezmurList[index].catagory.join(','),
+            'isSeen':
+                mezmurController.mezmurList[index].isSeen.value == true ? 1 : 0,
           },
           where: 'id = ?',
           whereArgs: [index + 1]);
@@ -105,6 +111,7 @@ class DatabaseController extends GetxController with ColorPallet {
       'isFavorite':
           mezmurController.mezmurList[i].isFavorite.value == true ? 1 : 0,
       'catagory': mezmurController.mezmurList[i].catagory.join(','),
+      'isSeen': mezmurController.mezmurList[i].isSeen.value == true ? 1 : 0,
     });
     print('row affect: $rowAffect');
   }
@@ -120,44 +127,58 @@ class DatabaseController extends GetxController with ColorPallet {
 
   fetchMezmurs() async {
     try {
-      DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
-      final response = await databaseReference.child('mezmurs').get();
+      final connectivityResult = await (Connectivity().checkConnectivity());
+      if (connectivityResult == ConnectivityResult.mobile ||
+          connectivityResult == ConnectivityResult.wifi ||
+          connectivityResult == ConnectivityResult.ethernet) {
+        DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+        final response = await databaseReference.child('mezmurs').get();
 
-      Map<dynamic, dynamic> snapShot =
-          Map<dynamic, dynamic>.from(response.value as Map<dynamic, dynamic>);
-      int newMezmurs = 0;
-      snapShot.forEach((key, value) {
-        if (isThisIdFound(snapShot[key]['id']) == false) {
-          Mezmur m = Mezmur(
-            id: snapShot[key]['id'],
-            title: snapShot[key]['title'],
-            lyrics: snapShot[key]['lyrics'],
-            image: snapShot[key]['image'],
-            isFavorite: false.obs,
-            catagory: snapShot[key]['catagory'],
-            fileId: snapShot[key]['fileId'],
+        Map<dynamic, dynamic> snapShot =
+            Map<dynamic, dynamic>.from(response.value as Map<dynamic, dynamic>);
+        int newMezmurs = 0;
+        snapShot.forEach((key, value) {
+          if (isThisIdFound(snapShot[key]['id']) == false) {
+            Mezmur m = Mezmur(
+              id: snapShot[key]['id'],
+              title: snapShot[key]['title'],
+              lyrics: snapShot[key]['lyrics'],
+              image: snapShot[key]['image'],
+              isFavorite: false.obs,
+              catagory: snapShot[key]['catagory'],
+              fileId: snapShot[key]['fileId'],
+              isSeen: false.obs,
+            );
+            mezmurController.mezmurList.add(m);
+            mezmurController.createCatagories();
+            addMezmur(snapShot[key]['id']);
+            newMezmurs++;
+          }
+        });
+
+        if (newMezmurs > 0) {
+          Get.snackbar(
+            'Success',
+            '$newMezmurs መዝሙር ተጨምሯል',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: blurWhite,
+            colorText: backgroudColor,
+            margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           );
-          mezmurController.mezmurList.add(m);
-          mezmurController.createCatagories();
-          addMezmur(snapShot[key]['id']);
-          print(snapShot[key]['title'] + 'added');
-          newMezmurs++;
+        } else {
+          Get.snackbar(
+            'No New',
+            'አዲስ መዝሙር የለም',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: blurWhite,
+            colorText: backgroudColor,
+            margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          );
         }
-      });
-
-      if (newMezmurs > 0) {
-        Get.snackbar(
-          'Success',
-          '$newMezmurs መዝሙር በስኬት ተጨምሯል',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: blurWhite,
-          colorText: backgroudColor,
-          margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        );
       } else {
         Get.snackbar(
-          'No New',
-          'አዲስ መዝሙር የለም',
+          'No Internet',
+          'በመጀመሪያ ኢንተርኔት ያብሩ',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: blurWhite,
           colorText: backgroudColor,

@@ -42,7 +42,10 @@ dependencies:
   firebase_core: ^2.15.1
   firebase_database: ^10.2.5
   audioplayers: ^4.1.0
-  animated_radial_menu: ^0.0.1
+  path_provider: ^2.1.1
+  dio: ^5.3.3
+  flutter_spinkit: ^5.2.0
+  connectivity_plus: ^4.0.2
 
 dev_dependencies:
   flutter_test:

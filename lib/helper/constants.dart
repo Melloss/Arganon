@@ -79,5 +79,5 @@ mixin Constants {
   final kidusYaredCatagory = 'kidus_yared';
   final sergCatagory = 'serg';
   final debretaborCatagory = 'debretabor';
-  final othersCatagory = 'others';
+  final adadisMezmursCatagory = 'adadisMezmurCatagory';
 }

@@ -18,9 +18,12 @@ class MezmurController extends GetxController with ColorPallet {
 
   AudioPlayer player = AudioPlayer();
   int currentPlayingMezmurIndex = -1;
+
   Duration mezmurDuration = const Duration(seconds: 0);
   Duration mezmurPosition = const Duration(seconds: 0);
+  RxBool fromFile = false.obs;
   RxBool isPlaying = false.obs;
+  RxBool showPlayerController = false.obs;
 
   List<int> kidistSilasseMezmurs = [];
   List<int> medhanealemMezmurs = [];
@@ -53,6 +56,7 @@ class MezmurController extends GetxController with ColorPallet {
   List<int> kidusMerkoryosMezmurs = [];
   List<int> kidusYaredMezmurs = [];
   List<int> abuneAregawiMezmurs = [];
+  List<int> adadisMezmurs = [];
 
   generateRandomMezmurs() {
     Set<int> randomNumbers = {};
@@ -92,6 +96,7 @@ class MezmurController extends GetxController with ColorPallet {
             'image': medhanealemImage,
             'catagory': [
               medhanealemCatagory,
+              adadisMezmursCatagory,
             ]
           }));
     } catch (error) {
@@ -113,6 +118,19 @@ class MezmurController extends GetxController with ColorPallet {
         }
       }
     }
+  }
+
+  void toggleFavorite(int index) async {
+    if (mezmurList[index].isFavorite.value == true) {
+      mezmurList[index].isFavorite.value = false;
+      favoriteMezmurIndexs.remove(index);
+    } else {
+      mezmurList[index].isFavorite.value = true;
+      if (favoriteMezmurIndexs.contains(index) == false) {
+        favoriteMezmurIndexs.add(index);
+      }
+    }
+    // postAllMezmursToFirebase();
   }
 
   String getSubtitle(int index) {
@@ -156,6 +174,7 @@ class MezmurController extends GetxController with ColorPallet {
     kidusMerkoryosMezmurs = [];
     kidusYaredMezmurs = [];
     abuneAregawiMezmurs = [];
+    adadisMezmurs = [];
 
     for (int i = 0; i < mezmurList.length; i++) {
       List catagories = [...mezmurList[i].catagory];
@@ -253,6 +272,9 @@ class MezmurController extends GetxController with ColorPallet {
       if (catagories.contains(abuneAregawiCatagory)) {
         abuneAregawiMezmurs.add(i);
       }
+      if (catagories.contains(adadisMezmursCatagory)) {
+        adadisMezmurs.add(i);
+      }
 
       catagories.clear();
     }
@@ -260,20 +282,6 @@ class MezmurController extends GetxController with ColorPallet {
 
   String getUrlAddress(String fileID) {
     return 'https://www.googleapis.com/drive/v3/files/$fileID?alt=media&key=AIzaSyCAtbRmPnOklzrDRYZe4LBemLzNTjx80pI&v=.mp3';
-  }
-
-  void toggleFavorite(int index) async {
-    if (mezmurList[index].isFavorite.value == true) {
-      mezmurList[index].isFavorite.value = false;
-      favoriteMezmurIndexs.remove(index);
-    } else {
-      mezmurList[index].isFavorite.value = true;
-      if (favoriteMezmurIndexs.contains(index) == false) {
-        favoriteMezmurIndexs.add(index);
-      }
-    }
-
-    //postAllMezmursToFirebase();
   }
 
   List getMezmur(String catagory) {
@@ -339,6 +347,8 @@ class MezmurController extends GetxController with ColorPallet {
       return mitsatMezmurs;
     } else if (catagory == debretaborCatagory) {
       return debretaborMezmurs;
+    } else if (catagory == adadisMezmursCatagory) {
+      return adadisMezmurs;
     }
     return [];
   }
