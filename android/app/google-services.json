@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1033299591762",
+    "firebase_url": "https://arganon-53673-default-rtdb.firebaseio.com",
+    "project_id": "arganon-53673",
+    "storage_bucket": "arganon-53673.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033299591762:android:a32a6ae380ee86c168958b",
+        "android_client_info": {
+          "package_name": "com.melloss.arganon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp6i9XjeRVW4OJYQKqXBvSc4bt_QhNsJc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

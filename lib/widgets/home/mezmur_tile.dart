@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../helper/helper.dart' show ColorPallet, screenWidth, Constants;
-import '../../models/mezmurs.dart';
 import '../../controllers/mezmur_controller.dart';
 import '../../screens/mezmur_screen_scroller.dart';
+import '../../controllers/database_controller.dart';
 
+// ignore: must_be_immutable
 class MezmurTile extends StatefulWidget {
   String image;
   String title;
@@ -31,6 +32,7 @@ class MezmurTile extends StatefulWidget {
 
 class _MezmurTileState extends State<MezmurTile> with ColorPallet, Constants {
   MezmurController mezmurController = Get.find();
+  DatabaseController databaseController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class _MezmurTileState extends State<MezmurTile> with ColorPallet, Constants {
               return FadeTransition(opacity: animation, child: child);
             },
             duration: const Duration(milliseconds: 500),
-            child: mezmurs[widget.index]['isFavorite']
+            child: mezmurController.mezmurList[widget.index].isFavorite.value
                 ? _buildTile()
                 : const SizedBox.shrink(),
           )
@@ -78,56 +80,80 @@ class _MezmurTileState extends State<MezmurTile> with ColorPallet, Constants {
                 color: Colors.black12,
               )
             ]),
-        child: ListTile(
-          leading: Hero(
-            transitionOnUserGestures: true,
-            tag: 'mezmur${widget.index}',
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                image: DecorationImage(
-                    alignment: Alignment.topCenter,
-                    image: AssetImage(widget.image),
-                    fit: BoxFit.cover),
+        child: Stack(
+          children: [
+            ListTile(
+              leading: Hero(
+                transitionOnUserGestures: true,
+                tag: 'mezmur${widget.index}',
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    image: DecorationImage(
+                        alignment: Alignment.topCenter,
+                        image: AssetImage(widget.image),
+                        fit: BoxFit.cover),
+                  ),
+                ),
+              ),
+              contentPadding:
+                  const EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
+              title: Text(widget.title,
+                  style: Theme.of(context).textTheme.titleLarge),
+              subtitle: Text(
+                widget.subtitle,
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              dense: true,
+              selected: true,
+              splashColor: blurWhite,
+              trailing: IconButton(
+                onPressed: () async {
+                  if (widget.from != fromFavorite) {
+                    mezmurController.toggleFavorite(widget.index);
+                    await databaseController.updateMezmur(widget.index);
+                  } else {
+                    mezmurController.toggleFavorite(widget.index);
+                    await databaseController.updateMezmur(widget.index);
+                    setState(() {
+                      mezmurController.favoriteMezmurIndexs =
+                          mezmurController.favoriteMezmurIndexs;
+                    });
+                    //mezmurController.favoriteMezmurIndexs.remove(widget.index);
+                  }
+                },
+                icon: Obx(
+                  () => Icon(
+                    mezmurController.mezmurList[widget.index].isFavorite.value
+                        ? Icons.favorite
+                        : Icons.favorite_outline,
+                    color: blurWhite.withOpacity(0.8),
+                    size: 28,
+                  ),
+                ),
               ),
             ),
-          ),
-          contentPadding:
-              const EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
-          title:
-              Text(widget.title, style: Theme.of(context).textTheme.titleLarge),
-          subtitle: Text(
-            widget.subtitle,
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
-          dense: true,
-          selected: true,
-          splashColor: blurWhite,
-          trailing: Obx(
-            () => IconButton(
-              onPressed: () {
-                if (widget.from != fromFavorite) {
-                  mezmurController.toggleFavorite(widget.index);
-                } else {
-                  mezmurController.toggleFavorite(widget.index);
-                  setState(() {
-                    mezmurController.favoriteMezmurIndexs =
-                        mezmurController.favoriteMezmurIndexs;
-                  });
-                  //mezmurController.favoriteMezmurIndexs.remove(widget.index);
-                }
-              },
-              icon: Icon(
-                mezmurController.mezmurList[widget.index]['isFavorite']
-                    ? Icons.favorite
-                    : Icons.favorite_outline,
-                color: blurWhite.withOpacity(0.8),
-                size: 28,
+            Positioned(
+              bottom: 5,
+              left: 5,
+              child: Obx(
+                () => Visibility(
+                  visible:
+                      !mezmurController.mezmurList[widget.index].isSeen.value,
+                  child: Container(
+                    width: 5,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: blurWhite,
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

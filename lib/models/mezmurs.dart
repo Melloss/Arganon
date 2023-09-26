@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import './mezmurs_file_id.dart';
 
 //Images
 const kidistArsemaImage = 'assets/icons/kidist_arsema.jpg';
@@ -69,11 +70,60 @@ const kidusMerkoryosCatagory = 'kidus_merkoryos';
 const kidusYaredCatagory = 'kidus_yared';
 const sergCatagory = 'serg';
 const debretaborCatagory = 'debretabor';
-const othersCatagory = 'others';
+const adadisMezmursCatagory = 'adadisMezmurCatagory';
 
-class Mezmurs extends GetxController {}
+class Mezmur {
+  int id;
+  String title;
+  String lyrics;
+  String image;
+  RxBool isFavorite;
+  List catagory;
+  String fileId;
+  RxBool isSeen;
+  Mezmur({
+    required this.id,
+    required this.title,
+    required this.catagory,
+    required this.image,
+    required this.isFavorite,
+    required this.lyrics,
+    required this.fileId,
+    required this.isSeen,
+  });
+  toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'lyrics': lyrics,
+      'image': image,
+      'catagory': catagory,
+      'fileId': fileId,
+      'isSeen': isSeen,
+    };
+  }
+}
 
-RxList<RxMap<String, dynamic>> mezmurs = [
+List<Mezmur> initMezmurs() {
+  List<Mezmur> mezmursList = [];
+  for (int i = 0; i < mezmurs.length; i++) {
+    bool isFavorite = mezmurs[i]['isFavorite'];
+    final m = Mezmur(
+      id: i,
+      title: mezmurs[i]['title'],
+      lyrics: mezmurs[i]['lyrics'],
+      image: mezmurs[i]['image'],
+      isFavorite: isFavorite.obs,
+      fileId: fileUniqueAddress[i],
+      catagory: mezmurs[i]['catagory'],
+      isSeen: false.obs,
+    );
+    mezmursList.add(m);
+  }
+  return mezmursList;
+}
+
+List<Map<String, dynamic>> mezmurs = [
   {
     'title': 'እኔስ በምግባሬ',
     'lyrics': '''እኔስ በምግባሬ ደካማ ሆኛለሁ /2/
@@ -97,7 +147,7 @@ RxList<RxMap<String, dynamic>> mezmurs = [
       emebetachinCatagory,
       nisehaCatagory,
     ]
-  }.obs,
+  },
   {
     'title': 'ቋንቋዬ ነሽ',
     'lyrics': '''ቋንቋዬ ነሽ ድንግል መግባቢያዬ
@@ -121,7 +171,30 @@ RxList<RxMap<String, dynamic>> mezmurs = [
     'catagory': [
       emebetachinCatagory,
     ]
-  }.obs,
+  },
+  {
+    'title': 'ስለማይነገር ስጦታው',
+    'lyrics': '''ስለማይነገር ስጦታው እግዚአብሔር ይመስገን
+ቸል ያላለን አምላክ ስንጓዝ ማዕበሉን አቋርጠን
+ስለማይነገር ስጦታው እግዚአብሔር ይመስገን
+    የሕይወት እስትንፋስ ዘራብን ህያው እንድንሆን
+    ይህን ያደረገ አምላካችን እግዚአብሔር ይመስገን
+    ስለማይነገር ስጦታው እግዚአብሔር ይመስገን
+ንፋስን ገልጾ ማዕበል አቁሞ የሚያሻግር
+የዓለም ፈተና ቢበዛ እርሱ መጠጊያችን
+ስለማይነገር ስጦታው እግዚአብሔር ይመስገን
+    ዳግም እንዳንሞት በሞቱ ሞትን የረታልን
+    የምንመካበት ትንሳኤን ሰላምን የሰጠን
+    ስለማይነገር ስጦታው እግዚአብሔር ይመስገን
+ከሲኦል እስራት ተፈተን ነፃ የወጣንበት
+መስቀሉን ለሰጠን ለአምላካችን እንዘምር በእውነት
+ስለማይነገር ስጦታው እግዚአብሔር ይመስገን''',
+    'image': medhanealemImage,
+    'isFavorite': false,
+    'catagory': [
+      medhanealemCatagory,
+    ]
+  },
   {
     'title': 'የአዋጅ ነጋሪት ቃል',
     'lyrics': '''የአዋጅ ነጋሪት ቃል በበረሃ እያለ
@@ -149,7 +222,7 @@ RxList<RxMap<String, dynamic>> mezmurs = [
       emebetachinCatagory,
       enkutatashCatagory,
     ]
-  }.obs,
+  },
   {
     'title': 'ውዳሴ ማርያም',
     'lyrics': '''ውዳሴ ማርያም እጮሃለሁ
@@ -198,7 +271,7 @@ RxList<RxMap<String, dynamic>> mezmurs = [
     'catagory': [
       emebetachinCatagory,
     ]
-  }.obs,
+  },
   {
     'title': 'የብርሃን ጎርፍ ናት',
     'lyrics': '''የብርሃን ጎርፍ ናት ድንግል እናታችን
@@ -221,7 +294,7 @@ RxList<RxMap<String, dynamic>> mezmurs = [
     'catagory': [
       emebetachinCatagory,
     ]
-  }.obs,
+  },
   {
     'title': 'ከጌታዬ ፍቅር የሚለየኝ ማነው',
     'lyrics': '''ከጌታዬ ፍቅር የሚለየኝ ማነው/2/
@@ -244,7 +317,7 @@ RxList<RxMap<String, dynamic>> mezmurs = [
     'catagory': [
       medhanealemCatagory,
     ]
-  }.obs,
+  },
   {
     'title': 'ምን ሰማህ ዮሐንስ',
     'lyrics': '''ምን ሰማህ ዮሐንስ በማህፀን ሳለህ/2/
@@ -269,7 +342,7 @@ RxList<RxMap<String, dynamic>> mezmurs = [
     'catagory': [
       kidusYohanisMetimkCatagory,
     ]
-  }.obs,
+  },
   {
     'title': 'አንደበትን ስጠኝ ጌታዬ',
     'lyrics': '''አዳኙ ስምህን ዘወትር ልጠራበት
@@ -295,7 +368,7 @@ RxList<RxMap<String, dynamic>> mezmurs = [
     'catagory': [
       medhanealemCatagory,
     ]
-  }.obs,
+  },
   {
     'title': 'የጽድቅ በር ነሽ',
     'lyrics': '''የጽድቅ በር ነሽ የሙሴ ጽላት
@@ -344,7 +417,7 @@ RxList<RxMap<String, dynamic>> mezmurs = [
     'catagory': [
       emebetachinCatagory,
     ]
-  }.obs,
+  },
   {
     'title': 'ኑ በእግዚአብሔር',
     'lyrics': '''ኑ በእግዚአብሔር ደስ ይበለን/2/
@@ -374,7 +447,7 @@ RxList<RxMap<String, dynamic>> mezmurs = [
     'catagory': [
       medhanealemCatagory,
     ]
-  }.obs,
+  },
   {
     'title': 'ሰላም ለኪ',
     'lyrics': '''ሰላም ለኪ ለኖህ ሐመሩ ሰላም ለኪ የአሮን በትሩ
@@ -400,7 +473,7 @@ RxList<RxMap<String, dynamic>> mezmurs = [
     'catagory': [
       emebetachinCatagory,
     ]
-  }.obs,
+  },
   {
     'title': 'ባክኛለሁና',
     'lyrics': '''ባክኛለሁና በስጋ ፈተና
@@ -429,8 +502,8 @@ RxList<RxMap<String, dynamic>> mezmurs = [
     'catagory': [
       emebetachinCatagory,
     ]
-  }.obs,
-].obs;
+  },
+];
 /* 
 {
     'title': '',

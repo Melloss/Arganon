@@ -1,13 +1,29 @@
 import 'package:get/get.dart';
-import '../models/mezmurs.dart' show mezmurs;
+import 'package:http/http.dart' as http;
 import 'dart:math' show Random;
-import '../helper/helper.dart' show Constants;
+import 'dart:convert' show json;
+import '../helper/helper.dart' show ColorPallet;
+import '../models/mezmurs.dart';
+import '../models/mezmurs_file_id.dart';
+import 'package:audioplayers/audioplayers.dart';
 
-class MezmurController extends GetxController with Constants {
-  RxList<RxMap<String, dynamic>> mezmurList = mezmurs;
+class MezmurController extends GetxController with ColorPallet {
+  List<Mezmur> mezmurList = [];
+
   List favoriteMezmurIndexs = [];
   Set randomMezmurs = {};
   List searchedMezmurs = [];
+  String mezmursUrl =
+      'https://arganon-53673-default-rtdb.firebaseio.com/mezmurs.json';
+
+  AudioPlayer player = AudioPlayer();
+  int currentPlayingMezmurIndex = -1;
+
+  Duration mezmurDuration = const Duration(seconds: 0);
+  Duration mezmurPosition = const Duration(seconds: 0);
+  RxBool fromFile = false.obs;
+  RxBool isPlaying = false.obs;
+  RxBool showPlayerController = false.obs;
 
   List<int> kidistSilasseMezmurs = [];
   List<int> medhanealemMezmurs = [];
@@ -40,8 +56,9 @@ class MezmurController extends GetxController with Constants {
   List<int> kidusMerkoryosMezmurs = [];
   List<int> kidusYaredMezmurs = [];
   List<int> abuneAregawiMezmurs = [];
+  List<int> adadisMezmurs = [];
 
-  void generateRandomMezmurs() {
+  generateRandomMezmurs() {
     Set<int> randomNumbers = {};
     for (int i = 0; randomNumbers.length < 5; i++) {
       randomNumbers.add(Random().nextInt(mezmurList.length));
@@ -49,26 +66,75 @@ class MezmurController extends GetxController with Constants {
     randomMezmurs = randomNumbers;
   }
 
+//https://arganon-53673-default-rtdb.firebaseio.com/
+  postAllMezmursToFirebase() async {
+    try {
+      await http.post(Uri.parse(mezmursUrl),
+          body: json.encode({
+            'id': mezmurList.length,
+            'fileId': fileUniqueAddress[mezmurList.length],
+            'title': 'አማኑኤል ተመስገን',
+            'lyrics': '''አማን በአማን /2/
+አማኑኤል ተመስገን /2/
+ለዚህ ፍቅርህ ምን ልክፈል /2/
+    ድብቁን ሃጢያት አንተ ብትገልጠው
+    ይቅር ብለኸኝ ባትሸፋፍነው
+    እንደሰው በቀል ቢኖርህ ጌታ
+    ለእኔ ሃጢያትስ የለውም ቦታ
+በየደቂቃው ሃጢያት ስሰራ
+ስሰርቅ ስበድል አንተን ሳልፈራ
+አንተ ግን ፊትህ ምንም ቢቀየም
+በቁጣህ በትር አልገረፍከኝም
+    ምህረትህን ልከህ አድነኝ ዛሬ
+    ታክቶኛልና በሃጢያት መኖሬ
+    ዓለም በሃጢያት እየሳበችኝ
+    በፍቅርህ በደስታ መኖር አቃተኝ
+የሃጢያት ጉዞ ጣፋጭ ቢመስልም
+ውጤቱ መሮ ፍጹም አይጥምም
+እንደ በደሌ ስላልከፈልከኝ
+ተመስገን እንጂ ሌላ ምን አለኝ''',
+            'image': medhanealemImage,
+            'catagory': [
+              medhanealemCatagory,
+              adadisMezmursCatagory,
+            ]
+          }));
+    } catch (error) {
+      print(error);
+    }
+  }
+
   search(String text) {
     searchedMezmurs.clear();
     for (int i = 0; i < mezmurList.length; i++) {
-      if (mezmurList[i]['title'].contains(text)) {
-        searchedMezmurs.add(i);
+      if (mezmurList[i].title.contains(text)) {
+        searchedMezmurs.add(mezmurList[i].id);
       }
     }
     for (int i = 0; i < mezmurList.length; i++) {
-      if (mezmurList[i]['lyrics'].contains(text)) {
+      if (mezmurList[i].lyrics.contains(text)) {
         if (searchedMezmurs.contains(i) == false) {
-          searchedMezmurs.add(i);
+          searchedMezmurs.add(mezmurList[i].id);
         }
       }
     }
+  }
 
-    print(searchedMezmurs);
+  void toggleFavorite(int index) async {
+    if (mezmurList[index].isFavorite.value == true) {
+      mezmurList[index].isFavorite.value = false;
+      favoriteMezmurIndexs.remove(index);
+    } else {
+      mezmurList[index].isFavorite.value = true;
+      if (favoriteMezmurIndexs.contains(index) == false) {
+        favoriteMezmurIndexs.add(index);
+      }
+    }
+    // postAllMezmursToFirebase();
   }
 
   String getSubtitle(int index) {
-    String lyrics = mezmurList[index]['lyrics'];
+    String lyrics = mezmurList[index].lyrics;
     String subtitle = lyrics.split('\n')[0];
     if (subtitle.length > 23) {
       return '${subtitle.substring(0, 23)}...';
@@ -77,8 +143,42 @@ class MezmurController extends GetxController with Constants {
   }
 
   createCatagories() {
+    kidistSilasseMezmurs = [];
+    medhanealemMezmurs = [];
+    nisehaMezmurs = [];
+    pseraklitosMezmur = [];
+    emebetachinMezmur = [];
+    abuneTeklehaymanotMezmurs = [];
+    kidusMikaelMezmurs = [];
+    kidusGebrielMezmurs = [];
+    kidistArsemaMezmurs = [];
+    kidusRufaelMezmurs = [];
+    abuneGebremenfeskidusMezmurs = [];
+    abuneGiorgisMezmurs = [];
+    sergMezmurs = [];
+    lidetMezmurs = [];
+    meskelMezmurs = [];
+    enkuatatashMezmurs = [];
+    timketMezmurs = [];
+    hosaenaMezmurs = [];
+    sikletMezmurs = [];
+    tinsaeMezmurs = [];
+    ergetMezmurs = [];
+    mitsatMezmurs = [];
+    debretaborMezmurs = [];
+    kidusUraelMezmurs = [];
+    kidusGiorgisMezmurs = [];
+    kidusYohanisMetmikMezmurs = [];
+    kidusEstifanosMezmurs = [];
+    kidusPawlosMezmurs = [];
+    kidusMerkoryosMezmurs = [];
+    kidusYaredMezmurs = [];
+    abuneAregawiMezmurs = [];
+    adadisMezmurs = [];
+
     for (int i = 0; i < mezmurList.length; i++) {
-      List catagories = mezmurList[i]['catagory'];
+      List catagories = [...mezmurList[i].catagory];
+
       if (catagories.contains(kidistSilasseCatagory)) {
         kidistSilasseMezmurs.add(i);
       }
@@ -172,6 +272,9 @@ class MezmurController extends GetxController with Constants {
       if (catagories.contains(abuneAregawiCatagory)) {
         abuneAregawiMezmurs.add(i);
       }
+      if (catagories.contains(adadisMezmursCatagory)) {
+        adadisMezmurs.add(i);
+      }
 
       catagories.clear();
     }
@@ -179,18 +282,6 @@ class MezmurController extends GetxController with Constants {
 
   String getUrlAddress(String fileID) {
     return 'https://www.googleapis.com/drive/v3/files/$fileID?alt=media&key=AIzaSyCAtbRmPnOklzrDRYZe4LBemLzNTjx80pI&v=.mp3';
-  }
-
-  void toggleFavorite(int index) {
-    if (mezmurList[index]['isFavorite'] == true) {
-      mezmurList[index]['isFavorite'] = false;
-      favoriteMezmurIndexs.remove(index);
-    } else {
-      mezmurList[index]['isFavorite'] = true;
-      if (favoriteMezmurIndexs.contains(index) == false) {
-        favoriteMezmurIndexs.add(index);
-      }
-    }
   }
 
   List getMezmur(String catagory) {
@@ -256,6 +347,8 @@ class MezmurController extends GetxController with Constants {
       return mitsatMezmurs;
     } else if (catagory == debretaborCatagory) {
       return debretaborMezmurs;
+    } else if (catagory == adadisMezmursCatagory) {
+      return adadisMezmurs;
     }
     return [];
   }
