@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../helper/helper.dart' show ColorPallet;
 import '../../controllers/mezmur_controller.dart';
 import '../../screens/mezmur_screen.dart';
+import '../../controllers/database_controller.dart';
 
 class Carousel extends StatefulWidget {
   final Set mezmurs;
@@ -16,6 +17,7 @@ class Carousel extends StatefulWidget {
 class _CarouselState extends State<Carousel> with ColorPallet {
   final carouselController = CarouselController();
   MezmurController mezmurController = Get.find();
+  DatabaseController databaseController = Get.find();
   int currentIndex = 0;
   String image1 = '';
   String image2 = '';
@@ -43,41 +45,47 @@ class _CarouselState extends State<Carousel> with ColorPallet {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: () {
-            print(widget.mezmurs.elementAt(currentIndex));
-            Get.to(
-              () => MezmurScreen(index: widget.mezmurs.elementAt(currentIndex)),
-              transition: Transition.topLevel,
-              duration: const Duration(milliseconds: 500),
-              opaque: true,
-            );
-          },
-          child: CarouselSlider(
-            carouselController: carouselController,
-            items: [
-              _buildSlider(image1),
-              _buildSlider(image2),
-              _buildSlider(image3),
-              _buildSlider(image4),
-              _buildSlider(image5),
-            ],
-            options: CarouselOptions(
-                viewportFraction: 0.7,
-                enlargeCenterPage: true,
-                autoPlay: true,
-                autoPlayInterval: const Duration(seconds: 4),
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    currentIndex = index;
-                  });
-                }),
+    return Visibility(
+      visible: databaseController.settings.showCarousel!,
+      child: Column(
+        children: [
+          const SizedBox(height: 20),
+          GestureDetector(
+            onTap: () {
+              Get.to(
+                () =>
+                    MezmurScreen(index: widget.mezmurs.elementAt(currentIndex)),
+                transition: Transition.topLevel,
+                duration: const Duration(milliseconds: 500),
+                opaque: true,
+              );
+            },
+            child: CarouselSlider(
+              carouselController: carouselController,
+              items: [
+                _buildSlider(image1),
+                _buildSlider(image2),
+                _buildSlider(image3),
+                _buildSlider(image4),
+                _buildSlider(image5),
+              ],
+              options: CarouselOptions(
+                  autoPlayAnimationDuration: const Duration(seconds: 3),
+                  autoPlayCurve: Curves.elasticOut,
+                  viewportFraction: 0.65,
+                  enlargeCenterPage: true,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 4),
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      currentIndex = index;
+                    });
+                  }),
+            ),
           ),
-        ),
-        _buildSliderBullets(),
-      ],
+          _buildSliderBullets(),
+        ],
+      ),
     );
   }
 
@@ -101,12 +109,13 @@ class _CarouselState extends State<Carousel> with ColorPallet {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 15),
         Text(
           mezmurTitles[currentIndex],
           style: TextStyle(
             color: blurWhite,
-            fontSize: 13,
+            fontSize: 17,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ],
@@ -127,14 +136,30 @@ class _CarouselState extends State<Carousel> with ColorPallet {
   }
 
   _buildBullet(int index) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 3, vertical: 15),
-      width: 6,
-      height: 6,
-      decoration: BoxDecoration(
-        color:
-            index == currentIndex ? blurWhite.withOpacity(0.7) : Colors.white12,
-        borderRadius: BorderRadius.circular(20),
+    return InkWell(
+      onTap: () {
+        carouselController.animateToPage(
+          index,
+          duration: const Duration(seconds: 3),
+          curve: Curves.elasticOut,
+        );
+      },
+      child: AnimatedContainer(
+        duration: const Duration(seconds: 3),
+        width: index == currentIndex ? 20 : 10,
+        curve: Curves.elasticOut,
+        margin: index == currentIndex
+            ? const EdgeInsets.symmetric(horizontal: 10, vertical: 20)
+            : const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+        child: Container(
+          height: 5,
+          decoration: BoxDecoration(
+            color: index == currentIndex
+                ? blurWhite.withOpacity(0.7)
+                : Colors.white12,
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
       ),
     );
   }

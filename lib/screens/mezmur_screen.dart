@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'dart:io';
 import '../helper/helper.dart'
     show Constants, ColorPallet, screenHeight, screenWidth;
 import '../controllers/mezmur_controller.dart';
@@ -297,14 +297,8 @@ class _MezmurScreenState extends State<MezmurScreen>
             onPressed: () {
               if (isDownloading == true) {
                 Get.dialog(AlertDialog(
-                  title: Text(
-                    'መዝሙር እየወረደ ነው',
-                    style: TextStyle(
-                      color: backgroudColor,
-                    ),
-                  ),
                   content: Text(
-                    'እንዲቋረጥ ይፈልጋሉ?',
+                    'መዝሙሩ እየወረደ ነው እንዲቋረጥ ይፈልጋሉ?',
                     style: TextStyle(
                       color: backgroudColor,
                     ),
@@ -323,12 +317,22 @@ class _MezmurScreenState extends State<MezmurScreen>
                           }
                           Get.offAllNamed(homeScreen);
                         },
-                        child: const Text('አዎ')),
+                        child: const Text(
+                          'አዎ',
+                          style: TextStyle(
+                            color: Colors.red,
+                          ),
+                        )),
                     TextButton(
                         onPressed: () {
                           Get.back();
                         },
-                        child: const Text('አይ ይውረድ'))
+                        child: Text(
+                          'አይ ይውረድ',
+                          style: TextStyle(
+                            color: backgroudColor,
+                          ),
+                        ))
                   ],
                 ));
               } else {
@@ -403,7 +407,9 @@ class _MezmurScreenState extends State<MezmurScreen>
                     alignment: Alignment.center,
                     child: Text(
                       '${mezmurController.mezmurList[widget.index].lyrics}\n',
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                          fontSize:
+                              databaseController.settings.mezmurLyricsFontSize),
                     ),
                   ),
                 ]),
