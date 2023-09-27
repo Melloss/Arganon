@@ -45,9 +45,9 @@ class _CarouselState extends State<Carousel> with ColorPallet {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 20),
         GestureDetector(
           onTap: () {
-            print(widget.mezmurs.elementAt(currentIndex));
             Get.to(
               () => MezmurScreen(index: widget.mezmurs.elementAt(currentIndex)),
               transition: Transition.topLevel,
@@ -65,7 +65,9 @@ class _CarouselState extends State<Carousel> with ColorPallet {
               _buildSlider(image5),
             ],
             options: CarouselOptions(
-                viewportFraction: 0.7,
+                autoPlayAnimationDuration: const Duration(seconds: 3),
+                autoPlayCurve: Curves.elasticOut,
+                viewportFraction: 0.65,
                 enlargeCenterPage: true,
                 autoPlay: true,
                 autoPlayInterval: const Duration(seconds: 4),
@@ -101,12 +103,13 @@ class _CarouselState extends State<Carousel> with ColorPallet {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 15),
         Text(
           mezmurTitles[currentIndex],
           style: TextStyle(
             color: blurWhite,
-            fontSize: 13,
+            fontSize: 17,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ],
@@ -127,14 +130,30 @@ class _CarouselState extends State<Carousel> with ColorPallet {
   }
 
   _buildBullet(int index) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 3, vertical: 15),
-      width: 6,
-      height: 6,
-      decoration: BoxDecoration(
-        color:
-            index == currentIndex ? blurWhite.withOpacity(0.7) : Colors.white12,
-        borderRadius: BorderRadius.circular(20),
+    return InkWell(
+      onTap: () {
+        carouselController.animateToPage(
+          index,
+          duration: const Duration(seconds: 3),
+          curve: Curves.elasticOut,
+        );
+      },
+      child: AnimatedContainer(
+        duration: const Duration(seconds: 3),
+        width: index == currentIndex ? 20 : 10,
+        curve: Curves.elasticOut,
+        margin: index == currentIndex
+            ? const EdgeInsets.symmetric(horizontal: 10, vertical: 20)
+            : const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+        child: Container(
+          height: 5,
+          decoration: BoxDecoration(
+            color: index == currentIndex
+                ? blurWhite.withOpacity(0.7)
+                : Colors.white12,
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
       ),
     );
   }

@@ -11,6 +11,7 @@ import './catagory_tab.dart';
 import '../controllers/mezmur_controller.dart';
 import '../controllers/database_controller.dart';
 import '../screens/mezmur_screen.dart';
+import '../screens/settings_tab.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -97,7 +98,7 @@ class _HomeState extends State<Home>
           const CatagoryTab(),
           const FavoriteTab(),
           Container(),
-          Container(),
+          const SettingsTab(),
         ],
       ),
       bottomNavigationBar: _buildNavigationBar(),

@@ -297,14 +297,8 @@ class _MezmurScreenState extends State<MezmurScreen>
             onPressed: () {
               if (isDownloading == true) {
                 Get.dialog(AlertDialog(
-                  title: Text(
-                    'መዝሙር እየወረደ ነው',
-                    style: TextStyle(
-                      color: backgroudColor,
-                    ),
-                  ),
                   content: Text(
-                    'እንዲቋረጥ ይፈልጋሉ?',
+                    'መዝሙሩ እየወረደ ነው እንዲቋረጥ ይፈልጋሉ?',
                     style: TextStyle(
                       color: backgroudColor,
                     ),
@@ -323,12 +317,22 @@ class _MezmurScreenState extends State<MezmurScreen>
                           }
                           Get.offAllNamed(homeScreen);
                         },
-                        child: const Text('አዎ')),
+                        child: const Text(
+                          'አዎ',
+                          style: TextStyle(
+                            color: Colors.red,
+                          ),
+                        )),
                     TextButton(
                         onPressed: () {
                           Get.back();
                         },
-                        child: const Text('አይ ይውረድ'))
+                        child: Text(
+                          'አይ ይውረድ',
+                          style: TextStyle(
+                            color: backgroudColor,
+                          ),
+                        ))
                   ],
                 ));
               } else {
