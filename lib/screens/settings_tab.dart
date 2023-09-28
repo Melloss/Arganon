@@ -125,7 +125,7 @@ class _SettingsTabState extends State<SettingsTab> with ColorPallet {
               onChanged: (value) async {
                 final preferences = await SharedPreferences.getInstance();
                 await preferences.setBool(
-                    databaseController.showCarouselSettings, value!);
+                    databaseController.showCarouselSettings, value);
                 databaseController.settings.showCarousel =
                     !databaseController.settings.showCarousel!;
 

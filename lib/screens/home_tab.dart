@@ -12,6 +12,7 @@ import '../controllers/mezmur_controller.dart';
 import '../controllers/database_controller.dart';
 import '../screens/mezmur_screen.dart';
 import '../screens/settings_tab.dart';
+import '../screens/kidase_tab.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -97,7 +98,7 @@ class _HomeState extends State<Home>
           _buildHomeTab(),
           const CatagoryTab(),
           const FavoriteTab(),
-          Container(),
+          const KidaseTab(),
           const SettingsTab(),
         ],
       ),

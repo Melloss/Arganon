@@ -4,6 +4,7 @@ import 'package:icons_plus/icons_plus.dart';
 import '../helper/helper.dart' show ColorPallet;
 import '../controllers/ui_controller.dart';
 
+// ignore: must_be_immutable
 class AboutScreen extends StatelessWidget with ColorPallet {
   AboutScreen({super.key});
 
