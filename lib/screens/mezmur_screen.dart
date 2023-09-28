@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'dart:io';
 import '../helper/helper.dart'
     show Constants, ColorPallet, screenHeight, screenWidth;
 import '../controllers/mezmur_controller.dart';
@@ -407,7 +407,9 @@ class _MezmurScreenState extends State<MezmurScreen>
                     alignment: Alignment.center,
                     child: Text(
                       '${mezmurController.mezmurList[widget.index].lyrics}\n',
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                          fontSize:
+                              databaseController.settings.mezmurLyricsFontSize),
                     ),
                   ),
                 ]),

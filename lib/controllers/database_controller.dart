@@ -4,15 +4,18 @@ import 'package:get/get.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' show join;
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './mezmur_controller.dart';
 import '../helper/helper.dart' show ColorPallet;
 import '../models/mezmurs.dart' show Mezmur, initMezmurs;
 import '../models/mezmurs_file_id.dart' show fileUniqueAddress;
+import '../models/settings.dart';
 
 class DatabaseController extends GetxController with ColorPallet {
   MezmurController mezmurController = Get.find();
   late Database db;
   init() async {
+    await initSettings();
     final path = join(await getDatabasesPath(), '5.db');
     try {
       db = await openDatabase(
@@ -188,5 +191,21 @@ class DatabaseController extends GetxController with ColorPallet {
     } catch (error) {
       print(error);
     }
+  }
+
+  final String showCarouselSettings = 'ShowCarouselSettings';
+  final String mezmurLyricsFontSizeSettings = 'MezmurLyricsFontSizeSettings';
+  Settings settings = Settings(mezmurLyricsFontSize: 19, showCarousel: true);
+
+  initSettings() async {
+    final preferences = await SharedPreferences.getInstance();
+    if (!preferences.containsKey(showCarouselSettings) &&
+        !preferences.containsKey(mezmurLyricsFontSizeSettings)) {
+      preferences.setBool(showCarouselSettings, true);
+      preferences.setDouble(mezmurLyricsFontSizeSettings, 19);
+    }
+    settings.mezmurLyricsFontSize =
+        preferences.getDouble(mezmurLyricsFontSizeSettings);
+    settings.showCarousel = preferences.getBool(showCarouselSettings);
   }
 }

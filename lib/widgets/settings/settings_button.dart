@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:icons_plus/icons_plus.dart';
 import '../../helper/helper.dart' show ColorPallet, screenWidth;
 
 class SettingsButton extends StatelessWidget with ColorPallet {
   final String text;
-  final Function onPressed;
-  SettingsButton({super.key, required this.text, required this.onPressed});
+  final Function() onPressed;
+  final IconData icon;
+  SettingsButton(
+      {super.key,
+      required this.text,
+      required this.onPressed,
+      required this.icon});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.symmetric(vertical: 20),
       alignment: Alignment.centerLeft,
       width: screenWidth(context) * 0.95,
       height: 55,
@@ -19,7 +25,7 @@ class SettingsButton extends StatelessWidget with ColorPallet {
         borderRadius: BorderRadius.circular(10),
       ),
       child: MaterialButton(
-        onPressed: () {},
+        onPressed: onPressed,
         child: Row(
           children: [
             const SizedBox(width: 20),
@@ -29,10 +35,11 @@ class SettingsButton extends StatelessWidget with ColorPallet {
             ),
             Expanded(child: Container()),
             Icon(
-              Icons.keyboard_arrow_right,
+              icon,
               color: blurWhite,
+              size: icon == FontAwesome.shirt ? 20 : 30,
             ),
-            const SizedBox(width: 20),
+            const SizedBox(width: 15),
           ],
         ),
       ),

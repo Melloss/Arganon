@@ -1,9 +1,9 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'dart:io';
 import '../screens/favorite_tab.dart';
 import '../helper/helper.dart' show screenWidth, ColorPallet;
 import '../widgets/widgets.dart' show Carousel, MezmurTile;
@@ -107,7 +107,7 @@ class _HomeState extends State<Home>
 
   _buildSearchInbox() {
     return Container(
-      margin: const EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20, bottom: 5),
       width: screenWidth(context) * 0.9,
       height: 50,
       child: TextField(
