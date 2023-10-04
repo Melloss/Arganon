@@ -153,7 +153,7 @@ class _MezmurScreenState extends State<MezmurScreen>
           'በመጀመሪያ ኢንተርኔት ያብሩ',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: blurWhite,
-          colorText: backgroudColor,
+          colorText: databaseController.settings.backgroundColor!.value,
           margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         );
       }
@@ -200,7 +200,7 @@ class _MezmurScreenState extends State<MezmurScreen>
               'በመጀመሪያ ኢንተርኔት ያብሩ',
               snackPosition: SnackPosition.BOTTOM,
               backgroundColor: blurWhite,
-              colorText: backgroudColor,
+              colorText: databaseController.settings.backgroundColor!.value,
               margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             );
           }
@@ -231,7 +231,7 @@ class _MezmurScreenState extends State<MezmurScreen>
             content: Text(
               'መዝሙሩ እየወረደ ነው እንዲቋረጥ ይፈልጋሉ?',
               style: TextStyle(
-                color: backgroudColor,
+                color: databaseController.settings.backgroundColor!.value,
               ),
             ),
             actions: [
@@ -245,7 +245,6 @@ class _MezmurScreenState extends State<MezmurScreen>
 
                     if (file.existsSync()) {
                       file.deleteSync();
-                      print('deleted');
                     }
                     await Get.offAllNamed(homeScreen);
                   },
@@ -262,7 +261,7 @@ class _MezmurScreenState extends State<MezmurScreen>
                   child: Text(
                     'አይ ይውረድ',
                     style: TextStyle(
-                      color: backgroudColor,
+                      color: databaseController.settings.backgroundColor!.value,
                     ),
                   ))
             ],
@@ -300,7 +299,7 @@ class _MezmurScreenState extends State<MezmurScreen>
                   content: Text(
                     'መዝሙሩ እየወረደ ነው እንዲቋረጥ ይፈልጋሉ?',
                     style: TextStyle(
-                      color: backgroudColor,
+                      color: databaseController.settings.backgroundColor!.value,
                     ),
                   ),
                   actions: [
@@ -330,7 +329,8 @@ class _MezmurScreenState extends State<MezmurScreen>
                         child: Text(
                           'አይ ይውረድ',
                           style: TextStyle(
-                            color: backgroudColor,
+                            color: databaseController
+                                .settings.backgroundColor!.value,
                           ),
                         ))
                   ],
@@ -371,22 +371,22 @@ class _MezmurScreenState extends State<MezmurScreen>
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-            mezmurScreenColor.withOpacity(0),
-            mezmurScreenColor.withOpacity(0.1),
-            mezmurScreenColor.withOpacity(0.2),
-            mezmurScreenColor.withOpacity(0.3),
-            mezmurScreenColor.withOpacity(0.6),
-            mezmurScreenColor.withOpacity(0.7),
-            mezmurScreenColor.withOpacity(0.8),
-            mezmurScreenColor.withOpacity(0.85),
-            mezmurScreenColor.withOpacity(0.93),
-            mezmurScreenColor.withOpacity(0.95),
-            mezmurScreenColor.withOpacity(0.95),
-            mezmurScreenColor.withOpacity(0.95),
-            mezmurScreenColor.withOpacity(0.98),
-            mezmurScreenColor.withOpacity(1),
-            mezmurScreenColor.withOpacity(1),
-            mezmurScreenColor.withOpacity(1),
+            databaseController.settings.mezmurColor!.value.withOpacity(0),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.1),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.2),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.3),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.6),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.7),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.8),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.85),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.93),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.95),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.95),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.95),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.98),
+            databaseController.settings.mezmurColor!.value.withOpacity(1),
+            databaseController.settings.mezmurColor!.value.withOpacity(1),
+            databaseController.settings.mezmurColor!.value.withOpacity(1),
           ])),
     );
   }
@@ -400,7 +400,7 @@ class _MezmurScreenState extends State<MezmurScreen>
           child: Column(
             children: [
               Expanded(
-                flex: 8,
+                flex: 10,
                 child:
                     ListView(physics: const BouncingScrollPhysics(), children: [
                   Align(
@@ -415,7 +415,7 @@ class _MezmurScreenState extends State<MezmurScreen>
                 ]),
               ),
               Expanded(
-                  flex: showAudioController ? 3 : 0,
+                  flex: showAudioController ? 4 : 0,
                   child: _buildMuzmurAudioController())
             ],
           ),
@@ -451,7 +451,7 @@ class _MezmurScreenState extends State<MezmurScreen>
                 color: mezmurScreenColor.withOpacity(0.5),
               )
             ],
-            color: backgroudColor,
+            color: databaseController.settings.backgroundColor!.value,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
@@ -521,7 +521,7 @@ class _MezmurScreenState extends State<MezmurScreen>
                           )),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -530,13 +530,10 @@ class _MezmurScreenState extends State<MezmurScreen>
                       ? Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
                             children: [
                               SpinKitWave(
                                 color: blurWhite,
-                                size: 20,
+                                size: 17,
                                 duration: const Duration(seconds: 1),
                               ),
                               const SizedBox(height: 10),
@@ -553,7 +550,7 @@ class _MezmurScreenState extends State<MezmurScreen>
                               onPressed: downloadMezmur,
                               icon: const Icon(
                                 Icons.download,
-                                size: 30,
+                                size: 25,
                               )),
                   IconButton(
                       onPressed: playButtonHandler,
@@ -564,7 +561,7 @@ class _MezmurScreenState extends State<MezmurScreen>
                                       mezmurController.currentPlayingMezmurIndex
                               ? Icons.pause_circle
                               : Icons.play_circle_fill,
-                          size: 45,
+                          size: 40,
                         ),
                       )),
                   IconButton(
@@ -582,7 +579,7 @@ class _MezmurScreenState extends State<MezmurScreen>
                       mezmurController.mezmurList[widget.index].isFavorite.value
                           ? Icons.favorite
                           : Icons.favorite_outline,
-                      size: 30,
+                      size: 25,
                     ),
                   ),
                 ],
@@ -610,13 +607,14 @@ class _MezmurScreenState extends State<MezmurScreen>
           margin: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: backgroudColor,
+            color: databaseController.settings.backgroundColor!.value,
             boxShadow: [
               BoxShadow(
                   blurStyle: BlurStyle.outer,
                   blurRadius: 3,
                   spreadRadius: 1,
-                  color: backgroudColor.withOpacity(0.3))
+                  color: databaseController.settings.backgroundColor!.value
+                      .withOpacity(0.3))
             ],
           ),
           child: Icon(

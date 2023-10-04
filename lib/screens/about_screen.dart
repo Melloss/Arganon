@@ -3,15 +3,18 @@ import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../helper/helper.dart' show ColorPallet;
 import '../controllers/ui_controller.dart';
+import '../controllers/database_controller.dart';
 
+// ignore: must_be_immutable
 class AboutScreen extends StatelessWidget with ColorPallet {
   AboutScreen({super.key});
 
   UIController uiController = Get.find();
+  DatabaseController databaseController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: backgroudColor,
+      color: databaseController.settings.backgroundColor!.value,
       child: Column(
         children: [
           Align(

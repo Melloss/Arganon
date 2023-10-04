@@ -3,7 +3,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:icons_plus/icons_plus.dart';
-import '../widgets/widgets.dart' show SettingsButton;
+import '../widgets/widgets.dart' show SettingsButton, ColorTheme;
 import '../helper/helper.dart' show ColorPallet, screenWidth;
 import '../screens/about_screen.dart';
 import '../controllers/ui_controller.dart';
@@ -33,14 +33,38 @@ class _SettingsTabState extends State<SettingsTab> with ColorPallet {
   bool showSampleMezmur = false;
 
   resetHandler() async {
+    const forgrounColorSettings = 'forgroundColorSettings';
+    const backgroundColorSettings = 'backgroundColorSettings';
+    const mezmurColorSettings = 'mezmurColorSettings';
     final preferences = await SharedPreferences.getInstance();
     await preferences.setBool(databaseController.showCarouselSettings, true);
     await preferences.setDouble(
         databaseController.mezmurLyricsFontSizeSettings, 19);
+    await preferences.setInt(databaseController.selectedThemeSettings, 0);
+    preferences.setString(
+        forgrounColorSettings, const Color(0xFF37718E).value.toRadixString(16));
+    preferences.setString(backgroundColorSettings,
+        const Color(0xFF254E70).value.toRadixString(16));
+    preferences.setString(
+        mezmurColorSettings, const Color(0xFF1D3557).value.toRadixString(16));
     setState(() {
       databaseController.settings.mezmurLyricsFontSize = 19;
       databaseController.settings.showCarousel = true;
+      databaseController.settings.selectedTheme = 0;
     });
+    uiController.selectedColorTheme.value = 0;
+    databaseController.settings.backgroundColor!.value =
+        const Color(0xFF254E70);
+    databaseController.settings.foregroundColor!.value =
+        const Color(0xFF37718E);
+    databaseController.settings.mezmurColor!.value = const Color(0xFF1D3557);
+  }
+
+  @override
+  void initState() {
+    uiController.selectedColorTheme.value =
+        databaseController.settings.selectedTheme!;
+    super.initState();
   }
 
   @override
@@ -68,7 +92,62 @@ class _SettingsTabState extends State<SettingsTab> with ColorPallet {
           SettingsButton(
             text: 'የመተግበሪያውን ልብስ ቀይር',
             onPressed: () async {
-              //TODO:
+              Get.dialog(
+                AlertDialog(
+                  actionsAlignment: MainAxisAlignment.center,
+                  backgroundColor: blurWhite,
+                  contentPadding: const EdgeInsets.all(10),
+                  actionsPadding: EdgeInsets.zero,
+                  content: SizedBox(
+                    width: screenWidth(context) * 0.9,
+                    height: 250,
+                    child: Wrap(children: [
+                      ColorTheme(
+                        index: 0,
+                        foregroundColor: foregroundColor,
+                        backgroundColor: backgroudColor,
+                        mezmurColor: mezmurScreenColor,
+                        title: 'Default',
+                      ),
+                      const ColorTheme(
+                        index: 1,
+                        foregroundColor: Color(0XFF35A29F),
+                        backgroundColor: Color(0xFF088395),
+                        mezmurColor: Color(0xFF26577C),
+                        title: 'theme 1',
+                      ),
+                      const ColorTheme(
+                        index: 2,
+                        foregroundColor: Color(0xFFAE445A),
+                        backgroundColor: Color(0xFF662549),
+                        mezmurColor: Color(0XFF451952),
+                        title: 'theme 2',
+                      ),
+                      const ColorTheme(
+                        index: 3,
+                        foregroundColor: Color(0xFFA78295),
+                        backgroundColor: Color(0xFF5C5470),
+                        mezmurColor: Color(0xFF352F44),
+                        title: 'theme 3',
+                      ),
+                      const ColorTheme(
+                        index: 4,
+                        foregroundColor: Color(0xFF526D82),
+                        backgroundColor: Color(0XFF474E68),
+                        mezmurColor: Color(0xFF404258),
+                        title: 'theme 4',
+                      ),
+                      const ColorTheme(
+                        index: 5,
+                        foregroundColor: Color(0xFF7D7C7C),
+                        backgroundColor: Color(0xFF393E46),
+                        mezmurColor: Color(0xFF222831),
+                        title: 'theme 5',
+                      ),
+                    ]),
+                  ),
+                ),
+              );
             },
             icon: FontAwesome.shirt,
           ),
@@ -107,7 +186,7 @@ class _SettingsTabState extends State<SettingsTab> with ColorPallet {
 
   _buildShowCarouselSettings() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: Row(
         children: [
           Text(
@@ -117,22 +196,28 @@ class _SettingsTabState extends State<SettingsTab> with ColorPallet {
                 ),
           ),
           Expanded(child: Container()),
-          Switch(
-              inactiveThumbColor: mezmurScreenColor.withOpacity(0.4),
-              activeColor: blurWhite,
-              trackColor: MaterialStatePropertyAll(foregroundColor),
-              value: databaseController.settings.showCarousel!,
-              onChanged: (value) async {
-                final preferences = await SharedPreferences.getInstance();
-                await preferences.setBool(
-                    databaseController.showCarouselSettings, value!);
-                databaseController.settings.showCarousel =
-                    !databaseController.settings.showCarousel!;
+          Obx(
+            () => Switch(
+                inactiveThumbColor: databaseController
+                    .settings.mezmurColor!.value
+                    .withOpacity(0.4),
+                activeColor: blurWhite,
+                trackColor: MaterialStatePropertyAll(
+                  databaseController.settings.foregroundColor!.value,
+                ),
+                value: databaseController.settings.showCarousel!,
+                onChanged: (value) async {
+                  final preferences = await SharedPreferences.getInstance();
+                  await preferences.setBool(
+                      databaseController.showCarouselSettings, value);
+                  databaseController.settings.showCarousel =
+                      !databaseController.settings.showCarousel!;
 
-                setState(() {
-                  databaseController.settings.showCarousel;
-                });
-              })
+                  setState(() {
+                    databaseController.settings.showCarousel;
+                  });
+                }),
+          )
         ],
       ),
     );

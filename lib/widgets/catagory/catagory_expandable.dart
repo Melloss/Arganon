@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import './catagory_tile.dart';
 import '../../helper/helper.dart' show ColorPallet;
+import '../../controllers/database_controller.dart';
 
 class CatagoryExpandable extends StatefulWidget {
   final String title;
@@ -14,6 +16,7 @@ class CatagoryExpandable extends StatefulWidget {
 
 class _CatagoryExpandableState extends State<CatagoryExpandable>
     with ColorPallet {
+  DatabaseController databaseController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,8 +24,8 @@ class _CatagoryExpandableState extends State<CatagoryExpandable>
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: [
-          foregroundColor.withOpacity(0.8),
-          foregroundColor.withOpacity(0.6),
+          databaseController.settings.foregroundColor!.value.withOpacity(0.8),
+          databaseController.settings.foregroundColor!.value.withOpacity(0.6),
         ]),
         borderRadius: BorderRadius.circular(5),
       ),

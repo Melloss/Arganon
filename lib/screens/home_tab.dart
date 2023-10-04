@@ -12,6 +12,7 @@ import '../controllers/mezmur_controller.dart';
 import '../controllers/database_controller.dart';
 import '../screens/mezmur_screen.dart';
 import '../screens/settings_tab.dart';
+import '../screens/kidase_tab.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -88,20 +89,25 @@ class _HomeState extends State<Home>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: TabBarView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: tabController,
-        children: [
-          _buildHomeTab(),
-          const CatagoryTab(),
-          const FavoriteTab(),
-          Container(),
-          const SettingsTab(),
-        ],
+    return Obx(
+      () => Scaffold(
+        backgroundColor: databaseController.settings.backgroundColor!.value,
+        appBar: AppBar(
+          backgroundColor: databaseController.settings.backgroundColor!.value,
+        ),
+        body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: tabController,
+          children: [
+            _buildHomeTab(),
+            const CatagoryTab(),
+            const FavoriteTab(),
+            const KidaseTab(),
+            const SettingsTab(),
+          ],
+        ),
+        bottomNavigationBar: _buildNavigationBar(),
       ),
-      bottomNavigationBar: _buildNavigationBar(),
     );
   }
 
@@ -163,7 +169,7 @@ class _HomeState extends State<Home>
         Expanded(
           child: isSearching
               ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: ListView.builder(
                     itemCount: mezmurController.searchedMezmurs.length,
                     itemBuilder: (context, index) {
@@ -238,8 +244,9 @@ class _HomeState extends State<Home>
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             colors: [
-              mezmurScreenColor.withOpacity(0.8),
-              navigationBarColor.withOpacity(0.3),
+              databaseController.settings.mezmurColor!.value.withOpacity(0.8),
+              databaseController.settings.mezmurColor!.value.withOpacity(0.3),
+              databaseController.settings.mezmurColor!.value.withOpacity(0.1),
             ],
           ),
           boxShadow: [
@@ -254,10 +261,9 @@ class _HomeState extends State<Home>
               visible: mezmurController.showPlayerController.value,
               child: Container(
                 width: screenWidth(context),
-                height: 40,
-                decoration: BoxDecoration(
-                  color: blurWhite,
-                  borderRadius: const BorderRadius.only(
+                height: 50,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10),
                   ),
@@ -285,6 +291,9 @@ class _HomeState extends State<Home>
                                 fit: BoxFit.cover,
                               ))),
                     ),
+                    /*
+ 
+                    */
                     TextButton(
                       onPressed: () {
                         Get.to(() => MezmurScreen(
@@ -294,11 +303,18 @@ class _HomeState extends State<Home>
                         mezmurController.currentPlayingMezmurIndex == -1
                             ? ''
                             : mezmurController
-                                .mezmurList[
-                                    mezmurController.currentPlayingMezmurIndex]
-                                .title,
+                                        .mezmurList[mezmurController
+                                            .currentPlayingMezmurIndex]
+                                        .title
+                                        .length <
+                                    20
+                                ? mezmurController
+                                    .mezmurList[mezmurController
+                                        .currentPlayingMezmurIndex]
+                                    .title
+                                : '${mezmurController.mezmurList[mezmurController.currentPlayingMezmurIndex].title.substring(0, 20)}...',
                         style: TextStyle(
-                          color: backgroudColor,
+                          color: blurWhite,
                           fontSize: 17,
                         ),
                       ),
@@ -308,13 +324,13 @@ class _HomeState extends State<Home>
                       icon: mezmurController.isPlaying.value
                           ? Icon(
                               Icons.pause_circle,
-                              color: foregroundColor,
-                              size: 25,
+                              color: blurWhite,
+                              size: 30,
                             )
                           : Icon(
                               Icons.play_circle,
-                              color: foregroundColor,
-                              size: 25,
+                              color: blurWhite,
+                              size: 30,
                             ),
                     ),
                     IconButton(
@@ -326,7 +342,8 @@ class _HomeState extends State<Home>
                         },
                         icon: Icon(
                           Icons.close,
-                          color: foregroundColor,
+                          color: blurWhite,
+                          size: 30,
                         )),
                   ],
                 ),
@@ -384,7 +401,7 @@ class _HomeState extends State<Home>
             'በመጀመሪያ ኢንተርኔት ያብሩ',
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: blurWhite,
-            colorText: backgroudColor,
+            colorText: databaseController.settings.backgroundColor!.value,
             margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           );
         }
