@@ -9,6 +9,5 @@ mixin ColorPallet {
   Color foregroundColor =
       const Color(0xFF37718E); //databaseController.settings.foregroundColor!;
   final blurWhite = const Color(0xFFD9D9D9);
-  final mezmurScreenColor = const Color(0xFF063645);
-  final navigationBarColor = const Color(0xFF1D3557);
+  Color mezmurScreenColor = const Color(0xFF063645);
 }

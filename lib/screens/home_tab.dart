@@ -169,7 +169,7 @@ class _HomeState extends State<Home>
         Expanded(
           child: isSearching
               ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: ListView.builder(
                     itemCount: mezmurController.searchedMezmurs.length,
                     itemBuilder: (context, index) {
@@ -244,8 +244,9 @@ class _HomeState extends State<Home>
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             colors: [
-              mezmurScreenColor.withOpacity(0.8),
-              navigationBarColor.withOpacity(0.3),
+              databaseController.settings.mezmurColor!.value.withOpacity(0.8),
+              databaseController.settings.mezmurColor!.value.withOpacity(0.3),
+              databaseController.settings.mezmurColor!.value.withOpacity(0.1),
             ],
           ),
           boxShadow: [
@@ -400,7 +401,7 @@ class _HomeState extends State<Home>
             'በመጀመሪያ ኢንተርኔት ያብሩ',
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: blurWhite,
-            colorText: backgroudColor,
+            colorText: databaseController.settings.backgroundColor!.value,
             margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           );
         }

@@ -25,7 +25,7 @@ class _KidaseContentState extends State<KidaseContent> with ColorPallet {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      margin: const EdgeInsets.only(left: 10, bottom: 33, top: 5, right: 0),
+      margin: const EdgeInsets.only(left: 10, bottom: 33, top: 5, right: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

@@ -201,6 +201,7 @@ class DatabaseController extends GetxController with ColorPallet {
   final String selectedThemeSettings = 'SelectedThemeSettings';
   final String forgrounColorSettings = 'forgroundColorSettings';
   final String backgroundColorSettings = 'backgroundColorSettings';
+  final String mezmurColorSettings = 'mezmurColorSettings';
 
   initSettings() async {
     final preferences = await SharedPreferences.getInstance();
@@ -213,6 +214,8 @@ class DatabaseController extends GetxController with ColorPallet {
           const Color(0xFF37718E).value.toRadixString(16));
       preferences.setString(backgroundColorSettings,
           const Color(0xFF254E70).value.toRadixString(16));
+      preferences.setString(
+          mezmurColorSettings, const Color(0xFF063645).value.toRadixString(16));
     }
     settings.mezmurLyricsFontSize =
         preferences.getDouble(mezmurLyricsFontSizeSettings);
@@ -224,5 +227,8 @@ class DatabaseController extends GetxController with ColorPallet {
     int backgroundColorValue =
         int.parse(preferences.getString(backgroundColorSettings)!, radix: 16);
     settings.backgroundColor = Color(backgroundColorValue).obs;
+    int mezmurColorValue =
+        int.parse(preferences.getString(mezmurColorSettings)!, radix: 16);
+    settings.mezmurColor = Color(mezmurColorValue).obs;
   }
 }

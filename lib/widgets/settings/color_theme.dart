@@ -8,6 +8,7 @@ class ColorTheme extends StatefulWidget {
   final int index;
   final Color foregroundColor;
   final Color backgroundColor;
+  final Color mezmurColor;
   final String title;
   const ColorTheme({
     super.key,
@@ -15,6 +16,7 @@ class ColorTheme extends StatefulWidget {
     required this.foregroundColor,
     required this.backgroundColor,
     required this.title,
+    required this.mezmurColor,
   });
 
   @override
@@ -38,8 +40,10 @@ class _ColorThemeState extends State<ColorTheme> with ColorPallet {
                 uiController.selectedColorTheme.value = widget.index;
                 await preferences.setInt('SelectedThemeSettings', widget.index);
                 uiController.setThemeColor(
-                    foregroundColor: widget.foregroundColor,
-                    backgroundColor: widget.backgroundColor);
+                  foregroundColor: widget.foregroundColor,
+                  backgroundColor: widget.backgroundColor,
+                  mezmurColor: widget.mezmurColor,
+                );
                 Get.back();
               },
               child: Container(
@@ -51,11 +55,11 @@ class _ColorThemeState extends State<ColorTheme> with ColorPallet {
                     borderRadius: BorderRadius.circular(30)),
                 child: AnimatedContainer(
                   width: uiController.selectedColorTheme.value == widget.index
-                      ? 51
-                      : 50,
+                      ? 56
+                      : 55,
                   height: uiController.selectedColorTheme.value == widget.index
-                      ? 51
-                      : 50,
+                      ? 56
+                      : 55,
                   duration: const Duration(microseconds: 700),
                   child: Container(
                     clipBehavior: Clip.antiAlias,
@@ -68,6 +72,9 @@ class _ColorThemeState extends State<ColorTheme> with ColorPallet {
                       ),
                       Expanded(
                         child: Container(color: widget.backgroundColor),
+                      ),
+                      Expanded(
+                        child: Container(color: widget.mezmurColor),
                       ),
                     ]),
                   ),

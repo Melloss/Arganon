@@ -12,9 +12,13 @@ class UIController extends GetxController {
   // Color foregroundColor = const Color(0xFF37718E);
   // Color backgruondColor = const Color(0xFF254E70);
 
-  void setThemeColor({Color? foregroundColor, Color? backgroundColor}) async {
+  void setThemeColor(
+      {required Color? foregroundColor,
+      required Color? backgroundColor,
+      required Color? mezmurColor}) async {
     const forgrounColorSettings = 'forgroundColorSettings';
     const backgroundColorSettings = 'backgroundColorSettings';
+    const mezmurColorSettings = 'mezmurColorSettings';
     DatabaseController databaseController = Get.find();
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -22,7 +26,10 @@ class UIController extends GetxController {
         forgrounColorSettings, foregroundColor!.value.toRadixString(16));
     preferences.setString(
         backgroundColorSettings, backgroundColor!.value.toRadixString(16));
+    preferences.setString(
+        mezmurColorSettings, mezmurColor!.value.toRadixString(16));
     databaseController.settings.foregroundColor!.value = foregroundColor;
     databaseController.settings.backgroundColor!.value = backgroundColor;
+    databaseController.settings.mezmurColor!.value = mezmurColor;
   }
 }

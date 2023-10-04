@@ -76,7 +76,7 @@ class _MezmurTileState extends State<MezmurTile> with ColorPallet, Constants {
             borderRadius: BorderRadius.circular(5),
             boxShadow: const [
               BoxShadow(
-                blurRadius: 3,
+                blurRadius: 2,
                 spreadRadius: 1,
                 color: Colors.black12,
               )

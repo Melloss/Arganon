@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../widgets/widgets.dart' show KidaseTitle, KidaseContent;
 import '../helper/helper.dart' show ColorPallet, Constants, screenHeight;
+import '../controllers/database_controller.dart';
 
 class KidaseScreen extends StatefulWidget {
   final List<Map<String, dynamic>> kidaseList;
@@ -13,6 +14,7 @@ class KidaseScreen extends StatefulWidget {
 
 class _KidaseScreenState extends State<KidaseScreen>
     with ColorPallet, Constants {
+  DatabaseController databaseController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +38,10 @@ class _KidaseScreenState extends State<KidaseScreen>
                 onPressed: () {
                   Get.back();
                 },
-                icon: const Icon(Icons.keyboard_arrow_left),
+                icon: const Icon(
+                  Icons.keyboard_arrow_left,
+                  color: Colors.white,
+                ),
               )),
         ],
       ),
@@ -51,22 +56,22 @@ class _KidaseScreenState extends State<KidaseScreen>
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-            mezmurScreenColor.withOpacity(0),
-            mezmurScreenColor.withOpacity(0.1),
-            mezmurScreenColor.withOpacity(0.2),
-            mezmurScreenColor.withOpacity(0.3),
-            mezmurScreenColor.withOpacity(0.6),
-            mezmurScreenColor.withOpacity(0.7),
-            mezmurScreenColor.withOpacity(0.8),
-            mezmurScreenColor.withOpacity(0.85),
-            mezmurScreenColor.withOpacity(0.93),
-            mezmurScreenColor.withOpacity(0.95),
-            mezmurScreenColor.withOpacity(0.95),
-            mezmurScreenColor.withOpacity(0.95),
-            mezmurScreenColor.withOpacity(0.98),
-            mezmurScreenColor.withOpacity(1),
-            mezmurScreenColor.withOpacity(1),
-            mezmurScreenColor.withOpacity(1),
+            databaseController.settings.mezmurColor!.value.withOpacity(0),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.1),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.2),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.3),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.6),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.7),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.8),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.85),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.93),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.95),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.95),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.95),
+            databaseController.settings.mezmurColor!.value.withOpacity(0.98),
+            databaseController.settings.mezmurColor!.value.withOpacity(1),
+            databaseController.settings.mezmurColor!.value.withOpacity(1),
+            databaseController.settings.mezmurColor!.value.withOpacity(1),
           ])),
     );
   }
@@ -97,27 +102,3 @@ class _KidaseScreenState extends State<KidaseScreen>
     );
   }
 }
-/*
- ListView.builder(
-          itemCount: widget.kidaseList.length,
-          itemBuilder: (context, index) {
-            if (widget.kidaseList[index].containsKey('title')) {
-              return KidaseTitle(title: widget.kidaseList[index]['title']);
-            } else {
-              return KidaseContent();
-            }
-          }),
-          IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.keyboard_arrow_left,
-              color: blurWhite,
-            ),
-          ),
-          KidaseTitle(
-            title: widget.kidaseList[0]['title'],
-          ),
-
-*/

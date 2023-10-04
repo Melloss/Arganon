@@ -48,7 +48,7 @@ class _ArganonState extends State<Arganon> with ColorPallet, Constants {
   _buildThemeData() {
     return ThemeData(
       primaryColor: backgroudColor,
-      primarySwatch: Colors.teal,
+      primarySwatch: Colors.blueGrey,
       appBarTheme: AppBarTheme(
         backgroundColor: backgroudColor,
         elevation: 0,
