@@ -46,6 +46,7 @@ mixin Constants {
   final mitseatImage = 'assets/icons/mitseat.jpg';
   final debretaborImage = 'assets/icons/debre_tabor.jpeg';
   final sergImage = 'assets/icons/serg.jpeg';
+  final kidaseImage = 'assets/kidase_2.jpg';
 
   //catagories
   final medhanealemCatagory = 'medhanealem';

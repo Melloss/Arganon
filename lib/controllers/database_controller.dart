@@ -10,6 +10,7 @@ import '../helper/helper.dart' show ColorPallet;
 import '../models/mezmurs.dart' show Mezmur, initMezmurs;
 import '../models/mezmurs_file_id.dart' show fileUniqueAddress;
 import '../models/settings.dart';
+import './ui_controller.dart';
 
 class DatabaseController extends GetxController with ColorPallet {
   MezmurController mezmurController = Get.find();
@@ -195,7 +196,11 @@ class DatabaseController extends GetxController with ColorPallet {
 
   final String showCarouselSettings = 'ShowCarouselSettings';
   final String mezmurLyricsFontSizeSettings = 'MezmurLyricsFontSizeSettings';
-  Settings settings = Settings(mezmurLyricsFontSize: 19, showCarousel: true);
+  Settings settings =
+      Settings(mezmurLyricsFontSize: 19, showCarousel: true, selectedTheme: 0);
+  final String selectedThemeSettings = 'SelectedThemeSettings';
+  final String forgrounColorSettings = 'forgroundColorSettings';
+  final String backgroundColorSettings = 'backgroundColorSettings';
 
   initSettings() async {
     final preferences = await SharedPreferences.getInstance();
@@ -203,9 +208,21 @@ class DatabaseController extends GetxController with ColorPallet {
         !preferences.containsKey(mezmurLyricsFontSizeSettings)) {
       preferences.setBool(showCarouselSettings, true);
       preferences.setDouble(mezmurLyricsFontSizeSettings, 19);
+      preferences.setInt(selectedThemeSettings, 0);
+      preferences.setString(forgrounColorSettings,
+          const Color(0xFF37718E).value.toRadixString(16));
+      preferences.setString(backgroundColorSettings,
+          const Color(0xFF254E70).value.toRadixString(16));
     }
     settings.mezmurLyricsFontSize =
         preferences.getDouble(mezmurLyricsFontSizeSettings);
     settings.showCarousel = preferences.getBool(showCarouselSettings);
+    settings.selectedTheme = preferences.getInt(selectedThemeSettings);
+    int foregroundColorValue =
+        int.parse(preferences.getString(forgrounColorSettings)!, radix: 16);
+    settings.foregroundColor = Color(foregroundColorValue).obs;
+    int backgroundColorValue =
+        int.parse(preferences.getString(backgroundColorSettings)!, radix: 16);
+    settings.backgroundColor = Color(backgroundColorValue).obs;
   }
 }

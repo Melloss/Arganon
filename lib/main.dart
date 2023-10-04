@@ -10,8 +10,27 @@ import './controllers/mezmur_controller.dart';
 import './controllers/ui_controller.dart';
 import './firebase_options.dart';
 
-class Arganon extends StatelessWidget with ColorPallet, Constants {
-  Arganon({super.key});
+class Arganon extends StatefulWidget {
+  const Arganon({super.key});
+
+  @override
+  State<Arganon> createState() => _ArganonState();
+}
+
+class _ArganonState extends State<Arganon> with ColorPallet, Constants {
+  DatabaseController databaseController = Get.find();
+  @override
+  void initState() {
+    backgroudColor = databaseController.settings.backgroundColor!.value;
+    foregroundColor = databaseController.settings.foregroundColor!.value;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    databaseController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +48,7 @@ class Arganon extends StatelessWidget with ColorPallet, Constants {
   _buildThemeData() {
     return ThemeData(
       primaryColor: backgroudColor,
+      primarySwatch: Colors.teal,
       appBarTheme: AppBarTheme(
         backgroundColor: backgroudColor,
         elevation: 0,
@@ -45,7 +65,7 @@ class Arganon extends StatelessWidget with ColorPallet, Constants {
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-              color: backgroudColor,
+              color: backgroudColor!,
             )),
         filled: true,
       ),
@@ -93,14 +113,15 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   //initialize all controllers
-  UIController uiController = Get.find();
   DatabaseController dbController = Get.find();
   MezmurController mezmurController = Get.find();
+  UIController uiController = Get.find();
   await dbController.init();
   mezmurController.generateRandomMezmurs();
   mezmurController.createCatagories();
   dbController.dispose();
 
   uiController.dispose();
-  runApp(Arganon());
+
+  runApp(const Arganon());
 }

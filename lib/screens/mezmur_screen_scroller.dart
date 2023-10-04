@@ -39,7 +39,7 @@ class _MezmurScreenScrollerState extends State<MezmurScreenScroller>
     uiController.currentPage.value = widget.from == fromHome
         ? widget.currentIndex
         : mezmurs.indexOf(widget.currentIndex);
-    print(uiController.currentPage);
+
     super.initState();
   }
 

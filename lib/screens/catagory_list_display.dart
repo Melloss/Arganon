@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../helper/helper.dart' show ColorPallet, Constants;
 import '../controllers/mezmur_controller.dart';
 import '../widgets/widgets.dart' show MezmurTile;
+import '../controllers/database_controller.dart';
 
 class CatagoryListDisplay extends StatefulWidget {
   const CatagoryListDisplay({super.key});
@@ -14,6 +15,7 @@ class CatagoryListDisplay extends StatefulWidget {
 class _CatagoryListDisplayState extends State<CatagoryListDisplay>
     with ColorPallet, Constants {
   MezmurController mezmurControllers = Get.find();
+  DatabaseController databaseController = Get.find();
   late List mezmurs;
   late String catagory;
   @override
@@ -27,7 +29,10 @@ class _CatagoryListDisplayState extends State<CatagoryListDisplay>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: databaseController.settings.backgroundColor!.value,
+      appBar: AppBar(
+        backgroundColor: databaseController.settings.backgroundColor!.value,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

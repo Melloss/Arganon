@@ -69,8 +69,9 @@ class _MezmurTileState extends State<MezmurTile> with ColorPallet, Constants {
         height: 65,
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
-              foregroundColor,
-              foregroundColor.withOpacity(0.8),
+              databaseController.settings.foregroundColor!.value,
+              databaseController.settings.foregroundColor!.value
+                  .withOpacity(0.8),
             ]),
             borderRadius: BorderRadius.circular(5),
             boxShadow: const [
