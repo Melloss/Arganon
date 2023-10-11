@@ -9,8 +9,6 @@ class UIController extends GetxController {
   RxInt currentPage = 0.obs;
   final flipCardController = FlipCardController();
   RxInt selectedColorTheme = 0.obs;
-  // Color foregroundColor = const Color(0xFF37718E);
-  // Color backgruondColor = const Color(0xFF254E70);
 
   void setThemeColor(
       {required Color? foregroundColor,

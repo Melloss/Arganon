@@ -10,7 +10,6 @@ import '../helper/helper.dart' show ColorPallet;
 import '../models/mezmurs.dart' show Mezmur, initMezmurs;
 import '../models/mezmurs_file_id.dart' show fileUniqueAddress;
 import '../models/settings.dart';
-import './ui_controller.dart';
 
 class DatabaseController extends GetxController with ColorPallet {
   MezmurController mezmurController = Get.find();

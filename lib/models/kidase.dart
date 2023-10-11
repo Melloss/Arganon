@@ -1,24 +1,17 @@
-class Kidase {
-  String? whoShouldSay;
-  String? content;
-  String? fileId;
-  String? meaning;
-  Kidase(
-      {required this.whoShouldSay,
-      required this.content,
-      required this.fileId,
-      required this.meaning});
-}
+const tensiuLetselot = 'tensiu_letselot';
+const egzioTesehalene = 'egzio_tesehalene';
+const selamLekulikimu = 'selam_lekulikimu';
+const misleMenfesike = 'mislemenfesike';
 
 List<Map<String, dynamic>> eminebehaKidase = [
   {'title': 'ከሰኞ አሰከ ዓርብ ባሉት ቀኖች ዘወትር የሚባል'},
   {
     'whoShouldSay': '',
-    'content': '''እምነ በሐ፥ ቅድስት
-ቤተክርስቲያን፥ ሥርጉት አረፋቲሃ
+    'content': '''እምነ በሐ፥ ቅድስት ቤተክርስቲያን፥
+ ሥርጉት አረፋቲሃ ወሥዕልት
 በዕንቍ ጳዝዮን፤ እምነ በሐ፥
 ቅድስት ቤተክርስቲያን፡''',
-    'fileId': '',
+    'fileId': 'eminebeha_kidist_betekristian',
     'meaning': '''ሰላም ላንቺ ይሁን፤ እናታችን
 ክብርት ቤተ ክርስቲያን፡
 ግድግዳዎችሽ በጳዝዮን እንቍ
@@ -32,7 +25,7 @@ List<Map<String, dynamic>> eminebehaKidase = [
 አሠርገወ ሰማየ፤ እምኩሉሰ ፀሐይ
 አርአየ: መስቀል አብርሃ! በከዋብት
 አሠርገወ ሰማየ፡''',
-    'fileId': '',
+    'fileId': 'meskel_abriha',
     'meaning': '''መስቀል አበራ! በኮከቦች
 ሰማይን አስጌጠ ከሁሉም ፀሐይን
 አሳየ መስቀል አበራ በኮከቦች
@@ -47,7 +40,7 @@ List<Map<String, dynamic>> eminebehaKidase = [
 ይፈልጠኒኑ እምሕዝቡ፤ ኵሉ ዘገብራ
 ለጽድቅ፥ ጻድቅ ውእቱ ወዘያከብር ሰንበተ፡
 ''',
-    'fileId': '',
+    'fileId': 'kulu_zegebra_letsidik',
     'meaning': '''ጽድቅን የሠራ ሰንበትን
 ያከበረም ሰው ሁሉ ጻድቅ ነው: ወደ
 እግዚአብሔር አምልኮት የገባ
@@ -69,7 +62,7 @@ List<Map<String, dynamic>> eminebehaKidase = [
 ቀመተ ቅድመ ንጉሥ ሰማያዊ፤
 ንጉሠ ሥጋ ወመንፈስ፤ ከመዝ
 መሐሩነ ሐዋርያት በአብጥሊሶሙ''',
-    'fileId': '',
+    'fileId': 'hale_luya_emebo_biesi',
     'meaning': '''በቅዳሴ ጊዜ
 ከምዕመናን ወገን ወደ ቤተ
 ክርስቲያን የገባ ሰው ቢኖር፥
@@ -93,10 +86,10 @@ List<Map<String, dynamic>> eminebehaKidase = [
 ገነዝዎ ለኢየሱስ በሰንዱናት
 ለዘተንሥአ እሙታን በመንክር ኪን
 ''',
-    'fileId': '',
+    'fileId': 'hale_luya_yosef_wenikodimos',
     'meaning': '''ሃሌሉያ! ዮሴፍ ኒቆዲሞስ ድንቅ
 በሚሆን ጥበብ ከሙታን ተለይቶ
-የተነሣ ኢየሱስን በበፍታ ገነዙት፡'''
+የተነሣ ኢየሱስን በበፍታ ገነዙት'''
   },
   {
     'whoShouldSay': '',
@@ -104,7 +97,7 @@ List<Map<String, dynamic>> eminebehaKidase = [
 ንጹሕ እንተ ውስቴታ መና ኅቡዕ
 ኅብስት ዘወረደ እምሰማያት ወሀቤ
 ሕይወት ለኵሉ ዓለም፡''',
-    'fileId': '',
+    'fileId': 'anti_wietu_mesob',
     'meaning': '''ለዓለም ሁሉ ሕይወት የሚሰጥ
 ከሰማይ የወረደ ኅብስት የተሠወረ
 መና ያለብሽ፥ ንጹሕ የወርቅ መሶብ
@@ -113,16 +106,16 @@ List<Map<String, dynamic>> eminebehaKidase = [
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ቡሩክ እግዚአብሔር
-አብ አኃዜ ኵሉ ዓለም አምላክነ፡
+አብ አኃዜ ኵሉ ዓለም አምላክነ
 ''',
-    'fileId': '',
+    'fileId': 'buruk_egziabher_ab_ahaze',
     'meaning': '''ዓለምን የያዘ እግዚአብሄር አብ  ቡሩክ ነው'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ ',
-    'content': '''ኣሜን፡
+    'content': '''ኣሜን
 ''',
-    'fileId': '',
+    'fileId': 'amen_hizib',
     'meaning': '''አሜን
 '''
   },
@@ -131,7 +124,7 @@ List<Map<String, dynamic>> eminebehaKidase = [
     'content': '''ወቡሩክ ወልድ ዋሕድ
 እግዚእነ ኢየሱስ ክርስቶስ መድኃኒነ፡፡
 ''',
-    'fileId': '',
+    'fileId': 'weburuk_weld_wahid',
     'meaning': '''ጌታችን መድኃኒታችን
 ኢየሱስ ክርስቶስ ወልድ ዋሕድም
 ቡሩክ ነው::'''
@@ -139,21 +132,21 @@ List<Map<String, dynamic>> eminebehaKidase = [
   {
     'whoShouldSay': 'ይበሉ ሕዝብ ',
     'content': '''ኣሜን፡''',
-    'fileId': '',
+    'fileId': 'amen_hizib',
     'meaning': '''አሜን'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ወቡሩክ መንፈስ ቅዱስ
-ጰራቅሊጦስ መጽንዒ ወመንጽሔ ኵልነ፡''',
-    'fileId': '',
+ጰራቅሊጦስ መጽንዒ ወመንጽሔ ኵልነ''',
+    'fileId': 'weburuk_menfes_kidus',
     'meaning': '''ሁላችንን የሚያነጻ፤
 የሚያጸና መንፈስ ቅዱስም ቡሩክ ነው::'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ ',
-    'content': '''ኣሜን፡''',
-    'fileId': '',
+    'content': '''ኣሜን''',
+    'fileId': 'amen_hizib',
     'meaning': '''አሜን'''
   },
   {
@@ -162,8 +155,8 @@ List<Map<String, dynamic>> eminebehaKidase = [
 ለሥሉስ ቅዱስ አብ ወወልድ
 ወመንፈስ ቅዱስ ዕሩይ ኵሎ ጊዜ
 ይእዜኒ ወዘልፈኒ ወለዓለመ ዓለም
-አሜን፡''',
-    'fileId': '',
+አሜን''',
+    'fileId': 'sibhat_wekbr_yidelu',
     'meaning': ''''ልዩ ሦስት ለሚሆኑ
 ሁልጊዜም ለተካከሉ ለአብ ለወልድ
 ለመንፈስ ቅዱስ ክብር ምስጋና
@@ -173,10 +166,10 @@ List<Map<String, dynamic>> eminebehaKidase = [
 ];
 List<Map<String, dynamic>> tseliyuAbewuyeKidase = [
   {
-    'whoShouldSay': '',
+    'whoShouldSay': 'ይበል ካህን',
     'content': '''ጸልዩ አበውየ ወአኀውየ ላዕሌየ
 ወላዕለ ዝንቱ መሥዋዕት''',
-    'fileId': '',
+    'fileId': 'tseliyu_weawihiye',
     'meaning': '''አባቴቼና ወንድሞቼ በእኔ ላይ
 በመሥዋዕቱም ላይ ጸልዩ '''
   },
@@ -188,7 +181,7 @@ List<Map<String, dynamic>> tseliyuAbewuyeKidase = [
 መሥወዕተ መልከ ጼዴቅ ወአሮን
 ወዘካርያስ ካህናተ ቤተ ክርስቲያኑ
 ለበኵር ''',
-    'fileId': '',
+    'fileId': 'egziabher_yismake_kolo',
     'meaning': '''ንፍቅ እግዚአብሔር
 የለመንከውን ሁሉ ይስማህ የበኵር
 የቤተ ክርስቲያኑ ካህናቱ የሚሆኑ
@@ -207,7 +200,7 @@ List<Map<String, dynamic>> tseliyuAbewuyeKidase = [
     'content': '''አሐዱ አብ ቅዱስ፤
 አሐዱ ወልድ ቅዱስ፤ አሐዱ ውእቱ
 መንፈስ ቅዱስ፡፡ ''',
-    'fileId': '',
+    'fileId': 'ahadu_ab_qdus',
     'meaning': '''አንዱ ቅዱስ አብ ነው፤
 አንዱ ቅዱስ ወልድ ነው፤ አንዱ
 ቅዱስ መንፈስ ቅዱስ ነው᎓'''
@@ -217,7 +210,7 @@ List<Map<String, dynamic>> tseliyuAbewuyeKidase = [
     'content': '''በአማን አብ ቅዱስ፤
 በአማን ወልድ ቅዱስ፤ በአማን
 ውእቱ መንፈስ ቅዱስ፡፡''',
-    'fileId': '',
+    'fileId': 'beaman_ab_kidus',
     'meaning': '''አብ በእውነት ቅዱስ
 ነው፤ ወልድ በእውነት ቅዱስ ነው፤
 መንፈስ ቅዱስ በእውነት ቅዱስ
@@ -227,7 +220,7 @@ List<Map<String, dynamic>> tseliyuAbewuyeKidase = [
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰብሕዎ
 ለእግዚአብሔር ኵልክሙ አሕዛብ''',
-    'fileId': '',
+    'fileId': 'sebihiwo_le_egziabher_kulikimu_ahizab',
     'meaning': ''' ሕዝቦች ሁላችሁም
 እግዚአብሔርን አመስግኑት፡፡ '''
   },
@@ -235,28 +228,28 @@ List<Map<String, dynamic>> tseliyuAbewuyeKidase = [
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ወይሴብሕዎ ኵሎሙ
 ሕዝብ''',
-    'fileId': '',
+    'fileId': 'weyisebhiwo_kulomu_hizb',
     'meaning': ''' ሕዝቡ ሁሉ ያመሰግኑታል'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ይእስመ ጽንዐት 
 ምሕረቱ ላዕሌነ፡፡''',
-    'fileId': '',
+    'fileId': 'esme_tseniat',
     'meaning': '''ምሕረቱ በኛ ላይ ጸንታለችና፡፡'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ ',
     'content': '''ጽድቍሰ
 ለእግዚአብሔር ይሄሉ ለዓለም''',
-    'fileId': '',
+    'fileId': 'tsidkuse',
     'meaning': '''የእግዚአብሔር ቸርነቱ ለዘለዓለም ይኖራል'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ስብሐት ለአብ፥
 ወወልድ፥ ወመንፈስ ቅዱስ፡፡ ''',
-    'fileId': '',
+    'fileId': 'sibhat_le_ab_wewelid',
     'meaning': '''ለአብ፥ ለወልድ፥
 ለመንፈስ ቅዱስ ምስጋና ይገባል'''
   },
@@ -270,7 +263,7 @@ List<Map<String, dynamic>> tseliyuAbewuyeKidase = [
     'whoShouldSay': 'ይበል ካህን ',
     'content': '''ይእዜኒ ወዘልፈኒ
 ወለዓለም ዓለም አሜን ሃሌሉያ''',
-    'fileId': '',
+    'fileId': 'yizeni_wezelifeni',
     'meaning': ''' ዛሬም ዘወትርም ለዘለዓለሙ አሜን ሃሌሉያ'''
   },
   {
@@ -282,25 +275,25 @@ List<Map<String, dynamic>> tseliyuAbewuyeKidase = [
   {
     'whoShouldSay': 'ይበል ዲያቆን',
     'content': '''ተንሥኡ ለጸሎት''',
-    'fileId': '',
+    'fileId': tensiuLetselot,
     'meaning': '''ለጸሎት ተነሡ '''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''እግዚኦ ተሣሃለነ ''',
-    'fileId': '',
+    'fileId': egzioTesehalene,
     'meaning': '''አቤቱ ይቅር በለን፡፡'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰላም ለኵልክሙ''',
-    'fileId': '',
+    'fileId': selamLekulikimu,
     'meaning': '''ሰላም ለሁላችሁም:'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': misleMenfesike,
     'meaning': '''ከመንፈስህ ጋራ::'''
   },
 ];
@@ -322,7 +315,7 @@ List<Map<String, dynamic>> kidusBasliyosMisganaTselotKidase = [
   {
     'whoShouldSay': 'ይበል ዲያቆን',
     'content': '''ጸልዩ''',
-    'fileId': '',
+    'fileId': 'tseliyu',
     'meaning': '''ጸልዩ'''
   },
   {
@@ -344,7 +337,7 @@ List<Map<String, dynamic>> kidusBasliyosMisganaTselotKidase = [
 በዘይሤኒ ኵሎ ጊዜ ይረስየነ ድልዋነ
 ከመ ንንሣእ እምሱታፌ ምሥጢር
 ቡሩክ ወይሥረይ ለነ ኃጣውኢነ፡፡''',
-    'fileId': '',
+    'fileId': 'hisu_wenastebekuake',
     'meaning': '''እግዚአብሔር
 ይምረን ዘንድ ይቅርም ይለን ዘንድ
 ደጅ ጥኑ ተማለዱ (በንባብ) ስለእኛ
@@ -357,7 +350,7 @@ List<Map<String, dynamic>> kidusBasliyosMisganaTselotKidase = [
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ኪርያላይሶን''',
-    'fileId': '',
+    'fileId': 'kiralayiso',
     'meaning': '''ኪርያላይሶን'''
   },
   {
@@ -382,25 +375,25 @@ List<Map<String, dynamic>> kidusBasliyosMisganaTselotKidase = [
   {
     'whoShouldSay': 'ይበል ዲያቆን',
     'content': '''ተንሥኡ ለጸሎት፡፡''',
-    'fileId': '',
+    'fileId': tensiuLetselot,
     'meaning': '''ለጸሎት ተነሱ'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''እግዚኦ ተሣሀለነ''',
-    'fileId': '',
+    'fileId': egzioTesehalene,
     'meaning': '''አቤቱ ይቅር በለን'''
   },
   {
     'whoShouldSay': 'ይበል ንፍቀ ካህን',
     'content': '''ሰላም ለኵልክሙ''',
-    'fileId': '',
+    'fileId': selamLekulikimu,
     'meaning': '''ሰላም ለሁላችሁም'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': misleMenfesike,
     'meaning': '''ከመንፈስህ ጋራ'''
   },
   {'title': 'ንፍቅ ካህኑ የሐዋርያትን የመባ ጸሎት በንባብ ይበል'},
@@ -420,7 +413,7 @@ List<Map<String, dynamic>> kidusBasliyosMisganaTselotKidase = [
     'whoShouldSay': 'ንፍቅ ይበል ዲያቆን',
     'content': '''ይጸልዩ በእንተ
 እለ ያበውኡ መባአ''',
-    'fileId': '',
+    'fileId': 'tseliyu_bente_ele_yabewiu',
     'meaning': '''መባ ስለሚያቀርቡ ሰዎች ጸልዩ'''
   },
   {
@@ -428,7 +421,7 @@ List<Map<String, dynamic>> kidusBasliyosMisganaTselotKidase = [
     'content': '''ተወከፍ መባኦሙ
 ለአኃው ወተወከፍ መባኦን ለአኃት
 ለነኒ ተወከፍ መባአነ ወቍርባነነ''',
-    'fileId': '',
+    'fileId': 'tewekef_mebaomu',
     'meaning': '''የወንዶችን መባቸውን ተቀበል 
 የሴቶችንም መባቸውን ተቀበል የኛንም
 መባችንን ቁርባናችንንም ተቀበል፡'''
@@ -450,25 +443,25 @@ List<Map<String, dynamic>> kidusBasliyosMisganaTselotKidase = [
   {
     'whoShouldSay': 'ይበል ዲያቆን',
     'content': '''ተንሥኡ ለጸሎት፡፡''',
-    'fileId': '',
+    'fileId': tensiuLetselot,
     'meaning': '''ለጸሎት ተነሱ'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''እግዚኦ ተሣሀለነ''',
-    'fileId': '',
+    'fileId': egzioTesehalene,
     'meaning': '''አቤቱ ይቅር በለን'''
   },
   {
     'whoShouldSay': 'ይበል ንፍቀ ካህን',
     'content': '''ሰላም ለኵልክሙ''',
-    'fileId': '',
+    'fileId': selamLekulikimu,
     'meaning': '''ሰላም ለሁላችሁም'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': misleMenfesike,
     'meaning': '''ከመንፈስህ ጋራ'''
   },
 ];
@@ -504,14 +497,14 @@ List<Map<String, dynamic>> hibstTselotKidase = [
     'whoShouldSay': 'ይበል ዲያቆን',
     'content': '''ስግዱ
 ለእግዚአብሔር በፍርሃት''',
-    'fileId': '',
+    'fileId': 'sigidu_le_egziabher',
     'meaning': '''በፍርሃት ለእግዚአብሔር ስገዱ'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ቅድሜከ እግዚኦ
 ንሰግድ ወንሴብሓከ፡''',
-    'fileId': '',
+    'fileId': 'kidmeke_egzio',
     'meaning': '''አቤቱ በፊትህ ወድቀን እንሰግዳለን፡፡
 እናመሰግንሃለን፡፡'''
   },
@@ -522,31 +515,31 @@ List<Map<String, dynamic>> hibstTselotKidase = [
   {
     'whoShouldSay': 'ይበል ዲያቆን',
     'content': '''ተንሥኡ ለጸሎት፡፡''',
-    'fileId': '',
+    'fileId': tensiuLetselot,
     'meaning': '''ለጸሎት ተነሱ'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''እግዚኦ ተሣሀለነ''',
-    'fileId': '',
+    'fileId': egzioTesehalene,
     'meaning': '''አቤቱ ይቅር በለን'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰላም ለኵልክሙ''',
-    'fileId': '',
+    'fileId': selamLekulikimu,
     'meaning': '''ሰላም ለሁላችሁም'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': misleMenfesike,
     'meaning': '''ከመንፈስህ ጋራ'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ንሰግድ (ሦስት ጊዜ)''',
-    'fileId': '',
+    'fileId': 'nisgid',
     'meaning': '''እንስገድ (ሦስት ጊዜ)'''
   },
   {
@@ -554,7 +547,7 @@ List<Map<String, dynamic>> hibstTselotKidase = [
     'content': '''ለአብ፥ ወወልድ፥
 ወመንፈስ ቅዱስ እንዘ ሠለስቱ
 አሐዱ፡: (ሦስት ጊዜ)''',
-    'fileId': '',
+    'fileId': 'le_ab_wewelid_wemenfes_kidus',
     'meaning': '''ሦስት ሲሆኑ አንድ
 ለሚሆኑ ለአብና ለወልድ ለመንፈስ
 ቅዱስም፡፡ (ሦስት ጊዜ)'''
@@ -562,35 +555,35 @@ List<Map<String, dynamic>> hibstTselotKidase = [
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰላም ለኪ''',
-    'fileId': '',
+    'fileId': 'selam_leki',
     'meaning': '''ሰላም ላንቺ ይኹን'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ቅድስት ቤተ
 ክርስቲያን ማኅደረ መለኮት፡፡''',
-    'fileId': '',
+    'fileId': 'kidist_betekirstian_mahdere_melekot',
     'meaning': '''የመለኮት ማደሪያ
 የሆንሽ ክብርት ቤተ ክርስቲያን፡'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰአሊ ለነ''',
-    'fileId': '',
+    'fileId': 'seali_lene',
     'meaning': '''ለምኚልን'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ድንግል ማርያም
 ወላዲተ አምላክ''',
-    'fileId': '',
+    'fileId': 'dingle_maryam_weladite_amlak',
     'meaning': ''' አምላክን የወለድሽ
 ድንግል ማርያም፡'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''አንቲ ውእቱ''',
-    'fileId': '',
+    'fileId': 'anti_wietu',
     'meaning': '''አንቺ ነሽ'''
   },
   {
@@ -605,7 +598,7 @@ List<Map<String, dynamic>> hibstTselotKidase = [
 ክርስቶስ ምስለ አቡከ ኄር ሰማያዊ
 ወመንፈስከ ቅዱስ ማሕየዊ እስመ
 መጻእከ ወአድኀንከነ''',
-    'fileId': '',
+    'fileId': 'maetent_zewerk',
     'meaning': '''ቡሩክ ከቤተ መቅደስ
 የተቀባላት የወርቅ ጽና አንቺ ነሽ፤
 የእሳት ፍሕም የያዝሽ፤ኃጢአትን
@@ -672,25 +665,25 @@ List<Map<String, dynamic>> hibstTselotKidase = [
   {
     'whoShouldSay': 'ይበል ዲያቆን',
     'content': '''ተንሥኡ ለጸሎት፡፡''',
-    'fileId': '',
+    'fileId': tensiuLetselot,
     'meaning': '''ለጸሎት ተነሱ'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''እግዚኦ ተሣሀለነ''',
-    'fileId': '',
+    'fileId': egzioTesehalene,
     'meaning': '''አቤቱ ይቅር በለን'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰላም ለኵልክሙ''',
-    'fileId': '',
+    'fileId': selamLekulikimu,
     'meaning': '''ሰላም ለሁላችሁም'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': misleMenfesike,
     'meaning': '''ከመንፈስህ ጋራ'''
   },
 ];
@@ -712,7 +705,7 @@ List<Map<String, dynamic>> kehawaryawPawlosMelikt = [
 አክሊለ ሰአል ወጸሊ በእንቲኣነ ያድኅን
 ነፍሳተነ በብዝኀ ሣህሉ ወምሕረቱ 
 በእንተ ስሙ ቅዱስ፡፡''',
-    'fileId': '',
+    'fileId': 'kidus_hawarya_pawlos',
     'meaning': '''ሐዋርያ ቅዱስ ጳውሎስ 
 መልእክትህ የበጀ፥ የታመሙትን
 ያዳንክ፥ አክሊልን የተቀበልህ፤ ስለእኛ
@@ -723,25 +716,25 @@ List<Map<String, dynamic>> kehawaryawPawlosMelikt = [
   {
     'whoShouldSay': 'ይበል ዲያቆን',
     'content': '''ተንሥኡ ለጸሎት፡፡''',
-    'fileId': '',
+    'fileId': tensiuLetselot,
     'meaning': '''ለጸሎት ተነሱ'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''እግዚኦ ተሣሀለነ''',
-    'fileId': '',
+    'fileId': egzioTesehalene,
     'meaning': '''አቤቱ ይቅር በለን'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰላም ለኵልክሙ''',
-    'fileId': '',
+    'fileId': selamLekulikimu,
     'meaning': '''ሰላም ለሁላችሁም'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': misleMenfesike,
     'meaning': '''ከመንፈስህ ጋራ'''
   },
   {'title': 'ሁለተኛው የሐዋርያው መልአክት ተነብቦ አንዳበቃ አንባቢው አንዲህ ይበል'},
@@ -758,7 +751,7 @@ List<Map<String, dynamic>> kehawaryawPawlosMelikt = [
 ህላዌከ ዕቀብ ማኅበረነ በእንተ
 ቅዱሳን ኅሩያን አርዳኢከ ናዝዘነ
 በሣህልከ በእንተ ቅዱስ ስምከ''',
-    'fileId': '',
+    'fileId': 'kidus_silus_zehibur_hilawe',
     'meaning': '''ባሕርይህ አንድ
 የሚሆን፥ በሦስትነት ያለህ ቅዱስ ሆይ!
 አንድነታችንን ጠብቅልን፤ ስለተ
@@ -769,25 +762,25 @@ List<Map<String, dynamic>> kehawaryawPawlosMelikt = [
   {
     'whoShouldSay': 'ይበል  ዲያቆን',
     'content': '''ተንሥኡ ለጸሎት፡፡''',
-    'fileId': '',
+    'fileId': tensiuLetselot,
     'meaning': '''ለጸሎት ተነሱ'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''እግዚኦ ተሣሀለነ''',
-    'fileId': '',
+    'fileId': egzioTesehalene,
     'meaning': '''አቤቱ ይቅር በለን'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰላም ለኵልክሙ''',
-    'fileId': '',
+    'fileId': selamLekulikimu,
     'meaning': '''ሰላም ለሁላችሁም'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': misleMenfesike,
     'meaning': '''ከመንፈስህ ጋራ'''
   },
   {'title': 'ከሐዋርያት ሥራ መጸሐፍ ተነብቦ አንዳበቃ አንባቢO አንዲህ ይበል'},
@@ -802,12 +795,12 @@ List<Map<String, dynamic>> kehawaryawPawlosMelikt = [
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ቅዱስ ቅዱስ ቅዱስ
-አንተ አብ አኃዜ ኵሉ ቅዱስ ቅዱስ
+አንተ እግዚአብሔር አብ አኃዜ ኵሉ ቅዱስ ቅዱስ
 ቅዱስ አንተ ወልድ ዋሕድ ዘአንተ
 ቃለ አብ ሕያው ቅዱስ ቅዱስ
 ቅዱስ አንተ መንፈስ ቅዱስ
 ዘተአምር ኵሎ''',
-    'fileId': '',
+    'fileId': 'kidus_kidus_kidus_ante',
     'meaning': ''' ሁሉን የያዝህ አብ
 ሆይ! ቅዱስ ቅዱስ ቅዱስ አንተ ነህ፡
 የሕያው አብ ቃል ተቀዳሚ
@@ -819,25 +812,25 @@ List<Map<String, dynamic>> kehawaryawPawlosMelikt = [
   {
     'whoShouldSay': 'ይበል  ዲያቆን',
     'content': '''ተንሥኡ ለጸሎት፡፡''',
-    'fileId': '',
+    'fileId': tensiuLetselot,
     'meaning': '''ለጸሎት ተነሱ'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''እግዚኦ ተሣሀለነ''',
-    'fileId': '',
+    'fileId': egzioTesehalene,
     'meaning': '''አቤቱ ይቅር በለን'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰላም ለኵልክሙ''',
-    'fileId': '',
+    'fileId': selamLekulikimu,
     'meaning': '''ሰላም ለሁላችሁም'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': misleMenfesike,
     'meaning': '''ከመንፈስህ ጋራ'''
   },
   {
@@ -917,7 +910,7 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
 ውእቱ ጊዜ ዕጣን ኅሩይ ጊዜ
 ሰብሖቱ ለመድኃኒነ መፍቀሬ ሰብእ
 ክርስቶስ፡፡''',
-    'fileId': '',
+    'fileId': 'zwietu_gize_barkot',
     'meaning': '''ይህ የማመስገን ጊዜ ነው
 የተመረጠ የዕጣን ጊዜም ነው፤ ሰውን
 የሚወድ መድኃኒታችን ክርስቶስ
@@ -929,7 +922,7 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
 ውእቱ እስመ ዘውስተ ከርሣ
 ዘይትሜዐዝ እምኵሉ ዕጣን ዘወለደቶ
 መጽአ ወአድኀነነ''',
-    'fileId': '',
+    'fileId': 'etan_yieti_maryam',
     'meaning': '''ዕጣን ማርያም ናት፥ በማኅፀንዋ
 ያደረው ዕጣን እርሱ ነው: ከዕጣን
 ሁሉ የሚሸት ነውና፥ የወለደችው
@@ -941,7 +934,7 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
 ንፁ ንስግድ ሎቱ ወንዕቀብ
 ትእዛዛቲሁ ከመ ይሥረይ ለነ
 ኃጣውኢነ''',
-    'fileId': '',
+    'fileId': 'efret_miuz',
     'meaning': '''መዓዛ ያለው ሽቱ ኢየሱስ
 ክርስቶስ ነው:: እንሰግድለት ዘንድ
 ኑ! ትእዛዞቹንም እንጠብቅ
@@ -952,7 +945,7 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
     'content': '''ተውህቦ ምሕረት ለሚካኤል
 ወብሥራት ለገብርኤል ወሀብተ
 ሰማያት ለማርያም ድንግል''',
-    'fileId': '',
+    'fileId': 'tewhibo_mihret_lemikael',
     'meaning': '''ምሕረት ለሚካኤል ተሰጠው::
 ማብሠር ለገብርኤል፤ ሰማያዊ
 ሀብትም ለድንግል ማርያም'''
@@ -962,7 +955,7 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
     'content': '''ተውህቦ ልቡና ለዳዊት ወጥበብ
 ለሰሎሞን ወቀርነ ቅብዕ ለሳሙኤል
 እስመ ውእቱ ዘይቀብዕ ነገሥተ''',
-    'fileId': '',
+    'fileId': 'tewihbo_libona_ledawit',
     'meaning': '''ልቦና ለዳዊት ተሰጠው: ጥበብ
 ለሰሎሞን፡ የሽቱ ቀንድም
 ለሳሙኤል ንጉሦችን የቀባ ነውና'''
@@ -973,7 +966,7 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
 ጴጥሮስ ወድንግልና ለዮሐንስ
 ወመልእክት ለአቡነ ጳውሎስ እስመ
 ውእቱ ብርሃና ለቤተ ክርስቲያን''',
-    'fileId': '',
+    'fileId': 'tewihbo_merahut',
     'meaning': '''ሥልጣን ለአባታችን ጴጥሮስ
 ተሰጠው፥ ድንግልና ለዮሐንስ፥
 መልእክት መጻፍ ለጳውሎስ፥ የቤተ
@@ -985,7 +978,7 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
 እስመ ዘውስተ ከርሣ ዘይትሌዐል
 እምኵሉ ዕጣን መጽአ ወተሠገወ
 እምኔሃ''',
-    'fileId': '',
+    'fileId': 'efret_mizt_yieti_maryam',
     'meaning': '''መዓዛ ያላት ሽቱ ማርያም ናት፡፡
 የማኅፀንዋ ፍሬ ከዕጣን ሁሉ
 የሚበልጥ ነውና መጥቶ ከርሷ ሰው
@@ -996,7 +989,7 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
     'content': '''ለማርያም ድንግል ንጽሕት
 ሠምራ አብ ወአሠርገዋ ደብተራ
 ለማኅደረ ፍቁር ወልዱ''',
-    'fileId': '',
+    'fileId': 'lemaryam_dingle_nitshit',
     'meaning': '''ንጽሕት ድንግል ማርያምን አብ
 ወደዳት፤ ለተወደደ ልጁ ማደሪያ
 እንድትሆን አስጌጣት'''
@@ -1006,7 +999,7 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
     'content': '''ተውህቦ ሕግ ለሙሴ ወክህነት
 ለአሮን ተውህቦ ዕጣን ኅሩይ
 ለዘካርያስ ካህን''',
-    'fileId': '',
+    'fileId': 'tewhibo_hig',
     'meaning': '''ሕግ ለሙሴ ተሰጠው፤ ክህነት
 ለአሮን፥ የተመረጠም ዕጣን ለካህኑ
 ለዘካርያስ'''
@@ -1014,9 +1007,9 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
   {
     'whoShouldSay': '',
     'content': '''ደብተራ ስምዕ ገብርዋ በከመ
-ነገረ እግዘእ ወአሮን ካህን በማእከላ
+ነገረ እግዚእ ወአሮን ካህን በማእከላ
 የዐርግ ዕጣነ ኅሩየ''',
-    'fileId': '',
+    'fileId': 'debtera_sime_gebriwa',
     'meaning': '''ጌታ እንደተናገረ የምስክር
 ድንኳን አደረጓት፥ ካህኑም አሮን
 በመካከሏ የተመረጠ ዕጣን
@@ -1024,10 +1017,10 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
   },
   {
     'whoShouldSay': '',
-    'content': '''ሱራፌል፡ ይሰግዱ ሎቱ
+    'content': '''ሱራፌል ይሰግዱ ሎቱ
 ወኪሩቤል ይሴብሕዎ ይጸርሑ እንዘ
 ይብሉ''',
-    'fileId': '',
+    'fileId': 'surafel_yisegdu_lotu',
     'meaning': '''ሱራፌል ይሰግዱለታል፡፡
 ኪሩቤልም ያመሰግኑታል፡ እንዲህ
 እያሉ፥ ይዘምራሉ'''
@@ -1037,7 +1030,7 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
     'content': '''ቅዱስ ቅዱስ ቅዱስ
 እግዚአብሔር በኀበ አእላፍ ወክቡር
 በውስተ ረበዋት''',
-    'fileId': '',
+    'fileId': 'kidus_kidus_kidus_egziabher_behabe',
     'meaning': '''እግዚአብሔር በአእላፍ
 መላእክት ዘንድ ቅዱስ ቅዱስ ቅዱስ
 ነው:: በአለቆችም ዘንድ ክቡር ነው'''
@@ -1046,7 +1039,7 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
     'whoShouldSay': '',
     'content': '''አንተ ውእቱ ዕጣን ኦ መድኃኒነ
 እስመ መጻእከ ወአድኃንከነ ተሣሀለነ''',
-    'fileId': '',
+    'fileId': 'anti_wietu_etan',
     'meaning': '''መድኃኒታችን ሆይ! ዕጣን አንተ
 ነህ፤ መጥተህ አድነኸናልና፡ ይቅር በለን'''
   },
@@ -1057,7 +1050,7 @@ List<Map<String, dynamic>> ziwituGizeBarkotKidase = [
 ሞተ ወኬዶ ለሞት ለአለ ውስተ
 መቃብር ወሀበ ሕይወተ ዘለዓለም
 ዕረፍተ፡ ( 3 ጊዜ)''',
-    'fileId': '',
+    'fileId': 'kirstos_tensia_emutan',
     'meaning': '''ክርስቶስ ከሙታን ተለይቶ
 ተነሣ! ሞተ ሞትን አጠፋው
 በመቃብር ላሉም የዘለዓለም ዕረፍት
@@ -1069,7 +1062,7 @@ List<Map<String, dynamic>> kidanTselotKidase = [
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ቅዱስ''',
-    'fileId': '',
+    'fileId': 'kidus',
     'meaning': '''ቅዱስ'''
   },
   {
@@ -1078,7 +1071,7 @@ List<Map<String, dynamic>> kidanTselotKidase = [
 ኃያል ቅዱስ ሕያው ዘኢይመውት
 ዘተወልደ እማርያም እምቅድስት
 ድንግል ተሣሃለነ እግዚኦ''',
-    'fileId': '',
+    'fileId': 'egziabher_kidus_hayal',
     'meaning': '''እግዚአብሔር፥
 ቅዱስ ኃይል ቅዱስ ሕያው
 የማይሞት፤ ከቅድስት ድንግል
@@ -1091,7 +1084,7 @@ List<Map<String, dynamic>> kidanTselotKidase = [
 ኃያል ቅዱስ ሕያው ዘእይመውት
 ዘተጠምቀ በዮርዳኖስ ወተሰቅለ ዲበ
 ዕፀ መስቀል ተሣሀለነ እግዚኦ''',
-    'fileId': '',
+    'fileId': 'kidus_egziabher_kidus_hayal',
     'meaning': '''ቅዱስ እግዚአብሔር ቅዱስ
 ኃይል ቅዱስ ሕያው የማይሞት
 በዮርዳኖስ የተጠመቀ፥ በመስቀል
@@ -1110,7 +1103,7 @@ List<Map<String, dynamic>> kidanTselotKidase = [
 ለመንፈስ ቅዱስ ይእዜኒ ወዘልፈኒ
 ለዓለመ ዓለም አሜን ወአሜን
 ለይኩን ለይኩን''',
-    'fileId': '',
+    'fileId': 'kidus_egziabher_kidus_hiyal_zeyimewit',
     'meaning': '''ቅዱስ እግዚአብሔር ቅዱስ
 ኃያል ቅዱስ ሕያው የማይሞት፥
 በሦስተኛው ቀን ከሙታን ተለይቶ
@@ -1128,7 +1121,7 @@ List<Map<String, dynamic>> kidanTselotKidase = [
     'whoShouldSay': '',
     'content': '''ቅዱስ ሥሉስ እግዚአብሔር
 ሕያው ተሣሃለነ''',
-    'fileId': '',
+    'fileId': 'kidus_silus_egziabher',
     'meaning': '''በሦስትነት ያለህ ቅዱስ ሕያው
 እግዚአብሔር ሆይ! ይቅር በለን'''
   },
@@ -1137,33 +1130,33 @@ List<Map<String, dynamic>> kidanTselotKidase = [
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ጸጋ ዘእግዚአብሔር
 የሀሉ ምስሌክሙ:''',
-    'fileId': '',
+    'fileId': 'tsega_ze_egziabher',
     'meaning': '''የእግዚአብሔር ጸጋ
 ከእናንተ ጋር ይሁን'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': 'misle_menfesike_2',
     'meaning': '''ከመንፈስህ ጋራ'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ንሰብሖ ለአምላክነ''',
-    'fileId': '',
+    'fileId': 'nisebihiwo_le_amlakine',
     'meaning': '''ለእግዚአብሔር ምስጋና ይሁን፡፡'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ርቱዕ ይደሉ''',
-    'fileId': '',
+    'fileId': 'rietu_yidelu',
     'meaning': '''እውነት ነው ይገባል'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''አጽንዑ ሕሊና
 ልብክሙ''',
-    'fileId': '',
+    'fileId': 'atsiniu_hilina_libkimu',
     'meaning': '''የልባችሁን አሳብ
 አጽኑ'''
   },
@@ -1173,35 +1166,35 @@ List<Map<String, dynamic>> kidanTselotKidase = [
 እግዚአብሔር አቡነ ዘበሰማያት፥
 አቡነ ዘበሰማያት፥ አቡነ ዘበሰማያት
 ኢታብአነ እግዘኦ ውስተ መንሱት''',
-    'fileId': '',
+    'fileId': 'bine_habe_egziabher',
     'meaning': '''በእግዚአብሔር
 ዘንድ አለን አባታችን ሆይ!
 አባታችን ሆይ! አባታችን ሆይ!
 አቤቱ ወደ ፈተና አታግባን'''
   },
-  {'title': 'ካህኑ የኪዳን ጸሎት “አግዚአብሔር አብ .” የሚለውን በንባብ ሲያሰማ'},
+  {'title': 'ካህኑ የኪዳን ጸሎት “አግዚአብሔር አብ” የሚለውን በንባብ ሲያሰማ'},
   {
-    'whoShouldSay': '',
-    'content': '''ይበሉ ሕዝብ ኪያከ ንዌድስ
-እግዚኦ፡''',
-    'fileId': '',
+    'whoShouldSay': 'ይበሉ ሕዝብ',
+    'content': '''ኪያከ ንሴብህ
+እግዚኦ''',
+    'fileId': 'kiyake_nisebh',
     'meaning': '''አቤቱ አንተን
-እናመሰግንሃለ፡'''
+እናወድስሀለን'''
   },
   {'title': 'ካህኑ የኪዳን ጸሎት “አግዚኦ ኢየሱስ ክርስቶስ” በንባብ ሲያሰማ'},
   {
-    'whoShouldSay': '',
-    'content': '''ይበሉ ሕዝብ ኪያከ ንዌድስ
-እግዚኦ፡''',
-    'fileId': '',
+    'whoShouldSay': 'ይበሉ ሕዝብ',
+    'content': '''ኪያከ ንዌድስ
+እግዚኦ''',
+    'fileId': 'kiyake_niweds',
     'meaning': '''አቤቱ አንተን
-እናመሰግንሃለ፡'''
+እናመሰግንሃለን'''
   },
   {'title': 'ካህኑ የኪዳን ጸሎት “ንሤልስ ለከ ዘንተ ቅዱሰ ...” አሰምቶ አንዳበቃ'},
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''አሜን''',
-    'fileId': '',
+    'fileId': 'amen',
     'meaning': '''በእውነት'''
   },
   {'title': 'ቀዳሴው ከሰዓት በኋላ (ዘሠርክ) በሚሆንበት ጊዜ ከዚህ በላይ በተዘመመው ምትክ'},
@@ -1209,47 +1202,47 @@ List<Map<String, dynamic>> kidanTselotKidase = [
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ጸጋሁ ለእግዚአብሔር
 የሀሉ ምስሌክሙ''',
-    'fileId': '',
+    'fileId': 'tsegahu_le_egziabher',
     'meaning': '''የእግዚአብሔር ጸጋ
 ከናንተ ጋራ ይሁን'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': 'misle_menfesike_3',
     'meaning': '''ከመንፈስህ ጋራ'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''እኵትዎ ለአምላክነ''',
-    'fileId': '',
+    'fileId': 'aekotiwo_le_amlakine',
     'meaning': '''ፈጣሪያችንን አመስግኑ::'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ርቱዕ ይደሉ''',
-    'fileId': '',
+    'fileId': 'rietu_yidelu',
     'meaning': '''እውነት ነው ይገባዋል'''
   },
   {'title': 'ካህኑ የመጀመሪያውን የኪዳን ጸሎት “ለከ ለአብ ዘኢይስን…” የሚለውን በንባብ አሰምቶ አንዳበቃ'},
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ንሴብሐከ እግዚኦ''',
-    'fileId': '',
+    'fileId': 'nisebhake_egzio',
     'meaning': '''አቤቱ እናመሰግንሃለን'''
   },
   {'title': 'ካህኑ ሁለተኛውን የኪዳን ጸሎት “ንዌድሰከ አግዚኦ ዘወትረ...” የሚለውን'},
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ንዌድስከ እግዚኦ''',
-    'fileId': '',
+    'fileId': 'niwekseke_egzio',
     'meaning': '''አቤቱ እናወድስሃለን'''
   },
   {'title': 'ካህኑ ሦስተኛውን የከዳን ጸሎት “ለከ ዘአምልብ ውዳሴ...” የሚለውን'},
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''አሜን''',
-    'fileId': '',
+    'fileId': 'amen',
     'meaning': '''በእውነት'''
   },
 ];
@@ -1259,7 +1252,7 @@ List<Map<String, dynamic>> oSilusKidusKidase = [
     'content': '''ኦ ሥሉስ ቅዱስ
 መሐረነ፤ ኦ ሥሉስ ቅዱስ መሐከነ፤ ኦ
 ሥሉስ ቅዱስ ተሣሃለነ''',
-    'fileId': '',
+    'fileId': 'o_silus_kidus_meharene',
     'meaning': '''ልዩ ሦስት ሆይ
 ማረን፤ ልዩ ሦስት ሆይ ራራልን፤ ልዩ
 ሦስት ሆይ ይቅር በለን'''
@@ -1284,7 +1277,7 @@ List<Map<String, dynamic>> oSilusKidusKidase = [
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ተንብሊ ወሰአሊ ኀበ
-ፍቁር ወልድ፡''',
+ፍቁር ወልድ''',
     'fileId': '',
     'meaning': '''ወደ ተወደደ ልጅሽ
 ለምኝልን አማልጅንም'''
@@ -1312,25 +1305,25 @@ List<Map<String, dynamic>> oSilusKidusKidase = [
   {
     'whoShouldSay': 'ይበል  ዲያቆን',
     'content': '''ተንሥኡ ለጸሎት፡፡''',
-    'fileId': '',
+    'fileId': tensiuLetselot,
     'meaning': '''ለጸሎት ተነሱ'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''እግዚኦ ተሣሀለነ''',
-    'fileId': '',
+    'fileId': egzioTesehalene,
     'meaning': '''አቤቱ ይቅር በለን'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰላም ለኵልክሙ''',
-    'fileId': '',
+    'fileId': selamLekulikimu,
     'meaning': '''ሰላም ለሁላችሁም'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': misleMenfesike,
     'meaning': '''ከመንፈስህ ጋራ'''
   },
   {
@@ -1349,7 +1342,7 @@ List<Map<String, dynamic>> oSilusKidusKidase = [
     'whoShouldSay': 'ይበል ዲያቆን',
     'content': '''ጸልዩ በእንተ
 ወንጌል ቅዱስ''',
-    'fileId': '',
+    'fileId': 'tseliyu_bente_wengel',
     'meaning': '''ክቡር ስለሚሆን
 ወንጌል ጸልዩ'''
   },
@@ -1357,7 +1350,7 @@ List<Map<String, dynamic>> oSilusKidusKidase = [
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ይረስየነ ድልዋነ
 ለሰሚዐ ወንጌል ቅዱስ፡፡''',
-    'fileId': '',
+    'fileId': 'yiresiyene_diliwane_lesemia_wengel_kidus',
     'meaning': '''የከበረ ወንጌልን
 ለመስማት የበቃን ያድርገን'''
   },
@@ -1442,8 +1435,8 @@ List<Map<String, dynamic>> oSilusKidusKidase = [
 ነው'''
   },
   {
-    'whoShouldSay': 'ይበል ካህን',
-    'content': '''ንፍቀ ኣእኵትዎ
+    'whoShouldSay': 'ይበል ካህን ንፍቅ',
+    'content': '''ኣእኵትዎ
 ለመንፈስ ቅዱስ''',
     'fileId': '',
     'meaning': '''መንፈስ ቅዱስን
@@ -1455,7 +1448,7 @@ List<Map<String, dynamic>> oSilusKidusKidase = [
 ወአጽምኡ ወንጌለ ቅዱስ፥ ዜናሁ
 ለእግዚእነ ወመድኃኒነ ኢየሱስ
 ክርስቶስ''',
-    'fileId': '',
+    'fileId': 'hale_luya_kumu_weamtsiu',
     'meaning': '''ሃሌሉያ! የጌታችን
 መድኃኒታችን ኢየሱስ ክርስቶስ
 የተናገረውን ክቡር የሚሆን
@@ -1465,14 +1458,14 @@ List<Map<String, dynamic>> oSilusKidusKidase = [
     'whoShouldSay': 'ይበል ካህን',
     'content': '''እግዚአብሔር ምስለ
 ኵልክሙ''',
-    'fileId': '',
+    'fileId': 'egziabher_misle_kulikimu',
     'meaning': '''እግዚአብሔር
 ከሁላችሁ ጋር ይሁን'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': 'misle_menfesike_3',
     'meaning': '''ከመንፈስህ ጋራ'''
   },
 ];
@@ -1484,7 +1477,7 @@ List<Map<String, dynamic>> wengelKidusKidase = [
 ወይም ማርቆስ
 ወይም ሉቃስ
 ወይም ዮሐንስ''',
-    'fileId': '',
+    'fileId': 'wengel_kidus_zezewene',
     'meaning': '''ክቡር የሚሆን ይህ
 ወንጌል ማቴዎስ የተናገረው
 የእግዚአብሔር ልጅ ቃል ነው::
@@ -1501,7 +1494,7 @@ List<Map<String, dynamic>> wengelKidusKidase = [
 ዘረድአነ ወየብቡ ለአምላከ ያዕቆብ
 ንሥኡ መዝሙረ ወሀቡ ከበሮ
 መዝሙር ሐዋዝ ዘምስለ መሰንቆ''',
-    'fileId': '',
+    'fileId': 'sibhat_leke_kirstos',
     'meaning': '''ይበሉ ሕዝብ ጌታዬ ፈጣሪዬ
 ክርስቶስ ሆይ! ሁልጊዜ ምስጋና
 ይገባሃል፡፡ ረዳት በሆነን በእግዚአብሔር
@@ -1516,7 +1509,7 @@ List<Map<String, dynamic>> wengelKidusKidase = [
     'content': '''በወንጌል መራህከነ ወበነቢያት
 ናዘዝከነ ዘለ ሊከ አቅረብከነ ስብሐት
 ለከ''',
-    'fileId': '',
+    'fileId': 'bewengel_merahkene',
     'meaning': '''በወንጌል መራኸል በነብያትም 
 አጽናናኸን ላንተ ላቀረብከን ምስጋና ይገባዋል'''
   },
@@ -1528,7 +1521,7 @@ List<Map<String, dynamic>> wengelKidusKidase = [
 ዘበአማን፥ ወነአምን መንፈሰ ቅዱሰ
 ዘበአማን፥ ህልወ ሥላሴሆሙ
 ነአምን''',
-    'fileId': '',
+    'fileId': 'neamin_ab_zebeaman',
     'meaning': '''አብን በእውነት
 እናምናለን፤ ወልድንም በእውነት
 እናምናለን፤ መንፈስ ቅዱስንም
@@ -1543,7 +1536,7 @@ List<Map<String, dynamic>> wengelKidusKidase = [
 እንዘ ይብሉ ቅዱስ ቅዱስ ቅዱስ
 አንተ እግዚአብሔር አብ ወወልድ
 ወመንፈስ ቅዱስ፡፡''',
-    'fileId': '',
+    'fileId': 'elu_kirubel_wesurafel',
     'meaning': '''እሊህ ኪሩቤል
 ሱራፌልም ለእርሱ ምስጋና
 ያቀርቡለታል፡፡ እንዲህ እያሉ÷
@@ -1565,7 +1558,7 @@ List<Map<String, dynamic>> wengelKidusKidase = [
 ንሴብሓከ ወንጸርሕ ኀቤከ እንዘ
 ንብል ቡሩክ አንተ እግዚኦ ኢየሱስ
 ክርስቶስ እስመ መጻእከ ወአድኀንከነ''',
-    'fileId': '',
+    'fileId': 'menu_yimesileke_emnine_amalikt',
     'meaning': '''አቤቱ ከአማልክት
 ወገን የሚመስልህ ማነው፤
 ተአምራትን የምታደርግ አንተ ነህ፤
@@ -1590,7 +1583,7 @@ List<Map<String, dynamic>> wengelKidusKidase = [
 ዋሕድ ለአቡሁ ቃለ አብ ሕያው
 ወቃል ማሕየዊ ቃለ እግዚአብሔር
 ተንሥአ ወሥጋሁኒ ኢማሰነ''',
-    'fileId': '',
+    'fileId': 'kedamihu_kal_wietu',
     'meaning': '''ቃል አስቀድሞ
 የነበረ፤ ያ ቃል የእግዚአብሔር ቃል
 ነው: ያ ቃል ሥጋ ሆነ፤ በኛም
@@ -1613,7 +1606,7 @@ List<Map<String, dynamic>> wengelKidusKidase = [
   },
   {
     'title':
-        'ቄሱም አንብቦ ከፈጸ በኋላ ቀሳውስቱና ዲያቆናቱ ከአሱም በኋላ ሕዝቡ ሁሉ ወንጌልን ይሳለሙ፡፡ በሚሳለሙበትም ጊዜ'
+        'ቄሱም አንብቦ ከፈጸ በኋላ ቀሳውስቱና ዲያቆናቱ ከእሱም በኋላ ሕዝቡ ሁሉ ወንጌልን ይሳለሙ፡፡ በሚሳለሙበትም ጊዜ'
   },
   {
     'whoShouldSay': 'ይበል ሕዝብ',
@@ -1632,7 +1625,7 @@ List<Map<String, dynamic>> wengelKidusKidase = [
   {
     'whoShouldSay': 'ይበል ዲያቆን',
     'content': '''ፃኡ ንኡሰ ክርስቲያን''',
-    'fileId': '',
+    'fileId': 'tsau_niuse_betekristian',
     'meaning': '''የክርስቲያን ታናናሾች በሰላም ሂዱ'''
   },
   {
@@ -1654,25 +1647,25 @@ List<Map<String, dynamic>> wengelKidusKidase = [
   {
     'whoShouldSay': 'ይበል  ዲያቆን',
     'content': '''ተንሥኡ ለጸሎት፡፡''',
-    'fileId': '',
+    'fileId': tensiuLetselot,
     'meaning': '''ለጸሎት ተነሱ'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''እግዚኦ ተሣሀለነ''',
-    'fileId': '',
+    'fileId': egzioTesehalene,
     'meaning': '''አቤቱ ይቅር በለን'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰላም ለኵልክሙ''',
-    'fileId': '',
+    'fileId': selamLekulikimu,
     'meaning': '''ሰላም ለሁላችሁም'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': misleMenfesike,
     'meaning': '''ከመንፈስህ ጋራ'''
   },
 ];
@@ -1699,7 +1692,7 @@ List<Map<String, dynamic>> tseliyuBenteBetekristianKidase = [
 ቤተ ክርስቲያን አሐቲ ቅድስት
 ጉባኤ እንተ ሐዋርያት ርትዕት በኀበ
 እግዚአብሔር''',
-    'fileId': '',
+    'fileId': 'tseliyu_bente_selame_betekristian',
     'meaning': '''ሐዋርያት
 ለሰበሰቡዋት በእግዚአብሔር ዘንድ
 ስለቀናች፥ ክብርት ስለምትሆን
@@ -1736,31 +1729,31 @@ List<Map<String, dynamic>> tseliyuBenteBetekristianKidase = [
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ኪርያላይሶን''',
-    'fileId': '',
+    'fileId': 'kiralayiso',
     'meaning': '''ኪርያላይሶን'''
   },
   {
     'whoShouldSay': 'ይበል  ዲያቆን',
     'content': '''ተንሥኡ ለጸሎት፡፡''',
-    'fileId': '',
+    'fileId': tensiuLetselot,
     'meaning': '''ለጸሎት ተነሱ'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''እግዚኦ ተሣሀለነ''',
-    'fileId': '',
+    'fileId': egzioTesehalene,
     'meaning': '''አቤቱ ይቅር በለን'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰላም ለኵልክሙ''',
-    'fileId': '',
+    'fileId': selamLekulikimu,
     'meaning': '''ሰላም ለሁላችሁም'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': misleMenfesike,
     'meaning': '''ከመንፈስህ ጋራ'''
   },
   {
@@ -1775,15 +1768,15 @@ List<Map<String, dynamic>> tseliyuBenteBetekristianKidase = [
     'meaning': ''''''
   },
   {
-    'whoShouldSay': 'ይበል ዲያቆን ንፍቀ',
+    'whoShouldSay': 'ይበል ዲያቆን ንፍቅ',
     'content': ''' ጸልዩ በእንተ
-ርዕሰ ሊቃነ ጳጳሳት አባ.......
+ርዕሰ ሊቃነ ጳጳሳት አባ............
 እግዚእነ ርእሰ ሊቃነ ጳጳሳት ዘሀገር
-ዐባይ......ወዲበ ርእሰ ሀገረ አበዊነ
+ዐባይ.........ወዲበ ርእሰ ሀገረ አበዊነ
 ብፁዕ ሊቀ ጳጳስ አባ ወኵሎሙ
 ኤጲስ ቆጶሳት ቀሳውስት
 ወዲያቆናት ርቱዓነ ሃይማኖት''',
-    'fileId': '',
+    'fileId': 'tseliyu_bente_riese_likane_papasat',
     'meaning': '''ብፁዕ
 ስለሚሆን ስለ ሊቀ ጳጳሳቱ ስለ አባ
 .......የደገኛዪቱ አገር ኢትዮጵያ
@@ -1815,25 +1808,25 @@ List<Map<String, dynamic>> tseliyuBenteBetekristianKidase = [
   {
     'whoShouldSay': 'ይበል  ዲያቆን',
     'content': '''ተንሥኡ ለጸሎት፡፡''',
-    'fileId': '',
+    'fileId': tensiuLetselot,
     'meaning': '''ለጸሎት ተነሱ'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''እግዚኦ ተሣሀለነ''',
-    'fileId': '',
+    'fileId': egzioTesehalene,
     'meaning': '''አቤቱ ይቅር በለን'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰላም ለኵልክሙ''',
-    'fileId': '',
+    'fileId': selamLekulikimu,
     'meaning': '''ሰላም ለሁላችሁም'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': misleMenfesike,
     'meaning': '''ከመንፈስህ ጋራ'''
   },
   {
@@ -1848,8 +1841,8 @@ List<Map<String, dynamic>> tseliyuBenteBetekristianKidase = [
     'whoShouldSay': 'ይበል ዲያቆን',
     'content': '''ጸልዩ በእንተ ዛቲ
 ቤተ ክርስቲያን ቅድስት ወማኅበርነ
-በውስቴታ:''',
-    'fileId': '',
+በውስቴታ''',
+    'fileId': 'tseliyu_behabe_zati_betekristian_kidist',
     'meaning': '''ክብር ስለምትሆን
 ስለዚች ቤተ ክርስቲያን፥ በውስጥ
 ዋም ስላለ አንድነታችንም ጸልዩ'''
@@ -1858,7 +1851,7 @@ List<Map<String, dynamic>> tseliyuBenteBetekristianKidase = [
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ማኅበረነ ባርከ ዕቀብ
 በሰላም''',
-    'fileId': '',
+    'fileId': 'mahiberene_barko_ekeb',
     'meaning': '''አንድነታችንን ባርክ
 በሰላም ጠብቅ'''
   },
@@ -1884,9 +1877,9 @@ List<Map<String, dynamic>> tseliyuBenteBetekristianKidase = [
   {
     'whoShouldSay': 'ይበል ዲያቆን',
     'content': '''ንበል ኵልነ በጥበበ
-እግዚአብሔር ጸሎተ ሃይማኖት፡''',
-    'fileId': '',
-    'meaning': ''' በእግዚአብሔር
+እግዚአብሔር አውሣኡ ጸሎተ ሃይማኖት፡''',
+    'fileId': 'nibel_kuline_betibebe',
+    'meaning': '''በእግዚአብሔር
 ጥበብ ሆነን ሁላችን የሃይማኖትን
 ጸሎት እንበል'''
   },
@@ -2034,25 +2027,25 @@ List<Map<String, dynamic>> yehawaryatAmenkiyuKidase = [
   {
     'whoShouldSay': 'ይበል  ዲያቆን',
     'content': '''ተንሥኡ ለጸሎት፡፡''',
-    'fileId': '',
+    'fileId': tensiuLetselot,
     'meaning': '''ለጸሎት ተነሱ'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''እግዚኦ ተሣሀለነ''',
-    'fileId': '',
+    'fileId': egzioTesehalene,
     'meaning': '''አቤቱ ይቅር በለን'''
   },
   {
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ሰላም ለኵልክሙ''',
-    'fileId': '',
+    'fileId': selamLekulikimu,
     'meaning': '''ሰላም ለሁላችሁም'''
   },
   {
     'whoShouldSay': 'ይበሉ ሕዝብ',
     'content': '''ምስለ መንፈስከ''',
-    'fileId': '',
+    'fileId': misleMenfesike,
     'meaning': '''ከመንፈስህ ጋራ'''
   },
 ];
@@ -2075,7 +2068,7 @@ List<Map<String, dynamic>> basliyosAmhaTselotKidase = [
     'content': '''ስብሐት
 ለእግዚአብሔር በሰማያት ወሰላም
 በምድር ሥምረቱ ለሰብእ''',
-    'fileId': '',
+    'fileId': 'sibhat_le_egziabher_besemayat_weselam_bemidr',
     'meaning': '''በሰማይ ለእግዚአብሔር ምስጋና ይገባዋል፤
 በምድርም ሰላም፥ የሰው ፈቃድ'''
   },
@@ -2093,17 +2086,17 @@ List<Map<String, dynamic>> basliyosAmhaTselotKidase = [
     'content': '''ጸልዩ በእንተ ሰላም
 ፍጽምት ወፍቅር ተአምኁ
 በበይናቲክሙ በአምኃ ቅድሳት''',
-    'fileId': '',
+    'fileId': 'tseliyu_bente_selam_fitsimt_wefkrt',
     'meaning': '''ፍጽምት ስለምትሆን
 ሰላምና ፍቅር ጸልዩ፥ እርስ በርሳችሁ
 በተለየች ሰላምታ እጅ ተነሳሱ'''
   },
   {
-    'whoShouldSay': '',
-    'content': '''ይበሉ ሕዝብ፦ ክርስቶስ አምላክነ
+    'whoShouldSay': 'ይበሉ ሕዝብ',
+    'content': '''ክርስቶስ አምላክነ
 ረስየነ ድልዋነ ከመ ንትአማኅ
 በበይናቲነ በአምኃ ቅድሳት''',
-    'fileId': '',
+    'fileId': 'kirstos_amlakine_yiresiyene',
     'meaning': ''' ፈጣሪያችን ክርስቶስ
 ሆይ! እርስ በርሳችን በከበረች
 ሰላምታ እጅ እንነሳሳ ዘንድ የበቃን
@@ -2113,7 +2106,6 @@ List<Map<String, dynamic>> basliyosAmhaTselotKidase = [
     'whoShouldSay': 'ይበል ካህን',
     'content': '''ክብርት ከምትሆን ስጦታህ ሳይፈረድብን እንቀበል፤ ይህችው÷
 የማታልፍ ሰማያዊት ናት፤ በጌታችን በኢየሱስ ክርስቶስ
-
 በርሱ ያለ ክብር ጽንዕ ከርሱ ጋራ ከመንፈስ ቅዱስም ጋራ ለአንተ
 ይገባል ዛሬም ዘወትርም ለዘላለሙ አሜን፨''',
     'fileId': '',

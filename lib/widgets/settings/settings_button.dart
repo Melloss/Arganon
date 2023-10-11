@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../helper/helper.dart' show ColorPallet, screenWidth;
 import '../../controllers/database_controller.dart';
 
+// ignore: must_be_immutable
 class SettingsButton extends StatelessWidget with ColorPallet {
   final String text;
   final Function() onPressed;

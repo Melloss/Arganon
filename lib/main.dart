@@ -65,7 +65,7 @@ class _ArganonState extends State<Arganon> with ColorPallet, Constants {
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-              color: backgroudColor!,
+              color: backgroudColor,
             )),
         filled: true,
       ),

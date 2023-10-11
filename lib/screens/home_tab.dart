@@ -199,7 +199,7 @@ class _HomeState extends State<Home>
               : RefreshIndicator(
                   onRefresh: refreshHandler,
                   backgroundColor: blurWhite,
-                  color: foregroundColor,
+                  color: databaseController.settings.foregroundColor!.value,
                   strokeWidth: 2,
                   child: ListView.builder(
                     controller: scrollController,
@@ -274,10 +274,10 @@ class _HomeState extends State<Home>
                     Visibility(
                       visible: mezmurController.currentPlayingMezmurIndex != -1,
                       child: Container(
-                          width: 45,
-                          height: 30,
+                          width: 50,
+                          height: 35,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(20),
                               image: DecorationImage(
                                 alignment: Alignment.topCenter,
                                 image: AssetImage(mezmurController
@@ -291,9 +291,6 @@ class _HomeState extends State<Home>
                                 fit: BoxFit.cover,
                               ))),
                     ),
-                    /*
- 
-                    */
                     TextButton(
                       onPressed: () {
                         Get.to(() => MezmurScreen(

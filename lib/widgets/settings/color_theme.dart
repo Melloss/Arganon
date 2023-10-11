@@ -47,7 +47,6 @@ class _ColorThemeState extends State<ColorTheme> with ColorPallet {
                 Get.back();
               },
               child: Container(
-                padding: const EdgeInsets.all(2),
                 decoration: BoxDecoration(
                     color: uiController.selectedColorTheme.value == widget.index
                         ? mezmurScreenColor.withOpacity(0.7)

@@ -18,6 +18,7 @@ class MezmurController extends GetxController with ColorPallet {
 
   AudioPlayer player = AudioPlayer();
   int currentPlayingMezmurIndex = -1;
+  RxString currentPlayingKidaseFileId = ''.obs;
 
   Duration mezmurDuration = const Duration(seconds: 0);
   Duration mezmurPosition = const Duration(seconds: 0);
