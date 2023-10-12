@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../widgets/widgets.dart' show KidaseTitle, KidaseContent;
 import '../helper/helper.dart' show ColorPallet, Constants, screenHeight;
 import '../controllers/database_controller.dart';
+import '../controllers/mezmur_controller.dart';
 
 class KidaseScreen extends StatefulWidget {
   final List<Map<String, dynamic>> kidaseList;
@@ -15,35 +16,48 @@ class KidaseScreen extends StatefulWidget {
 class _KidaseScreenState extends State<KidaseScreen>
     with ColorPallet, Constants {
   DatabaseController databaseController = Get.find();
+  MezmurController mezmurController = Get.find();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              alignment: Alignment.topCenter,
-              image: AssetImage(kidaseImage),
-              fit: BoxFit.cover,
-            )),
-          ),
-          _buildBackgroundOverlay(),
-          _buildKidase(),
-          Positioned(
-              top: 40,
-              left: 0,
-              child: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const Icon(
-                  Icons.keyboard_arrow_left,
-                  color: Colors.white,
-                ),
+    return WillPopScope(
+      onWillPop: () async {
+        if (mezmurController.isPlaying.value == true) {
+          await mezmurController.player.stop();
+        }
+        return true;
+      },
+      child: Scaffold(
+        body: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                alignment: Alignment.topCenter,
+                image: AssetImage(kidaseImage),
+                fit: BoxFit.cover,
               )),
-        ],
+            ),
+            _buildBackgroundOverlay(),
+            _buildKidase(),
+            Positioned(
+                top: 40,
+                left: 0,
+                child: IconButton(
+                  onPressed: () async {
+                    if (mezmurController.isPlaying.value == true) {
+                      await mezmurController.player.stop();
+                    }
+                    Get.back();
+                  },
+                  icon: const Icon(
+                    Icons.keyboard_arrow_left,
+                    color: Colors.white,
+                  ),
+                )),
+          ],
+        ),
       ),
     );
   }

@@ -166,15 +166,11 @@ class _MezmurScreenState extends State<MezmurScreen>
     try {
       removeNewMezmurCatagory();
       if (widget.index != mezmurController.currentPlayingMezmurIndex) {
-        //await mezmurController.player.stop();
-        await mezmurController.player.release();
+        mezmurController.isPlaying.value = false;
       }
       mezmurController.currentPlayingMezmurIndex = widget.index;
       if (mezmurController.isPlaying.value) {
-        if (mounted) {
-          mezmurController.isPlaying.value = false;
-        }
-
+        mezmurController.isPlaying.value = false;
         await mezmurController.player.pause();
       } else {
         if (mounted) {
@@ -448,7 +444,8 @@ class _MezmurScreenState extends State<MezmurScreen>
               BoxShadow(
                 blurRadius: 5,
                 spreadRadius: 3,
-                color: mezmurScreenColor.withOpacity(0.5),
+                color: databaseController.settings.mezmurColor!.value
+                    .withOpacity(0.5),
               )
             ],
             color: databaseController.settings.backgroundColor!.value,

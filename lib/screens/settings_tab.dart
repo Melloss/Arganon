@@ -28,9 +28,9 @@ class _SettingsTabState extends State<SettingsTab> with ColorPallet {
 የዳዊት መሰንቆ የእስራኤል መና
 የናሆም መድሃኒት ንኢ በደመና /2/
     ''';
-
   bool showCarousel = true;
   bool showSampleMezmur = false;
+  bool showSampleKidase = false;
 
   resetHandler() async {
     const forgrounColorSettings = 'forgroundColorSettings';
@@ -96,56 +96,52 @@ class _SettingsTabState extends State<SettingsTab> with ColorPallet {
                 AlertDialog(
                   actionsAlignment: MainAxisAlignment.center,
                   backgroundColor: blurWhite,
-                  contentPadding: const EdgeInsets.all(10),
+                  contentPadding: EdgeInsets.zero,
                   actionsPadding: EdgeInsets.zero,
-                  content: SizedBox(
-                    width: screenWidth(context) * 0.9,
-                    height: 250,
-                    child: Wrap(children: [
-                      ColorTheme(
-                        index: 0,
-                        foregroundColor: foregroundColor,
-                        backgroundColor: backgroudColor,
-                        mezmurColor: mezmurScreenColor,
-                        title: 'Default',
-                      ),
-                      const ColorTheme(
-                        index: 1,
-                        foregroundColor: Color(0XFF35A29F),
-                        backgroundColor: Color(0xFF088395),
-                        mezmurColor: Color(0xFF26577C),
-                        title: 'theme 1',
-                      ),
-                      const ColorTheme(
-                        index: 2,
-                        foregroundColor: Color(0xFFAE445A),
-                        backgroundColor: Color(0xFF662549),
-                        mezmurColor: Color(0XFF451952),
-                        title: 'theme 2',
-                      ),
-                      const ColorTheme(
-                        index: 3,
-                        foregroundColor: Color(0xFFA78295),
-                        backgroundColor: Color(0xFF5C5470),
-                        mezmurColor: Color(0xFF352F44),
-                        title: 'theme 3',
-                      ),
-                      const ColorTheme(
-                        index: 4,
-                        foregroundColor: Color(0xFF526D82),
-                        backgroundColor: Color(0XFF474E68),
-                        mezmurColor: Color(0xFF404258),
-                        title: 'theme 4',
-                      ),
-                      const ColorTheme(
-                        index: 5,
-                        foregroundColor: Color(0xFF7D7C7C),
-                        backgroundColor: Color(0xFF393E46),
-                        mezmurColor: Color(0xFF222831),
-                        title: 'theme 5',
-                      ),
-                    ]),
-                  ),
+                  content: Wrap(alignment: WrapAlignment.center, children: [
+                    ColorTheme(
+                      index: 0,
+                      foregroundColor: foregroundColor,
+                      backgroundColor: backgroudColor,
+                      mezmurColor: mezmurScreenColor,
+                      title: 'የተለመደ',
+                    ),
+                    const ColorTheme(
+                      index: 1,
+                      foregroundColor: Color(0XFF35A29F),
+                      backgroundColor: Color(0xFF088395),
+                      mezmurColor: Color(0xFF26577C),
+                      title: 'ሎሚ',
+                    ),
+                    const ColorTheme(
+                      index: 2,
+                      foregroundColor: Color(0xFFAE445A),
+                      backgroundColor: Color(0xFF662549),
+                      mezmurColor: Color(0XFF451952),
+                      title: 'ቀይ ስር',
+                    ),
+                    const ColorTheme(
+                      index: 3,
+                      foregroundColor: Color(0xFFA78295),
+                      backgroundColor: Color(0xFF5C5470),
+                      mezmurColor: Color(0xFF352F44),
+                      title: 'ቡና',
+                    ),
+                    const ColorTheme(
+                      index: 4,
+                      foregroundColor: Color(0xFF526D82),
+                      backgroundColor: Color(0XFF474E68),
+                      mezmurColor: Color(0xFF404258),
+                      title: 'ሽሮ',
+                    ),
+                    const ColorTheme(
+                      index: 5,
+                      foregroundColor: Color(0xFF7D7C7C),
+                      backgroundColor: Color(0xFF393E46),
+                      mezmurColor: Color(0xFF222831),
+                      title: 'ማታ',
+                    ),
+                  ]),
                 ),
               );
             },
@@ -171,12 +167,15 @@ class _SettingsTabState extends State<SettingsTab> with ColorPallet {
             ),
           ),
           Expanded(child: Container()),
-          SettingsButton(
-            text: 'ስለ',
-            onPressed: () async {
-              await uiController.flipCardController.toggleCard();
-            },
-            icon: Bootstrap.info,
+          Visibility(
+            visible: !showSampleMezmur,
+            child: SettingsButton(
+              text: 'ስለ',
+              onPressed: () async {
+                await uiController.flipCardController.toggleCard();
+              },
+              icon: Bootstrap.info,
+            ),
           ),
         ],
       ),

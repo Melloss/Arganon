@@ -86,6 +86,9 @@ class _KidaseTabState extends State<KidaseTab> with ColorPallet {
                       title: 'ወንጌል ቅዱስ ዘዜነወ ጀምሮ',
                       kidaseList: wengelKidusKidase),
                   _buildKidaseTile(
+                      title: 'ጸልዩ በእንተ ሰላመ ቤተ ክርስቲያን ጀምሮ',
+                      kidaseList: tseliyuBenteBetekristianKidase),
+                  _buildKidaseTile(
                       title: 'ከሐዋርያትን አመንክዩ ጀምሮ',
                       kidaseList: yehawaryatAmenkiyuKidase),
                   _buildKidaseTile(

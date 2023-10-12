@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
+import 'package:get/get.dart';
+import 'package:audioplayers/audioplayers.dart';
+import '../../controllers/mezmur_controller.dart';
 import '../../helper/helper.dart' show ColorPallet;
 
 class KidaseContent extends StatefulWidget {
@@ -21,6 +23,66 @@ class KidaseContent extends StatefulWidget {
 }
 
 class _KidaseContentState extends State<KidaseContent> with ColorPallet {
+  MezmurController mezmurController = Get.find();
+  bool isPlaying = false;
+  bool showSliderThumb = false;
+
+  playButtonHandler() async {
+    if (mezmurController.currentPlayingKidaseFileId.value != widget.fileId) {
+      setState(() {
+        isPlaying = false;
+      });
+    }
+    mezmurController.currentPlayingKidaseFileId.value = widget.fileId;
+
+    if (isPlaying == false) {
+      await mezmurController.player
+          .play(AssetSource('kidase/${widget.fileId}.mp3'));
+      setState(() {
+        isPlaying = true;
+      });
+      mezmurController.isPlaying.value = true;
+    } else {
+      await mezmurController.player.pause();
+      setState(() {
+        isPlaying = false;
+      });
+      mezmurController.isPlaying.value = false;
+    }
+  }
+
+  @override
+  void initState() {
+    mezmurController.player.onPositionChanged.listen((Duration position) {
+      if (mounted) {
+        setState(() {
+          mezmurController.mezmurPosition = position;
+        });
+      }
+    });
+
+    mezmurController.player.onDurationChanged.listen((Duration? duration) {
+      if (mounted) {
+        setState(() {
+          mezmurController.mezmurDuration = duration!;
+        });
+      }
+    });
+
+    mezmurController.player.onPlayerComplete.listen((event) async {
+      await mezmurController.player.stop();
+      if (mounted) {
+        setState(() {
+          mezmurController.mezmurDuration = Duration.zero;
+          mezmurController.mezmurPosition = Duration.zero;
+          isPlaying = false;
+        });
+      }
+      mezmurController.isPlaying.value = false;
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,7 +115,7 @@ class _KidaseContentState extends State<KidaseContent> with ColorPallet {
                               .copyWith(
                                 fontSize: widget.meaning == '' &&
                                         widget.isAmharic == false
-                                    ? 11.5
+                                    ? 13
                                     : 17,
                                 color: Colors.white,
                               ),
@@ -63,17 +125,62 @@ class _KidaseContentState extends State<KidaseContent> with ColorPallet {
               )),
               Expanded(child: Container()),
               Visibility(
-                visible: widget.meaning != '' && widget.isAmharic == false,
+                visible: widget.meaning != '' &&
+                    widget.isAmharic == false &&
+                    widget.fileId.isNotEmpty,
                 child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.play_circle,
-                    size: 30,
-                    color: Colors.white,
+                  onPressed: playButtonHandler,
+                  icon: Obx(
+                    () => Icon(
+                      mezmurController.currentPlayingKidaseFileId.value ==
+                                  widget.fileId &&
+                              isPlaying == true
+                          ? Icons.pause_circle
+                          : Icons.play_circle,
+                      size: 30,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ],
+          ),
+          Obx(
+            () => Visibility(
+              visible: mezmurController.currentPlayingKidaseFileId.value ==
+                      widget.fileId &&
+                  isPlaying == true,
+              child: SliderTheme(
+                data: Theme.of(context).sliderTheme.copyWith(
+                    trackShape: const RoundedRectSliderTrackShape(),
+                    trackHeight: 2,
+                    thumbShape: showSliderThumb == true
+                        ? null
+                        : SliderComponentShape.noThumb),
+                child: Slider(
+                  onChangeStart: (positon) {
+                    if (mounted) {
+                      setState(() {
+                        showSliderThumb = true;
+                      });
+                    }
+                  },
+                  onChangeEnd: (p) {
+                    if (mounted) {
+                      setState(() {
+                        showSliderThumb = false;
+                      });
+                    }
+                  },
+                  max: mezmurController.mezmurDuration.inSeconds.toDouble(),
+                  value: mezmurController.mezmurPosition.inSeconds.toDouble(),
+                  onChanged: (value) async {
+                    Duration newDuration = Duration(seconds: value.toInt());
+                    await mezmurController.player.seek(newDuration);
+                  },
+                ),
+              ),
+            ),
           ),
           Visibility(
             visible: widget.meaning.isNotEmpty,
@@ -97,7 +204,7 @@ class _KidaseContentState extends State<KidaseContent> with ColorPallet {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
