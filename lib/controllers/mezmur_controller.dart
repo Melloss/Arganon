@@ -61,7 +61,7 @@ class MezmurController extends GetxController with ColorPallet {
 
   generateRandomMezmurs() {
     Set<int> randomNumbers = {};
-    for (int i = 0; randomNumbers.length < 5; i++) {
+    for (int i = 0; randomNumbers.length < 7; i++) {
       randomNumbers.add(Random().nextInt(mezmurList.length));
     }
     randomMezmurs = randomNumbers;

@@ -115,6 +115,7 @@ class _CatagoryTabState extends State<CatagoryTab> with Constants {
             path: kidusPawlosImage,
             name: 'የቅዱስ ጳውሎስ',
             catagoryName: kidusPawlosCatagory,
+            alignment: const Alignment(0, -0.7),
           ),
           CatagoryTile(
             path: kidusMerkoryosImage,

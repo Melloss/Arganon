@@ -24,6 +24,8 @@ class _CarouselState extends State<Carousel> with ColorPallet {
   String image3 = '';
   String image4 = '';
   String image5 = '';
+  String image6 = '';
+  String image7 = '';
 
   List mezmurTitles = [];
   @override
@@ -33,12 +35,16 @@ class _CarouselState extends State<Carousel> with ColorPallet {
     image3 = mezmurController.mezmurList[widget.mezmurs.elementAt(2)].image;
     image4 = mezmurController.mezmurList[widget.mezmurs.elementAt(3)].image;
     image5 = mezmurController.mezmurList[widget.mezmurs.elementAt(4)].image;
+    image6 = mezmurController.mezmurList[widget.mezmurs.elementAt(5)].image;
+    image7 = mezmurController.mezmurList[widget.mezmurs.elementAt(6)].image;
     mezmurTitles = [
       mezmurController.mezmurList[widget.mezmurs.elementAt(0)].title,
       mezmurController.mezmurList[widget.mezmurs.elementAt(1)].title,
       mezmurController.mezmurList[widget.mezmurs.elementAt(2)].title,
       mezmurController.mezmurList[widget.mezmurs.elementAt(3)].title,
       mezmurController.mezmurList[widget.mezmurs.elementAt(4)].title,
+      mezmurController.mezmurList[widget.mezmurs.elementAt(5)].title,
+      mezmurController.mezmurList[widget.mezmurs.elementAt(6)].title,
     ];
     super.initState();
   }
@@ -68,6 +74,8 @@ class _CarouselState extends State<Carousel> with ColorPallet {
                 _buildSlider(image3),
                 _buildSlider(image4),
                 _buildSlider(image5),
+                _buildSlider(image6),
+                _buildSlider(image7),
               ],
               options: CarouselOptions(
                   autoPlayAnimationDuration: const Duration(seconds: 3),
@@ -131,6 +139,8 @@ class _CarouselState extends State<Carousel> with ColorPallet {
         _buildBullet(2),
         _buildBullet(3),
         _buildBullet(4),
+        _buildBullet(5),
+        _buildBullet(6),
       ],
     );
   }

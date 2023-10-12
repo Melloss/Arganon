@@ -4,7 +4,7 @@ const selamLekulikimu = 'selam_lekulikimu';
 const misleMenfesike = 'mislemenfesike';
 
 List<Map<String, dynamic>> eminebehaKidase = [
-  {'title': 'ከሰኞ አሰከ ዓርብ ባሉት ቀኖች ዘወትር የሚባል'},
+  {'title': 'ከሰኞ ፣ ማክሰኞ እና ሐሙስ የሚባል'},
   {
     'whoShouldSay': '',
     'content': '''እምነ በሐ፥ ቅድስት ቤተክርስቲያን፥
@@ -18,7 +18,7 @@ List<Map<String, dynamic>> eminebehaKidase = [
 የተጌጡ ናቸው፤ ሰላም ላንቺ ይሁን!
 እናታችን ክብርት ቤተ ክርስቲያን፡፡''',
   },
-  {'title': 'ቅዳሜ የሚባል'},
+  {'title': 'ረቡዕ ፣ አርብ እና ቅዳሜ የሚባል'},
   {
     'whoShouldSay': '',
     'content': '''መስቀል አብርሃ! በከዋክብት
@@ -31,7 +31,7 @@ List<Map<String, dynamic>> eminebehaKidase = [
 አሳየ መስቀል አበራ በኮከቦች
 ሰማይን አስጌጠ''',
   },
-  {'title': 'በዕለተ አሁድ የሚባል'},
+  {'title': 'በዕለተ ሰንበት የሚባል'},
   {
     'whoShouldSay': '',
     'content': '''ኵሉ ዘገብራ ለጽድቅ ጻድቅ
