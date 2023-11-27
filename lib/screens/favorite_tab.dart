@@ -1,4 +1,4 @@
-import 'package:arganon/helper/helper.dart';
+import 'package:arganon/utilities/utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../widgets/widgets.dart' show MezmurTile;

@@ -1,11 +1,13 @@
+import 'dart:io';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'dart:io';
+
 import '../screens/favorite_tab.dart';
-import '../helper/helper.dart' show screenWidth, ColorPallet;
+import '../utilities/utilities.dart' show screenWidth, ColorPallet;
 import '../widgets/widgets.dart' show Carousel, MezmurTile;
 import './catagory_tab.dart';
 import '../controllers/mezmur_controller.dart';
@@ -43,7 +45,6 @@ class _HomeState extends State<Home>
   @override
   void initState() {
     tabController = TabController(length: 5, vsync: this);
-
     scrollController.addListener(() {
       if (scrollController.offset == scrollController.initialScrollOffset) {
         setState(() {
@@ -55,6 +56,7 @@ class _HomeState extends State<Home>
         });
       }
     });
+
     super.initState();
   }
 

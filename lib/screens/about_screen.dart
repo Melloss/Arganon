@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
-import '../helper/helper.dart' show ColorPallet;
+import '../utilities/utilities.dart' show ColorPallet;
 import '../controllers/ui_controller.dart';
 import '../controllers/database_controller.dart';
 

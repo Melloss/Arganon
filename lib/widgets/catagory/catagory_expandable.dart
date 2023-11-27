@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import './catagory_tile.dart';
-import '../../helper/helper.dart' show ColorPallet;
+import '../../utilities/utilities.dart' show ColorPallet;
 import '../../controllers/database_controller.dart';
 
 class CatagoryExpandable extends StatefulWidget {

@@ -1,9 +1,12 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import './screens/home_tab.dart';
-import './helper/helper.dart' show ColorPallet, Constants, initControllers;
+import './services/authentication.dart';
+import './utilities/utilities.dart'
+    show ColorPallet, Constants, initControllers;
 import './controllers/database_controller.dart';
 import './screens/catagory_list_display.dart';
 import './controllers/mezmur_controller.dart';
@@ -19,10 +22,16 @@ class Arganon extends StatefulWidget {
 
 class _ArganonState extends State<Arganon> with ColorPallet, Constants {
   DatabaseController databaseController = Get.find();
+
   @override
   void initState() {
     backgroudColor = databaseController.settings.backgroundColor!.value;
     foregroundColor = databaseController.settings.foregroundColor!.value;
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      if (result != ConnectivityResult.none) {
+        Authentication.anonymousSignin();
+      }
+    });
     super.initState();
   }
 

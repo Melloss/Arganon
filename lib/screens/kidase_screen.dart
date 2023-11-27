@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../widgets/widgets.dart' show KidaseTitle, KidaseContent;
-import '../helper/helper.dart' show ColorPallet, Constants, screenHeight;
+import '../utilities/utilities.dart' show ColorPallet, Constants, screenHeight;
 import '../controllers/database_controller.dart';
 import '../controllers/mezmur_controller.dart';
 

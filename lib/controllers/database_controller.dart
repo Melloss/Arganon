@@ -5,8 +5,9 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' show join;
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import './mezmur_controller.dart';
-import '../helper/helper.dart' show ColorPallet;
+import '../utilities/utilities.dart' show ColorPallet;
 import '../models/mezmurs.dart' show Mezmur, initMezmurs;
 import '../models/mezmurs_file_id.dart' show fileUniqueAddress;
 import '../models/settings.dart';

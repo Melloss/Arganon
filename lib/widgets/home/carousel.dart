@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
-import '../../helper/helper.dart' show ColorPallet;
+import '../../utilities/utilities.dart' show ColorPallet;
 import '../../controllers/mezmur_controller.dart';
 import '../../screens/mezmur_screen.dart';
 import '../../controllers/database_controller.dart';

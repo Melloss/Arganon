@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:get/get.dart';
-import '../../helper/helper.dart' show ColorPallet, screenWidth;
+import '../../utilities/utilities.dart' show ColorPallet, screenWidth;
 import '../../controllers/database_controller.dart';
 
 // ignore: must_be_immutable

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../widgets/widgets.dart' show SettingsButton, ColorTheme;
-import '../helper/helper.dart' show ColorPallet, screenWidth;
+import '../utilities/utilities.dart' show ColorPallet, screenWidth;
 import '../screens/about_screen.dart';
 import '../controllers/ui_controller.dart';
 import '../controllers/database_controller.dart';

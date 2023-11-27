@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../helper/helper.dart' show ColorPallet, Constants;
+import '../utilities/utilities.dart' show ColorPallet, Constants;
 import '../controllers/mezmur_controller.dart';
 import '../widgets/widgets.dart' show MezmurTile;
 import '../controllers/database_controller.dart';

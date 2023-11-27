@@ -1,7 +1,7 @@
-import 'package:arganon/helper/helper.dart';
+import 'package:arganon/utilities/utilities.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widgets.dart' show CatagoryExpandable, CatagoryTile;
-import '../helper/helper.dart' show Constants;
+import '../utilities/utilities.dart' show Constants;
 
 class CatagoryTab extends StatefulWidget {
   const CatagoryTab({super.key});

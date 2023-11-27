@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:math' show Random;
 import 'dart:convert' show json;
-import '../helper/helper.dart' show ColorPallet;
+import '../utilities/utilities.dart' show ColorPallet;
 import '../models/mezmurs.dart';
 import '../models/mezmurs_file_id.dart';
 import 'package:audioplayers/audioplayers.dart';

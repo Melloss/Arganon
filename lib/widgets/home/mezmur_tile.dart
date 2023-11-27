@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../helper/helper.dart' show ColorPallet, screenWidth, Constants;
+import '../../utilities/utilities.dart'
+    show ColorPallet, screenWidth, Constants;
 import '../../controllers/mezmur_controller.dart';
 import '../../screens/mezmur_screen_scroller.dart';
 import '../../controllers/database_controller.dart';

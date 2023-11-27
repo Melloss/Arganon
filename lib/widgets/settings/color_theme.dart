@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../helper/helper.dart' show ColorPallet;
+import '../../utilities/utilities.dart' show ColorPallet;
 import '../../controllers/ui_controller.dart';
 
 class ColorTheme extends StatefulWidget {

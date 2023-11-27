@@ -3,7 +3,7 @@ import '../screens/mezmur_screen.dart';
 import 'package:get/get.dart';
 import '../controllers/mezmur_controller.dart';
 import '../controllers/ui_controller.dart';
-import '../helper/helper.dart' show Constants;
+import '../utilities/utilities.dart' show Constants;
 
 class MezmurScreenScroller extends StatefulWidget {
   final String from;

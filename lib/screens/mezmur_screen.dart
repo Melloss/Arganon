@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'dart:io';
-import '../helper/helper.dart'
+import '../utilities/utilities.dart'
     show Constants, ColorPallet, screenHeight, screenWidth;
 import '../controllers/mezmur_controller.dart';
 import '../controllers/database_controller.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../helper/helper.dart' show Constants;
+import '../../utilities/utilities.dart' show Constants;
 
 class CatagoryTile extends StatelessWidget with Constants {
   final String name;

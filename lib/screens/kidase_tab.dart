@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import './kidase_screen.dart';
-import '../helper/helper.dart' show ColorPallet, screenWidth;
+import '../utilities/utilities.dart' show ColorPallet, screenWidth;
 import '../models/kidase.dart';
 import '../controllers/database_controller.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../../controllers/mezmur_controller.dart';
-import '../../helper/helper.dart' show ColorPallet;
+import '../../utilities/utilities.dart' show ColorPallet;
 
 class KidaseContent extends StatefulWidget {
   final String content;
@@ -34,13 +34,18 @@ class _KidaseContentState extends State<KidaseContent> with ColorPallet {
       });
     }
     mezmurController.currentPlayingKidaseFileId.value = widget.fileId;
+    await mezmurController.player.setReleaseMode(ReleaseMode.loop);
 
     if (isPlaying == false) {
-      await mezmurController.player
-          .play(AssetSource('kidase/${widget.fileId}.mp3'));
+      await mezmurController.player.play(
+        AssetSource(
+          'kidase/${widget.fileId}.mp3',
+        ),
+      );
       setState(() {
         isPlaying = true;
       });
+
       mezmurController.isPlaying.value = true;
     } else {
       await mezmurController.player.pause();
@@ -69,17 +74,17 @@ class _KidaseContentState extends State<KidaseContent> with ColorPallet {
       }
     });
 
-    mezmurController.player.onPlayerComplete.listen((event) async {
-      await mezmurController.player.stop();
-      if (mounted) {
-        setState(() {
-          mezmurController.mezmurDuration = Duration.zero;
-          mezmurController.mezmurPosition = Duration.zero;
-          isPlaying = false;
-        });
-      }
-      mezmurController.isPlaying.value = false;
-    });
+    // mezmurController.player.onPlayerComplete.listen((event) async {
+    //   await mezmurController.player.stop();
+    //   if (mounted) {
+    //     setState(() {
+    //       mezmurController.mezmurDuration = Duration.zero;
+    //       mezmurController.mezmurPosition = Duration.zero;
+    //       isPlaying = false;
+    //     });
+    //   }
+    //   mezmurController.isPlaying.value = false;
+    // });
     super.initState();
   }
 
