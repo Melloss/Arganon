@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:math' show Random;
@@ -9,19 +10,21 @@ import 'package:audioplayers/audioplayers.dart';
 
 class MezmurController extends GetxController with ColorPallet {
   List<Mezmur> mezmurList = [];
-
   List favoriteMezmurIndexs = [];
-  Set randomMezmurs = {};
   List searchedMezmurs = [];
+
+  Set randomMezmurs = {};
   String mezmursUrl =
       'https://arganon-53673-default-rtdb.firebaseio.com/mezmurs.json';
+  RxString currentPlayingKidaseFileId = ''.obs;
 
   AudioPlayer player = AudioPlayer();
+
   int currentPlayingMezmurIndex = -1;
-  RxString currentPlayingKidaseFileId = ''.obs;
 
   Duration mezmurDuration = const Duration(seconds: 0);
   Duration mezmurPosition = const Duration(seconds: 0);
+
   RxBool fromFile = false.obs;
   RxBool isPlaying = false.obs;
   RxBool showPlayerController = false.obs;
@@ -66,40 +69,67 @@ class MezmurController extends GetxController with ColorPallet {
     }
     randomMezmurs = randomNumbers;
   }
+  /*
+
+          'id': 64,
+          'fileId': '1X3p6UemykNuTqThkxoBV_u76lgGDdMGo',
+          'title': 'እመቤቴ የአምላክ እናት',
+          'lyrics': '''እመቤቴ የአምላክ እናት
+ላመስግንሽ ቀን ከሌሊት
+ለልጅሽም ክብር ውዳሴ
+ታቀርባለች ዘውትር ነፍሴ /2/
+    ልቤ ተነሣሣ ተቀኘ ለክብርሽ
+    በፍፁም ትህትና ሊያመሰግንሽ
+    ጽዮን መጠጊያ ነሽ የአብርሃም ድንኳን
+    የታጠረች ተክል እመብርሃን
+የለመለመች መስክ አምላክ የመረጣት
+የጽላቱ ኪዳን ታቦቱ ድንግል ናት
+የሰማይ የምድር ንግስት ናትና
+ክብር ይገባታል ዘውትር ጠዋት ማታ
+    አደራሽን ማርያም የሁሉ እናት
+    በምልጃሽ አስቢኝ ኃላ ስራቆት
+    ያንን የእሳት ባህር አሻግሪኝ ድንግል ሆይ
+    እንዳልወድቅ እንዳሞት ከቶ እንዳላይ ስቃይ''',
+          'image': emebetachinImage1,
+          'catagory': [
+            emebetachinCatagory,
+            adadisMezmursCatagory,
+          ]
+        }
+
+  */
 
 //https://arganon-53673-default-rtdb.firebaseio.com/
   postAllMezmursToFirebase() async {
     try {
-      await http.post(Uri.parse(mezmursUrl),
-          body: json.encode({
-            'id': mezmurList.length,
-            'fileId': fileUniqueAddress[mezmurList.length],
-            'title': 'አማኑኤል ተመስገን',
-            'lyrics': '''አማን በአማን /2/
-አማኑኤል ተመስገን /2/
-ለዚህ ፍቅርህ ምን ልክፈል /2/
-    ድብቁን ሃጢያት አንተ ብትገልጠው
-    ይቅር ብለኸኝ ባትሸፋፍነው
-    እንደሰው በቀል ቢኖርህ ጌታ
-    ለእኔ ሃጢያትስ የለውም ቦታ
-በየደቂቃው ሃጢያት ስሰራ
-ስሰርቅ ስበድል አንተን ሳልፈራ
-አንተ ግን ፊትህ ምንም ቢቀየም
-በቁጣህ በትር አልገረፍከኝም
-    ምህረትህን ልከህ አድነኝ ዛሬ
-    ታክቶኛልና በሃጢያት መኖሬ
-    ዓለም በሃጢያት እየሳበችኝ
-    በፍቅርህ በደስታ መኖር አቃተኝ
-የሃጢያት ጉዞ ጣፋጭ ቢመስልም
-ውጤቱ መሮ ፍጹም አይጥምም
-እንደ በደሌ ስላልከፈልከኝ
-ተመስገን እንጂ ሌላ ምን አለኝ''',
-            'image': medhanealemImage,
-            'catagory': [
-              medhanealemCatagory,
-              adadisMezmursCatagory,
-            ]
-          }));
+      DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+
+      await databaseReference.child('mezmurs/63').set({
+        'id': 63,
+        'fileId': '1X3p6UemykNuTqThkxoBV_u76lgGDdMGo',
+        'title': 'እመቤቴ የአምላክ እናት',
+        'lyrics': '''እመቤቴ የአምላክ እናት
+ላመስግንሽ ቀን ከሌሊት
+ለልጅሽም ክብር ውዳሴ
+ታቀርባለች ዘውትር ነፍሴ /2/
+    ልቤ ተነሣሣ ተቀኘ ለክብርሽ
+    በፍፁም ትህትና ሊያመሰግንሽ
+    ጽዮን መጠጊያ ነሽ የአብርሃም ድንኳን
+    የታጠረች ተክል እመብርሃን
+የለመለመች መስክ አምላክ የመረጣት
+የጽላቱ ኪዳን ታቦቱ ድንግል ናት
+የሰማይ የምድር ንግስት ናትና
+ክብር ይገባታል ዘውትር ጠዋት ማታ
+    አደራሽን ማርያም የሁሉ እናት
+    በምልጃሽ አስቢኝ ኃላ ስራቆት
+    ያንን የእሳት ባህር አሻግሪኝ ድንግል ሆይ
+    እንዳልወድቅ እንዳሞት ከቶ እንዳላይ ስቃይ''',
+        'image': emebetachinImage1,
+        'catagory': [
+          emebetachinCatagory,
+          adadisMezmursCatagory,
+        ]
+      });
     } catch (error) {
       print(error);
     }
@@ -131,7 +161,7 @@ class MezmurController extends GetxController with ColorPallet {
         favoriteMezmurIndexs.add(index);
       }
     }
-    // postAllMezmursToFirebase();
+    postAllMezmursToFirebase();
   }
 
   String getSubtitle(int index) {

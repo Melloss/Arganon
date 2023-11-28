@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 class Settings {
   double? mezmurLyricsFontSize;
   bool? showCarousel;
+  bool? makeKidaseAudioLoop;
   int? selectedTheme;
   Rx<Color>? foregroundColor;
   Rx<Color>? backgroundColor;

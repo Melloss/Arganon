@@ -106,10 +106,6 @@ class _KidaseScreenState extends State<KidaseScreen>
                 fileId: widget.kidaseList[index]['fileId'],
                 whoShouldSay: widget.kidaseList[index]['whoShouldSay'],
                 meaning: widget.kidaseList[index]['meaning'],
-                isAmharic:
-                    widget.kidaseList[index].containsKey('isAmharic') == true
-                        ? true
-                        : false,
               );
             }
           }),

@@ -1,22 +1,23 @@
+import 'package:arganon/controllers/database_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../../controllers/mezmur_controller.dart';
-import '../../utilities/utilities.dart' show ColorPallet;
+import '../../utilities/utilities.dart' show ColorPallet, screenWidth;
 
 class KidaseContent extends StatefulWidget {
   final String content;
   final String meaning;
   final String whoShouldSay;
   final String fileId;
-  final bool isAmharic;
-  const KidaseContent(
-      {super.key,
-      required this.content,
-      required this.meaning,
-      required this.whoShouldSay,
-      required this.fileId,
-      this.isAmharic = false});
+
+  const KidaseContent({
+    super.key,
+    required this.content,
+    required this.meaning,
+    required this.whoShouldSay,
+    required this.fileId,
+  });
 
   @override
   State<KidaseContent> createState() => _KidaseContentState();
@@ -24,6 +25,7 @@ class KidaseContent extends StatefulWidget {
 
 class _KidaseContentState extends State<KidaseContent> with ColorPallet {
   MezmurController mezmurController = Get.find();
+  DatabaseController databaseController = Get.find();
   bool isPlaying = false;
   bool showSliderThumb = false;
 
@@ -34,7 +36,11 @@ class _KidaseContentState extends State<KidaseContent> with ColorPallet {
       });
     }
     mezmurController.currentPlayingKidaseFileId.value = widget.fileId;
-    await mezmurController.player.setReleaseMode(ReleaseMode.loop);
+    if (databaseController.settings.makeKidaseAudioLoop == true) {
+      await mezmurController.player.setReleaseMode(ReleaseMode.loop);
+    } else {
+      await mezmurController.player.setReleaseMode(ReleaseMode.release);
+    }
 
     if (isPlaying == false) {
       await mezmurController.player.play(
@@ -74,17 +80,19 @@ class _KidaseContentState extends State<KidaseContent> with ColorPallet {
       }
     });
 
-    // mezmurController.player.onPlayerComplete.listen((event) async {
-    //   await mezmurController.player.stop();
-    //   if (mounted) {
-    //     setState(() {
-    //       mezmurController.mezmurDuration = Duration.zero;
-    //       mezmurController.mezmurPosition = Duration.zero;
-    //       isPlaying = false;
-    //     });
-    //   }
-    //   mezmurController.isPlaying.value = false;
-    // });
+    mezmurController.player.onPlayerComplete.listen((event) async {
+      if (mezmurController.player.releaseMode == ReleaseMode.release) {
+        await mezmurController.player.stop();
+        if (mounted) {
+          setState(() {
+            mezmurController.mezmurDuration = Duration.zero;
+            mezmurController.mezmurPosition = Duration.zero;
+            isPlaying = false;
+          });
+        }
+        mezmurController.isPlaying.value = false;
+      }
+    });
     super.initState();
   }
 
@@ -97,53 +105,47 @@ class _KidaseContentState extends State<KidaseContent> with ColorPallet {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              RichText(
-                  text: TextSpan(
-                children: [
-                  TextSpan(
-                      text: widget.whoShouldSay == ''
-                          ? ''
-                          : '${widget.whoShouldSay}፦ ',
-                      style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                            fontSize: 15,
-                            color: Colors.orange,
-                            fontWeight: FontWeight.bold,
-                          ),
-                      children: [
-                        TextSpan(
-                          text: widget.content,
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayLarge!
-                              .copyWith(
-                                fontSize: widget.meaning == '' &&
-                                        widget.isAmharic == false
-                                    ? 13
-                                    : 17,
-                                color: Colors.white,
-                              ),
-                        ),
-                      ]),
-                ],
-              )),
-              Expanded(child: Container()),
-              Visibility(
-                visible: widget.meaning != '' &&
-                    widget.isAmharic == false &&
-                    widget.fileId.isNotEmpty,
-                child: IconButton(
-                  onPressed: playButtonHandler,
-                  icon: Obx(
-                    () => Icon(
-                      mezmurController.currentPlayingKidaseFileId.value ==
-                                  widget.fileId &&
-                              isPlaying == true
-                          ? Icons.pause_circle
-                          : Icons.play_circle,
-                      size: 30,
-                      color: Colors.white,
+              SizedBox(
+                width: screenWidth(context) * 0.75,
+                child: RichText(
+                    text: TextSpan(
+                        text: widget.whoShouldSay == ''
+                            ? ''
+                            : '${widget.whoShouldSay}፦ ',
+                        style:
+                            Theme.of(context).textTheme.displayLarge!.copyWith(
+                                  fontSize: 15,
+                                  color: Colors.orange,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                        children: [
+                      TextSpan(
+                        text: widget.content,
+                        style:
+                            Theme.of(context).textTheme.displayLarge!.copyWith(
+                                  fontSize: 17,
+                                  color: Colors.white,
+                                ),
+                      ),
+                    ])),
+              ),
+              Expanded(
+                child: Visibility(
+                  visible: widget.meaning != '' && widget.fileId.isNotEmpty,
+                  child: IconButton(
+                    onPressed: playButtonHandler,
+                    icon: Obx(
+                      () => Icon(
+                        mezmurController.currentPlayingKidaseFileId.value ==
+                                    widget.fileId &&
+                                isPlaying == true
+                            ? Icons.pause_circle
+                            : Icons.play_circle,
+                        size: 35,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -199,12 +201,15 @@ class _KidaseContentState extends State<KidaseContent> with ColorPallet {
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    widget.meaning,
-                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                          fontSize: 17,
-                          color: Colors.limeAccent,
-                        ),
+                  child: SizedBox(
+                    width: screenWidth(context) * 0.75,
+                    child: Text(
+                      widget.meaning,
+                      style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                            fontSize: 17,
+                            color: Colors.limeAccent,
+                          ),
+                    ),
                   ),
                 ),
               ],

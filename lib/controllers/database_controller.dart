@@ -134,13 +134,16 @@ class DatabaseController extends GetxController with ColorPallet {
       final connectivityResult = await (Connectivity().checkConnectivity());
       if (connectivityResult == ConnectivityResult.mobile ||
           connectivityResult == ConnectivityResult.wifi ||
-          connectivityResult == ConnectivityResult.ethernet) {
+          connectivityResult == ConnectivityResult.ethernet ||
+          connectivityResult == ConnectivityResult.vpn) {
         DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
         final response = await databaseReference.child('mezmurs').get();
 
+        int newMezmurs = 0;
+
         Map<dynamic, dynamic> snapShot =
             Map<dynamic, dynamic>.from(response.value as Map<dynamic, dynamic>);
-        int newMezmurs = 0;
+
         snapShot.forEach((key, value) {
           if (isThisIdFound(snapShot[key]['id']) == false) {
             Mezmur m = Mezmur(
@@ -202,12 +205,15 @@ class DatabaseController extends GetxController with ColorPallet {
   final String forgrounColorSettings = 'forgroundColorSettings';
   final String backgroundColorSettings = 'backgroundColorSettings';
   final String mezmurColorSettings = 'mezmurColorSettings';
+  final String makeKidaseAudioLoop = 'makeKidaseAudioLoop';
 
   initSettings() async {
     final preferences = await SharedPreferences.getInstance();
     if (!preferences.containsKey(showCarouselSettings) &&
-        !preferences.containsKey(mezmurLyricsFontSizeSettings)) {
+        !preferences.containsKey(mezmurLyricsFontSizeSettings) &&
+        !preferences.containsKey(makeKidaseAudioLoop)) {
       preferences.setBool(showCarouselSettings, true);
+      preferences.setBool(makeKidaseAudioLoop, true);
       preferences.setDouble(mezmurLyricsFontSizeSettings, 19);
       preferences.setInt(selectedThemeSettings, 0);
       preferences.setString(forgrounColorSettings,
@@ -220,6 +226,7 @@ class DatabaseController extends GetxController with ColorPallet {
     settings.mezmurLyricsFontSize =
         preferences.getDouble(mezmurLyricsFontSizeSettings);
     settings.showCarousel = preferences.getBool(showCarouselSettings);
+    settings.makeKidaseAudioLoop = preferences.getBool(makeKidaseAudioLoop);
     settings.selectedTheme = preferences.getInt(selectedThemeSettings);
     int foregroundColorValue =
         int.parse(preferences.getString(forgrounColorSettings)!, radix: 16);

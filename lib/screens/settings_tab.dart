@@ -1,3 +1,4 @@
+import 'package:arganon/controllers/mezmur_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,7 @@ class SettingsTab extends StatefulWidget {
 class _SettingsTabState extends State<SettingsTab> with ColorPallet {
   UIController uiController = Get.find();
   DatabaseController databaseController = Get.find();
+  MezmurController mezmurController = Get.find();
   String sampleMezmur = '''እኔስ በምግባሬ ደካማ ሆኛለሁ /2/
 እዘኝልኝ ድንግል እለምንሻለሁ /2/
 
@@ -148,7 +150,7 @@ class _SettingsTabState extends State<SettingsTab> with ColorPallet {
             icon: FontAwesome.shirt,
           ),
           _buildShowCarouselSettings(),
-          const SizedBox(height: 30),
+          _buildKidaseAudioLoopSettings(),
           _buildMezmurLyricsFontSizeSettings(),
           Expanded(child: Container()),
           Visibility(
@@ -183,9 +185,46 @@ class _SettingsTabState extends State<SettingsTab> with ColorPallet {
     );
   }
 
+  _buildKidaseAudioLoopSettings() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
+      child: Row(
+        children: [
+          Text(
+            'የቅዳሴ ድምፅ ይደጋገም',
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  fontSize: 20,
+                ),
+          ),
+          Expanded(child: Container()),
+          Obx(
+            () => Switch(
+                inactiveThumbColor: databaseController
+                    .settings.mezmurColor!.value
+                    .withOpacity(0.4),
+                activeColor: blurWhite,
+                trackColor: MaterialStatePropertyAll(
+                  databaseController.settings.foregroundColor!.value,
+                ),
+                value: databaseController.settings.makeKidaseAudioLoop!,
+                onChanged: (value) async {
+                  final pref = await SharedPreferences.getInstance();
+                  await pref.setBool(
+                      databaseController.makeKidaseAudioLoop, value);
+                  databaseController.settings.makeKidaseAudioLoop = value;
+                  setState(() {
+                    databaseController.settings.makeKidaseAudioLoop = value;
+                  });
+                }),
+          )
+        ],
+      ),
+    );
+  }
+
   _buildShowCarouselSettings() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
       child: Row(
         children: [
           Text(
@@ -224,7 +263,7 @@ class _SettingsTabState extends State<SettingsTab> with ColorPallet {
 
   _buildMezmurLyricsFontSizeSettings() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
       child: Align(
         alignment: Alignment.center,
         child: Column(
